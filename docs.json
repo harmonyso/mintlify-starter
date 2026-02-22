@@ -219,15 +219,7 @@
   },
   "logo": {
     "light": "/images/branding/Harmony-horizontal-purple.png",
-    "dark": "/images/branding/Harmony-horizontal-white.png"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@harmony.io"
-      }
-    ]
+    "dark": "/images/branding/Harmony-horizontal-purple.png"
   },
   "api": {
     "baseUrl": "https://api.harmony.io",
