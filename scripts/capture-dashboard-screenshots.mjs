@@ -9,7 +9,7 @@
  *   pnpm run screenshots:dashboard -- --force   # Overwrite existing screenshots
  *   pnpm run screenshots:dashboard -- --guides=analyzing-service-desk-metrics   # Only capture for selected guide(s)
  *
- * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents
+ * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management
  *
  * Prerequisites:
  * - Frontend running at BASE_URL (default localhost:5173 for all 8 widgets; demo.harmony.io yields 4 until deployed)
@@ -181,6 +181,60 @@ const SCREENSHOT_TARGETS = [
       await new Promise((r) => setTimeout(r, 1500));
     },
   },
+  // configuring-asset-management (path: /settings/asset-management)
+  {
+    type: "element",
+    selector: 'div:has(h2:has-text("Asset notifications"))',
+    filename: "eol-notifications.png",
+    dir: "configuring-asset-management",
+    path: "settings/asset-management",
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has(h2:has-text("Create new policy"))',
+    filename: "eol-policy-form.png",
+    dir: "configuring-asset-management",
+    path: "settings/asset-management",
+    prepare: async (p) => {
+      const createBtn = p.getByRole("button", { name: "Create policy" }).first();
+      await createBtn.scrollIntoViewIfNeeded().catch(() => null);
+      await new Promise((r) => setTimeout(r, 300));
+      await createBtn.click().catch(() => null);
+      await new Promise((r) => setTimeout(r, 1500));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has(label:has-text("Stock threshold"))',
+    filename: "low-stock-alert-form.png",
+    dir: "configuring-asset-management",
+    path: "settings/asset-management",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 500));
+      const createBtn = p.getByRole("button", { name: "Create alert" }).first();
+      await createBtn.scrollIntoViewIfNeeded().catch(() => null);
+      await new Promise((r) => setTimeout(r, 300));
+      await createBtn.click().catch(() => null);
+      await new Promise((r) => setTimeout(r, 1500));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has(h2:has-text("Discovery policy"))',
+    filename: "discovery-policy.png",
+    dir: "configuring-asset-management",
+    path: "settings/asset-management",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 500));
+      const editBtn = p.locator('button[title*="Edit policy"]').first();
+      await editBtn.scrollIntoViewIfNeeded().catch(() => null);
+      await new Promise((r) => setTimeout(r, 300));
+      await editBtn.click().catch(() => null);
+      await new Promise((r) => setTimeout(r, 1500));
+    },
+  },
 ];
 
 async function main() {
@@ -297,7 +351,7 @@ async function main() {
 
     if (selectedGuides?.length && targets.length === 0) {
       console.log(`\n⚠ No targets for guides: ${selectedGuides.join(", ")}`);
-      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents\n");
+      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management\n");
     }
 
     const byPath = {};
@@ -307,11 +361,17 @@ async function main() {
       byPath[p].push(t);
     }
 
-    for (const path of [SYSTEM_DASHBOARD_PATH, "agents"]) {
+    for (const path of [SYSTEM_DASHBOARD_PATH, "agents", "settings/asset-management"]) {
       const targets = byPath[path];
       if (!targets?.length) continue;
 
-      if (path === "agents") {
+      if (path === "settings/asset-management") {
+        console.log(`\nNavigating to /settings/asset-management...`);
+        await page.goto(`${BASE_URL}/settings/asset-management`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.waitForLoadState("networkidle");
+        await new Promise((r) => setTimeout(r, 4000));
+        await hideImpersonationBanner(page);
+      } else if (path === "agents") {
         console.log(`\nNavigating to /agents...`);
         await page.goto(`${BASE_URL}/agents`, { waitUntil: "domcontentloaded", timeout: 30000 });
         await page.waitForLoadState("networkidle");
