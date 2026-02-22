@@ -13,9 +13,11 @@
     "tabs": [
       {
         "tab": "Guides",
+        "icon": "book-open",
         "groups": [
           {
             "group": "Getting started",
+            "icon": "rocket",
             "pages": [
               "index",
               "guides/getting-started-with-harmony-dashboard",
@@ -26,6 +28,7 @@
           },
           {
             "group": "Dashboard & Analytics",
+            "icon": "chart-bar",
             "pages": [
               "guides/creating-and-managing-custom-dashboards",
               "guides/working-with-dashboard-widgets",
@@ -35,6 +38,7 @@
           },
           {
             "group": "Service Desk & Tickets",
+            "icon": "ticket",
             "pages": [
               "guides/understanding-service-desk-and-managing-tickets",
               "guides/organizing-tickets-and-table-views"
@@ -42,12 +46,14 @@
           },
           {
             "group": "People Management",
+            "icon": "users",
             "pages": [
               "guides/managing-people"
             ]
           },
           {
             "group": "Asset Management",
+            "icon": "laptop",
             "pages": [
               "guides/managing-asset-views-and-details",
               "guides/managing-asset-organization-and-importing"
@@ -55,24 +61,28 @@
           },
           {
             "group": "Software Management",
+            "icon": "box",
             "pages": [
               "guides/managing-software-applications"
             ]
           },
           {
             "group": "Workflows & Automation",
+            "icon": "diagram-project",
             "pages": [
               "guides/building-and-managing-workflows"
             ]
           },
           {
             "group": "Portal (End-User View)",
+            "icon": "user-circle",
             "pages": [
               "guides/using-the-harmony-portal"
             ]
           },
           {
             "group": "Settings",
+            "icon": "cog",
             "pages": [
               "guides/managing-service-desks-and-teams",
               "guides/configuring-automation-and-sla",
@@ -84,6 +94,7 @@
           },
           {
             "group": "Integrations",
+            "icon": "plug",
             "pages": [
               "guides/understanding-integrations",
               "guides/connecting-and-managing-integrations",
@@ -94,9 +105,11 @@
       },
       {
         "tab": "AI Agents",
+        "icon": "robot",
         "groups": [
           {
             "group": "Getting started",
+            "icon": "rocket",
             "pages": [
               "guides/working-with-ai-agents",
               "guides/configuring-ai-agents"
@@ -104,6 +117,7 @@
           },
           {
             "group": "Software Management",
+            "icon": "box",
             "pages": [
               "guides/agents/app-access",
               "guides/agents/license-expiration-monitoring",
@@ -112,6 +126,7 @@
           },
           {
             "group": "Access Control",
+            "icon": "lock",
             "pages": [
               "guides/agents/device-recovery",
               "guides/agents/idp-password-reset",
@@ -121,6 +136,7 @@
           },
           {
             "group": "Hardware Management",
+            "icon": "laptop",
             "pages": [
               "guides/agents/asset-acknowledgment",
               "guides/agents/device-uptime-monitoring",
@@ -129,6 +145,7 @@
           },
           {
             "group": "Employee Lifecycle",
+            "icon": "users",
             "pages": [
               "guides/agents/employee-account-termination"
             ]
@@ -137,10 +154,12 @@
       },
       {
         "tab": "API reference",
+        "icon": "square-terminal",
         "openapi": "openapi.json",
         "groups": [
           {
             "group": "API documentation",
+            "icon": "file-code",
             "pages": [
               "api-reference/introduction"
             ]
@@ -149,6 +168,7 @@
       },
       {
         "tab": "Integrations",
+        "icon": "plug",
         "groups": [
           {
             "group": " ",
@@ -158,6 +178,7 @@
           },
           {
             "group": "Collaboration",
+            "icon": "messages",
             "pages": [
               "integrations/slack",
               "integrations/teams"
@@ -174,6 +195,7 @@
           },
           {
             "group": "IT Service Management",
+            "icon": "briefcase",
             "pages": [
               "integrations/atlassian",
               "integrations/manage-engine-servicedesk",
@@ -194,6 +216,7 @@
           },
           {
             "group": "MDM",
+            "icon": "device-mobile",
             "pages": [
               "integrations/apple-business-manager",
               "integrations/microsoft-intune",
@@ -215,6 +238,7 @@
           },
           {
             "group": "EDR",
+            "icon": "shield-check",
             "pages": [
               "integrations/crowdstrike",
               "integrations/sentinelone"
@@ -230,6 +254,7 @@
           },
           {
             "group": "Software Management",
+            "icon": "box",
             "pages": [
               "integrations/torii"
             ]
@@ -244,9 +269,11 @@
       },
       {
         "tab": "Trust & Security",
+        "icon": "shield",
         "groups": [
           {
             "group": " ",
+            "icon": "shield",
             "pages": [
               "trust-security/overview"
             ]
