@@ -3,6 +3,10 @@ title: "Service Desk & Tickets"
 description: "Learn how to use the Harmony Service Desk to create tickets, manage conversations, assign work, use canned responses, and track SLA."
 ---
 
+<Note>
+**Path:** `/tickets/desk/$deskId` (or `/tickets/desk/all` for all desks)
+</Note>
+
 ## Understanding the Service Desk
 
 The Service Desk is where you create, triage, and resolve IT support tickets. Tickets can be submitted via Slack, Microsoft Teams, email, or the web portal. The Harmony AI agent handles many requests automatically; human agents handle escalations and complex cases.
@@ -15,8 +19,8 @@ A **desk** is a service desk that groups teams and tickets. You may have access 
 
 Open **Tickets** from the sidebar. Routes:
 
-- **/tickets/desk/$deskId** — Tickets for a specific desk
-- **/tickets/desk/all** — All tickets across desks (when you have access to multiple desks)
+- **`/tickets/desk/$deskId`** — Tickets for a specific desk
+- **`/tickets/desk/all`** — All tickets across desks (when you have access to multiple desks)
 
 The main view shows a table of tickets with columns for subject, status, priority, assignee, desk, SLA, and more. Use the toolbar filters and search to find specific tickets.
 

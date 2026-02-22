@@ -62,7 +62,8 @@
           {
             "group": "AI Agents",
             "pages": [
-              "guides/working-with-ai-agents"
+              "guides/working-with-ai-agents",
+              "guides/configuring-ai-agents"
             ]
           },
           {
@@ -85,7 +86,6 @@
               "guides/managing-ticket-settings",
               "guides/managing-user-management",
               "guides/configuring-asset-management",
-              "guides/configuring-ai-agents",
               "guides/managing-knowledge-base"
             ]
           },

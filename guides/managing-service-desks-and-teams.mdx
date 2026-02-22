@@ -3,6 +3,10 @@ title: "Service Desks & Teams"
 description: "Learn how to create and manage service desks, add teams, configure members and roles, set working hours, and adjust desk settings."
 ---
 
+<Note>
+**Path:** `/settings/desks`
+</Note>
+
 ## Understanding Service Desks
 
 ### What are Service Desks?
@@ -29,7 +33,7 @@ Desks also have settings for email inbox, automation, SLA, notifications, tags, 
 
 ### Creating a New Desk
 
-1. Go to **Settings** → **Desks** (`/settings/desks`).
+1. Go to **Settings** → **Desks**.
 2. Click **Create Desk**.
 3. Create a custom desk or choose a predefined template:
    - **Custom** — Enter name, emoji, and description.
@@ -44,7 +48,11 @@ Desks also have settings for email inbox, automation, SLA, notifications, tags, 
 
 ### Configuring Desk Details
 
-From the desk overview (`/settings/desks/$deskId`), you can configure:
+<Note>
+**Path:** `/settings/desks/$deskId`
+</Note>
+
+From the desk overview, you can configure:
 
 - **Email** — Enable email-to-ticket, set inbox address, and choose whether CC'd addresses become watchers.
 - **Members and teams** — Add/remove desk members and manage teams.
@@ -67,6 +75,10 @@ When the disabled-desks feature is enabled, desks can be turned on or off. Use t
 ---
 
 ## Configuring Desk Members
+
+<Note>
+**Path:** `/settings/desks/$deskId/members`
+</Note>
 
 ### Adding Members to a Desk
 
@@ -102,7 +114,11 @@ Member roles depend on your configuration:
 
 ### Editing Team Details
 
-1. Open the team from the Teams list (`/settings/desks/$deskId/teams/$teamId`).
+<Note>
+**Path:** `/settings/desks/$deskId/teams/$teamId`
+</Note>
+
+1. Open the team from the Teams list.
 2. Use **Edit** to change name, timezone, and description.
 
 ### Deleting Teams

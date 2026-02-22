@@ -3,6 +3,10 @@ title: "Managing Software"
 description: "Learn how to navigate the software list, view application details, manage licenses, assign and revoke user access, use bulk actions, and export software data."
 ---
 
+<Note>
+**Path:** `/software`
+</Note>
+
 ## Understanding Software Management
 
 The Software area shows applications discovered from your integrations (e.g., Okta, Microsoft Entra). Open **Software** from the sidebar to view the list at `/software`. Applications are synced from your identity provider; you manage their status, licenses, and user access in Harmony.
@@ -17,7 +21,7 @@ Software applications are discovered automatically from your integrations (Okta,
 
 ### Viewing Software Details
 
-Click an application row to open its detail page at `/software/{appId}`. The page shows the header (name, icon, status, monthly cost, detected logins, end of contract), overview (description, category, vendor, source, stakeholders), licenses table, and users table.
+Click an application row to open its detail page at `/software/$appId` (or `/software/v2/$appId`). The page shows the header (name, icon, status, monthly cost, detected logins, end of contract), overview (description, category, vendor, source, stakeholders), licenses table, and users table.
 
 ### Understanding Application Types
 
