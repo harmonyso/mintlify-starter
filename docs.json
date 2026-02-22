@@ -82,9 +82,11 @@
             "pages": [
               "guides/managing-service-desks-and-teams",
               "guides/configuring-automation-and-sla",
-              "guides/managing-ticket-settings-and-users",
-              "guides/configuring-asset-management-and-agents",
-              "guides/managing-preferences-and-knowledge-base"
+              "guides/managing-ticket-settings",
+              "guides/managing-user-management",
+              "guides/configuring-asset-management",
+              "guides/configuring-ai-agents",
+              "guides/managing-knowledge-base"
             ]
           },
           {

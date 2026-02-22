@@ -1,0 +1,123 @@
+---
+title: "Ticket Settings"
+description: "Learn how to manage custom fields, tags, canned responses, and ticket configuration for your service desk."
+---
+
+## Managing Ticket Settings
+
+Ticket settings configure how tickets look and behave for a desk. Open **Settings** → **Desks** → *desk* → **Tickets** for custom fields and tags, or **Templates** for canned responses.
+
+### Understanding Ticket Configuration
+
+Ticket configuration includes:
+
+- **Custom fields** — Extra fields on tickets (text, number, select, etc.)
+- **Tags** — Labels for categorizing and filtering tickets
+- **Priorities** — Urgent, High, Medium, Low (configured in SLA)
+- **Canned responses** — Reusable reply templates
+
+### Managing Custom Fields
+
+**Creating custom fields**
+
+1. Go to **Settings** → **Desks** → *desk* → **Tickets**.
+2. Open **Custom fields** and click **Create custom field**.
+3. Enter name and description.
+4. Choose field type and options.
+5. Set whether the field is required and/or internal (visible only to desk members).
+6. For single/multi select, add the option list.
+7. Save.
+
+**Understanding custom field types**
+
+| Type | Description |
+|------|-------------|
+| **Text** | Single-line or multiline text. |
+| **Number** | Numeric value. |
+| **Checkbox** | Yes/no. |
+| **Single select** | One option from a list. Configure options when creating. |
+| **Multi select** | Multiple options from a list. Configure options when creating. |
+
+**Setting custom field requirements**
+
+- **Required** — Field must be filled before the ticket can be submitted or closed (depending on desk configuration).
+- **Internal** — Field is visible only to desk members, not reporters.
+
+**Ordering custom fields**
+
+Custom fields are shown in the order returned by the API. Reordering is not available in the UI.
+
+### Managing Ticket Tags
+
+**Creating tags**
+
+1. Open the desk → **Tickets** tab → **Tags** section.
+2. Click **Create tag**.
+3. Enter name and choose a color (from the preset palette).
+4. Save.
+
+**Editing tags**
+
+Click a tag to edit name and color. System tags cannot be edited or deleted.
+
+**Deleting tags**
+
+Click **Delete** on a tag. Only non-system tags can be deleted. The tag's usage count is shown; clicking it filters tickets by that tag.
+
+### Managing Ticket Priorities
+
+Priorities (Urgent, High, Medium, Low) are configured in the **SLA** tab. Set response and resolution time targets per priority. See [Automation & SLA](/guides/configuring-automation-and-sla) for details.
+
+### Configuring Ticket Sources
+
+Ticket sources (Slack, Teams, Email, etc.) are determined by how tickets are created. There is no separate configuration UI for sources. Sources are used for filtering, display, and canned-response variables.
+
+### Managing Canned Responses
+
+Canned responses (templates) let agents insert predefined replies quickly. Configure at **Settings** → **Desks** → *desk* → **Templates**.
+
+**Creating canned responses**
+
+1. Open **Templates** and click **Create template**.
+2. Enter name and content (rich text).
+3. Add variables if needed (e.g., `{{subject}}`, `{{reporter}}`).
+4. Choose **Personal** (only you) or **Shared** (all desk members).
+5. Optionally add attachments (when enabled).
+6. Save.
+
+**Editing canned responses**
+
+Click a template to edit name, content, variables, availability, and attachments.
+
+**Managing canned response variables**
+
+Use **Add variable** in the editor to insert ticket data. Available variables include:
+
+- `{{subject}}`, `{{id}}`, `{{description}}`
+- `{{reporter}}`, `{{agent}}`
+- `{{status}}`, `{{priority}}`, `{{source}}`, `{{ticket_type}}`
+- `{{desk_name}}`, `{{currentUser}}`, `{{portalUrl}}`
+
+Variables are replaced with actual values when the template is used.
+
+**Sharing canned responses**
+
+- **Personal** — Only visible to you.
+- **Shared** — Visible to all desk members.
+
+***
+
+<CardGroup cols={2}>
+  <Card title="User Management" icon="users" href="/guides/managing-user-management">
+    Users, groups, roles, and notification channels.
+  </Card>
+  <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams">
+    Desk structure and team configuration.
+  </Card>
+  <Card title="Automation & SLA" icon="clock" href="/guides/configuring-automation-and-sla">
+    SLA targets and automation rules.
+  </Card>
+  <Card title="Service Desk & Tickets" icon="ticket" href="/guides/understanding-service-desk-and-managing-tickets">
+    Create and manage tickets.
+  </Card>
+</CardGroup>

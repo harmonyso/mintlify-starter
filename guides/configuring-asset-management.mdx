@@ -1,6 +1,6 @@
 ---
-title: "Asset & Agent Settings"
-description: "Learn how to configure asset management (EOL policies, low stock alerts, discovery) and AI agent settings (schedules, approval workflows, provisioning)."
+title: "Asset Management Settings"
+description: "Learn how to configure EOL policies, low stock alerts, discovery policies, and asset notifications."
 ---
 
 ## Configuring Asset Management Settings
@@ -103,90 +103,7 @@ Each asset type can be excluded independently. Change the exclusion toggle to up
 
 Use **Check matching assets** to preview how many assets match the current policy before saving.
 
----
-
-## Configuring Agent Settings
-
-Agent settings control when agents run, how approvals work, and provisioning behavior. Open an agent at **Agents** → *agent* to access its configuration panel.
-
-### Understanding Agent Configuration
-
-Each agent type has a configuration panel on the right side of the detail page. Options vary by agent but typically include:
-
-- **Schedule** — When the agent runs (daily, weekly, etc.)
-- **Approval** — Who must approve and how (for agents that require approval)
-- **Provisioning** — Access duration, auto-approval (for app access and similar agents)
-- **Agent-specific options** — Thresholds, ticket desk, filters, etc.
-
-### Configuring Agent Settings
-
-1. Open the agent detail page.
-2. Use the configuration panel on the right.
-3. Change options (schedule, approval, thresholds, etc.).
-4. Click **Save** to apply.
-
-### Enabling and Disabling Agents
-
-Use the **Enabled** toggle in the agent header. When disabled, the agent does not run on schedule or respond to triggers. Configuration is preserved. The agent list and detail view show status (Enabled / Disabled).
-
-### Setting Agent Schedules
-
-In the **Run Schedule** section:
-
-**Recurring schedules**
-
-- **Frequency** — Daily, Weekly, Monthly, Quarterly (every 3 months), Semi-annually (every 6 months), Annually
-- **Day** — For weekly: day of week; for monthly/quarterly/semi-annually/annually: day of month (e.g., first, last, specific day)
-- **Time** — Hour and minute
-- **Timezone** — When the schedule runs in local time
-
-**Cron-based schedules**
-
-Agents use cron expressions internally. The UI exposes frequency, day, time, and timezone; these are converted to a 5-field cron expression for the backend.
-
-**One-time runs**
-
-Agents can be run manually. Use the **Run** button (or Run dialog) to trigger a one-time execution. This does not affect the schedule.
-
-### Configuring Agent Approval Workflows
-
-For agents that require approval (e.g., App Access, IDP Group Management):
-
-**Approval strategy**
-
-| Strategy | Description |
-|----------|-------------|
-| **Require approval from all** | Every listed approver must approve. |
-| **Require approval from one of** | Any one approver can approve. |
-| **Escalate if first approver doesn't respond** | First approver is tried; if no response within the timeout, escalation occurs. |
-
-**Approvers**
-
-- **Role-based** — Direct manager, app owners, IT approvers, budget approvers, etc. (options vary by agent)
-- **Employee-based** — Specific people from the employee directory
-
-Add up to 10 approvers. Configure per agent based on available role options.
-
-**Timeout**
-
-Set how many days (1–7) to wait for approval before timeout or escalation.
-
-**Reminders**
-
-Enable reminders (first and second) at configurable intervals (e.g., 4 hours, 24 hours) to nudge approvers.
-
-### Understanding Agent Permissions (Provisioning)
-
-For app access and similar agents, the **Provisioning** tab shows:
-
-- **Provisioning method** — How access is granted (e.g., Okta, Microsoft Entra)
-- **Access duration** — JIT (Just-in-Time) duration: 1D, 7D, 30D, 90D, 6M, 1Y
-- **Auto approval** — When on, requests are approved automatically (no dynamic provisioning)
-- **Application owners** — Stakeholders for the application
-
-Configure these per app instance. Changes affect how the agent provisions access when approval is granted.
-
----
+***
 
 <CardGroup cols={2}>
   <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
@@ -195,10 +112,10 @@ Configure these per app instance. Changes affect how the agent provisions access
   <Card title="Asset Organization" icon="upload" href="/guides/managing-asset-organization-and-importing">
     Import and organize assets.
   </Card>
-  <Card title="Working with AI Agents" icon="robot" href="/guides/working-with-ai-agents">
-    Use agents, run workflows, and view history.
+  <Card title="Configuring AI Agents" icon="robot" href="/guides/configuring-ai-agents">
+    Agent schedules, approvals, and provisioning.
   </Card>
-  <Card title="Ticket Settings & Users" icon="cog" href="/guides/managing-ticket-settings-and-users">
+  <Card title="User Management" icon="users" href="/guides/managing-user-management">
     Configure EOL and asset notification destinations.
   </Card>
 </CardGroup>

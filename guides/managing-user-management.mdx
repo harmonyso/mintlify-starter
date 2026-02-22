@@ -1,110 +1,6 @@
 ---
-title: "Ticket Settings & Users"
-description: "Learn how to manage custom fields, tags, canned responses, user groups, and notification channels for your service desk."
----
-
-## Managing Ticket Settings
-
-Ticket settings configure how tickets look and behave for a desk. Open **Settings** → **Desks** → *desk* → **Tickets** for custom fields and tags, or **Templates** for canned responses.
-
-### Understanding Ticket Configuration
-
-Ticket configuration includes:
-
-- **Custom fields** — Extra fields on tickets (text, number, select, etc.)
-- **Tags** — Labels for categorizing and filtering tickets
-- **Priorities** — Urgent, High, Medium, Low (configured in SLA)
-- **Canned responses** — Reusable reply templates
-
-### Managing Custom Fields
-
-**Creating custom fields**
-
-1. Go to **Settings** → **Desks** → *desk* → **Tickets**.
-2. Open **Custom fields** and click **Create custom field**.
-3. Enter name and description.
-4. Choose field type and options.
-5. Set whether the field is required and/or internal (visible only to desk members).
-6. For single/multi select, add the option list.
-7. Save.
-
-**Understanding custom field types**
-
-| Type | Description |
-|------|-------------|
-| **Text** | Single-line or multiline text. |
-| **Number** | Numeric value. |
-| **Checkbox** | Yes/no. |
-| **Single select** | One option from a list. Configure options when creating. |
-| **Multi select** | Multiple options from a list. Configure options when creating. |
-
-**Setting custom field requirements**
-
-- **Required** — Field must be filled before the ticket can be submitted or closed (depending on desk configuration).
-- **Internal** — Field is visible only to desk members, not reporters.
-
-**Ordering custom fields**
-
-Custom fields are shown in the order returned by the API. Reordering is not available in the UI.
-
-### Managing Ticket Tags
-
-**Creating tags**
-
-1. Open the desk → **Tickets** tab → **Tags** section.
-2. Click **Create tag**.
-3. Enter name and choose a color (from the preset palette).
-4. Save.
-
-**Editing tags**
-
-Click a tag to edit name and color. System tags cannot be edited or deleted.
-
-**Deleting tags**
-
-Click **Delete** on a tag. Only non-system tags can be deleted. The tag's usage count is shown; clicking it filters tickets by that tag.
-
-### Managing Ticket Priorities
-
-Priorities (Urgent, High, Medium, Low) are configured in the **SLA** tab. Set response and resolution time targets per priority. See [Automation & SLA](/guides/configuring-automation-and-sla) for details.
-
-### Configuring Ticket Sources
-
-Ticket sources (Slack, Teams, Email, etc.) are determined by how tickets are created. There is no separate configuration UI for sources. Sources are used for filtering, display, and canned-response variables.
-
-### Managing Canned Responses
-
-Canned responses (templates) let agents insert predefined replies quickly. Configure at **Settings** → **Desks** → *desk* → **Templates**.
-
-**Creating canned responses**
-
-1. Open **Templates** and click **Create template**.
-2. Enter name and content (rich text).
-3. Add variables if needed (e.g., `{{subject}}`, `{{reporter}}`).
-4. Choose **Personal** (only you) or **Shared** (all desk members).
-5. Optionally add attachments (when enabled).
-6. Save.
-
-**Editing canned responses**
-
-Click a template to edit name, content, variables, availability, and attachments.
-
-**Managing canned response variables**
-
-Use **Add variable** in the editor to insert ticket data. Available variables include:
-
-- `{{subject}}`, `{{id}}`, `{{description}}`
-- `{{reporter}}`, `{{agent}}`
-- `{{status}}`, `{{priority}}`, `{{source}}`, `{{ticket_type}}`
-- `{{desk_name}}`, `{{currentUser}}`, `{{portalUrl}}`
-
-Variables are replaced with actual values when the template is used.
-
-**Sharing canned responses**
-
-- **Personal** — Only visible to you.
-- **Shared** — Visible to all desk members.
-
+title: "User Management"
+description: "Learn how to manage users, groups, roles, and notification channels (Slack, Teams, Email) for your organization."
 ---
 
 ## Managing Users and Groups
@@ -195,7 +91,7 @@ When importing or editing a group, select the roles and, for Desk roles, the des
 
 When a group has multiple roles that assign the same desk (e.g., Desk manager and Desk agent), the UI may show an overlap warning. Resolve this by simplifying role assignments so each desk has a single role per group, or by splitting into separate groups.
 
----
+***
 
 ## Managing Notification Channels
 
@@ -280,20 +176,17 @@ Part of Asset Management: `low_stock_threshold_reached` and related stock alerts
 
 On each destination card, use the checkboxes to choose which event types are sent to that channel. Different destinations can receive different events.
 
----
+***
 
 <CardGroup cols={2}>
+  <Card title="Ticket Settings" icon="cog" href="/guides/managing-ticket-settings">
+    Custom fields, tags, and canned responses.
+  </Card>
   <Card title="Understanding Integrations" icon="plug" href="/guides/understanding-integrations">
     Connect Slack, Teams, and notification channels.
   </Card>
   <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams">
     Desk structure and team configuration.
-  </Card>
-  <Card title="Automation & SLA" icon="clock" href="/guides/configuring-automation-and-sla">
-    SLA targets and automation rules.
-  </Card>
-  <Card title="Service Desk & Tickets" icon="ticket" href="/guides/understanding-service-desk-and-managing-tickets">
-    Create and manage tickets.
   </Card>
   <Card title="User Roles and Permissions" icon="shield" href="/guides/understanding-user-roles-and-permissions">
     Role definitions and access levels.
