@@ -9,7 +9,7 @@
  *   pnpm run screenshots:dashboard -- --force   # Overwrite existing screenshots
  *   pnpm run screenshots:dashboard -- --guides=analyzing-service-desk-metrics   # Only capture for selected guide(s)
  *
- * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management
+ * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard
  *
  * Prerequisites:
  * - Frontend running at BASE_URL (default localhost:5173 for all 8 widgets; demo.harmony.io yields 4 until deployed)
@@ -126,6 +126,38 @@ async function navigateAndClickAgent(page, agentNames) {
   }
 }
 
+/** Navigate to first desk's Automation tab (/settings/desks/$deskId/automation). */
+async function navigateToDeskAutomation(page) {
+  const base = process.env.BASE_URL || "http://localhost:5173";
+  await page.goto(`${base}/settings/desks`, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForLoadState("networkidle");
+  await new Promise((r) => setTimeout(r, 2000));
+  const firstDesk = page.locator("table tbody tr.cursor-pointer").first();
+  await firstDesk.click().catch(() => page.locator('a[href*="/settings/desks/"]').first().click());
+  await page.waitForURL((u) => u.pathname.match(/\/settings\/desks\/[^/]+\/?$/), { timeout: 10000 });
+  await new Promise((r) => setTimeout(r, 1500));
+  await page.getByRole("link", { name: "Automation" }).first().click();
+  await page.waitForURL((u) => u.pathname.includes("/automation"), { timeout: 10000 });
+  await new Promise((r) => setTimeout(r, 2000));
+  await hideImpersonationBanner(page);
+}
+
+/** Navigate to first desk's SLA tab (/settings/desks/$deskId/sla). */
+async function navigateToDeskSla(page) {
+  const base = process.env.BASE_URL || "http://localhost:5173";
+  await page.goto(`${base}/settings/desks`, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForLoadState("networkidle");
+  await new Promise((r) => setTimeout(r, 2000));
+  const firstDesk = page.locator("table tbody tr.cursor-pointer").first();
+  await firstDesk.click().catch(() => page.locator('a[href*="/settings/desks/"]').first().click());
+  await page.waitForURL((u) => u.pathname.match(/\/settings\/desks\/[^/]+\/?$/), { timeout: 10000 });
+  await new Promise((r) => setTimeout(r, 1500));
+  await page.getByRole("link", { name: "SLAs" }).first().click();
+  await page.waitForURL((u) => u.pathname.includes("/sla"), { timeout: 10000 });
+  await new Promise((r) => setTimeout(r, 2000));
+  await hideImpersonationBanner(page);
+}
+
 // Screenshot targets: { title, filename, dir } for widgets, or { type: "region", filename, dir, clip } for regions
 const SCREENSHOT_TARGETS = [
   // analyzing-asset-and-automation-metrics
@@ -149,10 +181,11 @@ const SCREENSHOT_TARGETS = [
   // configuring-ai-agents (path uses agents flow: /agents → click first → agent detail)
   {
     type: "element",
-    selector: 'div[class*="absolute"][class*="right-0"]:has(h2:has-text("Agent Configurations"))',
+    selector: 'div:has(h2:has-text("Agent Configurations"))',
     filename: "agent-config-panel.png",
     dir: "configuring-ai-agents",
     path: "agents",
+    prepare: clickAgentWithSchedule,
   },
   {
     type: "element",
@@ -233,6 +266,206 @@ const SCREENSHOT_TARGETS = [
       await new Promise((r) => setTimeout(r, 300));
       await editBtn.click().catch(() => null);
       await new Promise((r) => setTimeout(r, 1500));
+    },
+  },
+  // configuring-automation-and-sla (path: /settings/desks → click first desk → Automation or SLA tab)
+  {
+    type: "element",
+    selector: 'div:has(h2:has-text("Ticket assignment"))',
+    filename: "auto-assignment.png",
+    dir: "configuring-automation-and-sla",
+    path: "settings/desks",
+    prepare: navigateToDeskAutomation,
+  },
+  {
+    type: "element",
+    selector: 'div:has(h2:has-text("Ticket closing"))',
+    filename: "auto-close-settings.png",
+    dir: "configuring-automation-and-sla",
+    path: "settings/desks",
+    prepare: navigateToDeskAutomation,
+  },
+  {
+    type: "element",
+    selector: 'div:has(h2:has-text("SLA targets"))',
+    filename: "sla-policies.png",
+    dir: "configuring-automation-and-sla",
+    path: "settings/desks",
+    prepare: navigateToDeskSla,
+  },
+  // configuring-integration-sync-and-credentials (path: /settings/integrations)
+  {
+    type: "region",
+    filename: "integration-status.png",
+    dir: "configuring-integration-sync-and-credentials",
+    path: "settings/integrations",
+    clip: { x: 0, y: 0, width: 1400, height: 420 },
+  },
+  {
+    type: "element",
+    selector: 'div:has(label:has-text("Bidirectional synchronization"))',
+    filename: "sync-toggle.png",
+    dir: "configuring-integration-sync-and-credentials",
+    path: "settings/integrations",
+    prepare: async (p) => {
+      const card = p.getByText(/Freshservice|Solarwinds/i).first();
+      await card.scrollIntoViewIfNeeded().catch(() => null);
+      await new Promise((r) => setTimeout(r, 300));
+      await card.click().catch(() => p.locator("[class*='cursor-pointer']").first().click());
+      await new Promise((r) => setTimeout(r, 2000));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"], [data-slot="dialog-content"]',
+    filename: "integration-credentials-modal.png",
+    dir: "configuring-integration-sync-and-credentials",
+    path: "settings/integrations",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 500));
+      // Try integrations with credential forms first (Freshservice, Okta, Solarwinds, etc.)
+      const preferred = p.getByText(/Freshservice|Okta|Solarwinds|Slack|ServiceNow/i).first();
+      if (await preferred.isVisible().catch(() => false)) {
+        await preferred.scrollIntoViewIfNeeded().catch(() => null);
+        await new Promise((r) => setTimeout(r, 300));
+        await preferred.click();
+      } else {
+        const firstCard = p.locator('div[class*="grid"] [class*="cursor-pointer"]').first();
+        await firstCard.scrollIntoViewIfNeeded().catch(() => null);
+        await new Promise((r) => setTimeout(r, 300));
+        await firstCard.click();
+      }
+      await new Promise((r) => setTimeout(r, 2000));
+    },
+  },
+  // connecting-and-managing-integrations (path: /settings/integrations)
+  {
+    type: "region",
+    filename: "integrations-connect.png",
+    dir: "connecting-and-managing-integrations",
+    path: "settings/integrations",
+    clip: { x: 0, y: 0, width: 1400, height: 420 },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"], [data-slot="dialog-content"]',
+    filename: "integration-config-form.png",
+    dir: "connecting-and-managing-integrations",
+    path: "settings/integrations",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 500));
+      const preferred = p.getByText(/Freshservice|Okta|Solarwinds|ServiceNow/i).first();
+      if (await preferred.isVisible().catch(() => false)) {
+        await preferred.scrollIntoViewIfNeeded().catch(() => null);
+        await new Promise((r) => setTimeout(r, 300));
+        await preferred.click();
+      } else {
+        const firstCard = p.locator('div[class*="grid"] [class*="cursor-pointer"]').first();
+        await firstCard.scrollIntoViewIfNeeded().catch(() => null);
+        await new Promise((r) => setTimeout(r, 300));
+        await firstCard.click();
+      }
+      await new Promise((r) => setTimeout(r, 2000));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]',
+    filename: "multi-instance-modal.png",
+    dir: "connecting-and-managing-integrations",
+    path: "settings/integrations",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 500));
+      // Click a card for an integration that supports multiple instances (Slack, Okta, Confluence, etc.)
+      const multiInstanceNames = ["Slack", "Okta", "Confluence", "Google Drive", "Jira", "Microsoft Teams"];
+      let clicked = false;
+      for (const name of multiInstanceNames) {
+        const card = p.locator('div[class*="grid"] [class*="cursor-pointer"]').filter({ hasText: name }).first();
+        if (await card.isVisible().catch(() => false)) {
+          await card.scrollIntoViewIfNeeded().catch(() => null);
+          await new Promise((r) => setTimeout(r, 300));
+          await card.click();
+          clicked = true;
+          break;
+        }
+      }
+      if (!clicked) {
+        const firstCard = p.locator('div[class*="grid"] [class*="cursor-pointer"]').first();
+        await firstCard.scrollIntoViewIfNeeded().catch(() => null);
+        await new Promise((r) => setTimeout(r, 300));
+        await firstCard.click();
+      }
+      await new Promise((r) => setTimeout(r, 2500));
+    },
+  },
+  // getting-started-with-harmony-dashboard (path: /dashboard)
+  {
+    type: "region",
+    filename: "sidebar-sections.png",
+    dir: "getting-started-with-harmony-dashboard",
+    path: SYSTEM_DASHBOARD_PATH,
+    clip: { x: 0, y: 0, width: 280, height: 900 },
+  },
+  {
+    type: "region",
+    filename: "dashboard-home.png",
+    dir: "getting-started-with-harmony-dashboard",
+    path: SYSTEM_DASHBOARD_PATH,
+    clip: { x: 280, y: 0, width: 1120, height: 900 },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has([data-slot="command"])',
+    filename: "command-palette.png",
+    dir: "getting-started-with-harmony-dashboard",
+    path: SYSTEM_DASHBOARD_PATH,
+    prepare: async (p) => {
+      await p.keyboard.press(process.platform === "darwin" ? "Meta+k" : "Control+k");
+      await new Promise((r) => setTimeout(r, 800));
+      await p.getByPlaceholder("Search for commands...").fill("dashboard").catch(() => null);
+      await new Promise((r) => setTimeout(r, 500));
+    },
+  },
+  // creating-and-managing-custom-dashboards (path: /dashboard or system-dashboard)
+  {
+    type: "element",
+    selector: 'div:has(button:has-text("Create dashboard"))',
+    filename: "dashboard-dropdown.png",
+    dir: "creating-and-managing-custom-dashboards",
+    path: SYSTEM_DASHBOARD_PATH,
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 400));
+      const titleBtn = p.locator("button").filter({ has: p.locator("h2") }).first();
+      await titleBtn.waitFor({ state: "visible", timeout: 15000 });
+      await titleBtn.click();
+      await new Promise((r) => setTimeout(r, 800));
+    },
+  },
+  {
+    type: "element",
+    selector: 'div:has(button:has-text("Delete"))',
+    filename: "dashboard-edit-delete.png",
+    dir: "creating-and-managing-custom-dashboards",
+    path: SYSTEM_DASHBOARD_PATH,
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 400));
+      const titleBtn = p.locator("button").filter({ has: p.locator("h2") }).first();
+      await titleBtn.waitFor({ state: "visible", timeout: 15000 });
+      await titleBtn.click();
+      await new Promise((r) => setTimeout(r, 600));
+      const dropdown = p.locator('div:has(button:has-text("Create dashboard"))');
+      const firstRow = dropdown.locator('div.flex.w-full.items-center').filter({ has: p.getByText("Dashboard", { exact: true }) }).first();
+      const copyBtn = firstRow.locator('div.flex.gap-2').locator('button').nth(1);
+      await copyBtn.click();
+      await p.waitForURL((u) => u.pathname.includes("/dashboard/") && !u.pathname.endsWith("/system-dashboard"), { timeout: 8000 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 2000));
+      await p.getByRole("button", { name: "Edit" }).click();
+      await new Promise((r) => setTimeout(r, 800));
     },
   },
 ];
@@ -351,7 +584,7 @@ async function main() {
 
     if (selectedGuides?.length && targets.length === 0) {
       console.log(`\n⚠ No targets for guides: ${selectedGuides.join(", ")}`);
-      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management\n");
+      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard\n");
     }
 
     const byPath = {};
@@ -361,11 +594,29 @@ async function main() {
       byPath[p].push(t);
     }
 
-    for (const path of [SYSTEM_DASHBOARD_PATH, "agents", "settings/asset-management"]) {
+    for (const path of [SYSTEM_DASHBOARD_PATH, "agents", "settings/asset-management", "settings/desks", "settings/integrations"]) {
       const targets = byPath[path];
       if (!targets?.length) continue;
 
-      if (path === "settings/asset-management") {
+      if (path === "settings/integrations") {
+        console.log(`\nNavigating to /settings/integrations...`);
+        await page.goto(`${BASE_URL}/settings/integrations`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.waitForLoadState("networkidle");
+        await new Promise((r) => setTimeout(r, 4000));
+        await hideImpersonationBanner(page);
+      } else if (path === "settings/desks") {
+        console.log(`\nNavigating to /settings/desks...`);
+        await page.goto(`${BASE_URL}/settings/desks`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.waitForLoadState("networkidle");
+        await new Promise((r) => setTimeout(r, 3000));
+        const firstDesk = page.locator("table tbody tr.cursor-pointer").first();
+        if (await firstDesk.isVisible().catch(() => false)) {
+          await firstDesk.click();
+          await page.waitForURL((u) => u.pathname.match(/\/settings\/desks\/[^/]+/), { timeout: 10000 });
+        }
+        await new Promise((r) => setTimeout(r, 2000));
+        await hideImpersonationBanner(page);
+      } else if (path === "settings/asset-management") {
         console.log(`\nNavigating to /settings/asset-management...`);
         await page.goto(`${BASE_URL}/settings/asset-management`, { waitUntil: "domcontentloaded", timeout: 30000 });
         await page.waitForLoadState("networkidle");
@@ -393,7 +644,7 @@ async function main() {
           continue;
         }
         await firstAgent.click();
-        await page.waitForURL((url) => url.pathname.includes("/agents/") && url.pathname.includes("/v2"), { timeout: 15000 });
+        await page.waitForURL((url) => /\/agents\/[^/]+\/[^/]+/.test(url.pathname), { timeout: 15000 });
         await new Promise((r) => setTimeout(r, 5000));
         await hideImpersonationBanner(page);
       } else {
