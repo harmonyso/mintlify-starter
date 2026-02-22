@@ -27,7 +27,7 @@ Each agent type has a configuration panel on the right side of the detail page. 
 3. Change options (schedule, approval, thresholds, etc.).
 4. Click **Save** to apply.
 
-{/* IMAGE: Agent detail page with configuration panel → /images/guides/configuring-ai-agents/agent-config-panel.png | UI: frontend-app/src/features/agents/components/agent-details-v2/agent-overview-v2.tsx, agent-config-panel.tsx | Route: /agents/$agentId/$slug/v2 */}
+![Agent detail page with configuration panel](/images/guides/configuring-ai-agents/agent-config-panel.png)
 
 ### Enabling and Disabling Agents
 
@@ -52,7 +52,7 @@ Agents use cron expressions internally. The UI exposes frequency, day, time, and
 
 Agents can be run manually. Use the **Run** button (or Run dialog) to trigger a one-time execution. This does not affect the schedule.
 
-{/* IMAGE: Run Schedule section (frequency, day, time, timezone) → /images/guides/configuring-ai-agents/agent-schedule.png | UI: frontend-app/src/features/agents/components/agent-details-v2/agent-configurations/shared/schedule-section.tsx | Route: /agents/$agentId/$slug/v2 */}
+![Run Schedule section (frequency, day, time, timezone)](/images/guides/configuring-ai-agents/agent-schedule.png)
 
 ### Configuring Agent Approval Workflows
 
@@ -81,7 +81,7 @@ Set how many days (1–7) to wait for approval before timeout or escalation.
 
 Enable reminders (first and second) at configurable intervals (e.g., 4 hours, 24 hours) to nudge approvers.
 
-{/* IMAGE: Approval strategy and approvers → /images/guides/configuring-ai-agents/agent-approvals.png | UI: frontend-app/src/features/agents/components/agent-details-v2/agent-configurations/shared/approval-configuration.tsx | Route: /agents/$agentId/$slug/v2 */}
+![Approval strategy and approvers](/images/guides/configuring-ai-agents/agent-approvals.png)
 
 ### Understanding Agent Permissions (Provisioning)
 
@@ -94,7 +94,7 @@ For app access and similar agents, the **Provisioning** tab shows:
 
 Configure these per app instance. Changes affect how the agent provisions access when approval is granted.
 
-{/* IMAGE: Provisioning tab (method, access duration, auto approval) → /images/guides/configuring-ai-agents/agent-provisioning.png | UI: frontend-app/src/features/agents/components/agent-details-v2/provisioning/provisioning-tab.tsx | Route: /agents/$agentId/$slug/v2 (Provisioning tab) */}
+![Provisioning tab (method, access duration, auto approval)](/images/guides/configuring-ai-agents/agent-provisioning.png)
 
 ***
 

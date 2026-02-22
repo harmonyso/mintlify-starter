@@ -20,7 +20,7 @@ The dashboard surface key service desk metrics at a glance. Add these widgets to
 
 These metrics use live data from your service desk and update when you refresh.
 
-{/* IMAGE: Dashboard with Tickets Opened, Open Tickets, SLA Breached widgets → /images/guides/analyzing-service-desk-metrics/overview-widgets.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#total-tickets, open-tickets-now, unassigned-tickets-now, sla-breached-now | Route: /dashboard */}
+![Dashboard with Tickets Opened, Open Tickets, SLA Breached widgets](/images/guides/analyzing-service-desk-metrics/overview-widgets.png)
 
 ## Understanding Ticket Volume Trends
 
@@ -36,7 +36,7 @@ The **Opened vs Resolved Tickets** chart compares ticket creation and resolution
 
 Use it to see whether backlog is growing or shrinking. Available as line or bar chart.
 
-{/* IMAGE: Opened vs Resolved Tickets chart → /images/guides/analyzing-service-desk-metrics/opened-vs-resolved.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#opened-vs-resolved | Route: /dashboard */}
+![Opened vs Resolved Tickets chart](/images/guides/analyzing-service-desk-metrics/opened-vs-resolved.png)
 
 ## Monitoring Response and Resolution Time
 
@@ -52,7 +52,7 @@ Time from ticket creation to resolution. Also shown as a single number for the s
 
 The **Response vs Resolution Time** chart shows daily averages for both metrics over time. Helps spot trends and correlate response speed with resolution speed.
 
-{/* IMAGE: Response vs Resolution Time chart → /images/guides/analyzing-service-desk-metrics/response-vs-resolution.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#response-vs-resolution | Route: /dashboard */}
+![Response vs Resolution Time chart](/images/guides/analyzing-service-desk-metrics/response-vs-resolution.png)
 
 ## Tracking SLA Compliance
 
@@ -64,7 +64,7 @@ The **SLA Compliance** number widget shows the percentage of tickets that met th
 
 The **SLA Compliance Trend** chart shows how SLA compliance changes over time. It stacks "SLA met" and "SLA breached" so you can see the proportion of each by day.
 
-{/* IMAGE: SLA Compliance Trend stacked chart → /images/guides/analyzing-service-desk-metrics/sla-compliance-chart.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#sla-compliance | Route: /dashboard */}
+![SLA Compliance Trend stacked chart](/images/guides/analyzing-service-desk-metrics/sla-compliance-chart.png)
 
 ### SLA Breaches
 
@@ -76,13 +76,13 @@ The **SLA Breached** widget shows how many open tickets have passed their resolu
 
 **Ticket Breakdown by Status** shows tickets grouped by status: Open, In Progress, Pending (all pending sub-types combined), Resolved, Closed. Use donut or bar view. Statuses use consistent colors (e.g. green for Open, orange for Pending).
 
-{/* IMAGE: Ticket status donut/bar chart → /images/guides/analyzing-service-desk-metrics/breakdown-status.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#ticket-breakdown | Route: /dashboard */}
+![Ticket status donut/bar chart](/images/guides/analyzing-service-desk-metrics/breakdown-status.png)
 
 ### Breakdown by Priority
 
 **Ticket Breakdown by Priority** shows ticket volume by priority over time: Low, Medium, High, Urgent. Available as bar or line chart. Clicking a bar can navigate to filtered tickets.
 
-{/* IMAGE: Ticket Breakdown by Priority chart → /images/guides/analyzing-service-desk-metrics/breakdown-priority.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#ticket-priority | Route: /dashboard */}
+![Ticket Breakdown by Priority chart](/images/guides/analyzing-service-desk-metrics/breakdown-priority.png)
 
 ### Breakdown by Employee (Created/Resolved)
 
@@ -95,7 +95,7 @@ Both use the reports API with `groupBy` on the actor. Useful for workload and co
 
 The **User Satisfaction** widget shows an average satisfaction score from survey responses. Scores are shown with a label (e.g. excellent, very good, good, fair, needs improvement) based on the average rating. Add this widget from the Widget Library to include it on your dashboard.
 
-{/* IMAGE: User Satisfaction widget → /images/guides/analyzing-service-desk-metrics/user-satisfaction.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#user-satisfaction | Route: /dashboard */}
+![User Satisfaction widget](/images/guides/analyzing-service-desk-metrics/user-satisfaction.png)
 
 ---
 

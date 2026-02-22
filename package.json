@@ -1,0 +1,13 @@
+{
+  "name": "harmony-mintlify-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "screenshots:dashboard": "node scripts/capture-dashboard-screenshots.mjs",
+    "screenshots:dashboard:login": "pnpm exec playwright install chromium && node scripts/capture-dashboard-screenshots.mjs --login",
+    "screenshots:dashboard:run": "pnpm exec playwright install chromium && pnpm run screenshots:dashboard"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0"
+  }
+}

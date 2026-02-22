@@ -7,6 +7,14 @@ description: "Learn how to build custom workflows with triggers, actions, and co
 **Path:** `/workflows`
 </Note>
 
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://player.vimeo.com/video/1161532099"
+  title="Introducing Harmony's Workflow Builder"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
 ## Understanding Workflow Automation
 
 Workflow automation lets you create custom workflows that run automatically based on triggers (manual, scheduled, or events) and execute a sequence of steps. Workflows can integrate with Slack, Teams, Okta, HRIS systems, MDM tools, and Harmony itself.
@@ -23,8 +31,6 @@ The canvas is a drag-and-drop area where workflow nodes are laid out. Nodes conn
 
 Open **Workflows** at `/workflows` to see all custom workflows. Each card shows the workflow name, description, enabled state, and toggle. Click a workflow to edit it. Click **Create Workflow** to start a new one (when the Workflow Builder feature is enabled).
 
-{/* IMAGE: Workflows list with cards (name, enabled toggle) → /images/guides/building-and-managing-workflows/workflows-list.png | UI: frontend-app/src/routes/workflows/index.tsx, workflow-card.tsx | Route: /workflows */}
-
 ### Creating Your First Workflow
 
 1. Click **Create Workflow** on the Workflows page.
@@ -35,8 +41,6 @@ Open **Workflows** at `/workflows` to see all custom workflows. Each card shows 
 6. Add more steps as needed.
 7. Save and enable the workflow.
 
-{/* IMAGE: Workflow canvas with trigger node and step selector → /images/guides/building-and-managing-workflows/workflow-canvas.png | UI: frontend-app/src/features/workflow-builder/components/workflow-canvas.tsx | Route: /workflows/new or /workflows/$workflowId/edit */}
-
 ---
 
 ## Building Workflows
@@ -46,8 +50,6 @@ Open **Workflows** at `/workflows` to see all custom workflows. Each card shows 
 - **From the trigger:** Click the **+** handle at the bottom of the trigger node, or drag from it. A step selector appears; pick a category (Slack, Okta, Harmony, etc.) and an operation.
 - **From an existing step:** Drag from the output handle of a step to create a connection. Drop on the canvas to add a new step, or drop on another step's input handle to connect.
 - **Context menu:** Right-click the canvas to add a step at that position.
-
-{/* IMAGE: Step selector with categories (Slack, Okta, Harmony) → /images/guides/building-and-managing-workflows/workflow-step-selector.png | UI: frontend-app/src/features/workflow-builder/components/properties-panel.tsx#StepSelector | Route: /workflows/$workflowId/edit */}
 
 ### Connecting Workflow Steps
 
@@ -162,7 +164,7 @@ Use the **AI** block to analyze content or generate responses. Useful for automa
 
 Add a **Condition** block from the Logic category. Configure a condition; the workflow branches to different paths based on whether the condition is true or false. Connect follow-up steps to the "true" or "false" output handles.
 
-{/* IMAGE: Condition block with true/false branches → /images/guides/building-and-managing-workflows/condition-block.png | UI: frontend-app/src/features/workflow-builder (Logic category, Condition block) | Route: /workflows/$workflowId/edit */}
+![Condition block with true/false branches](/images/guides/building-and-managing-workflows/condition-block.png)
 
 ### Setting Up Conditions
 
@@ -200,8 +202,6 @@ In action block fields that support templates, type `{{` to open the template pi
 
 The Template Picker modal shows a tree of available variables grouped by source (inputs, trigger, steps). Expand nodes to find the path, then insert it into your field.
 
-{/* IMAGE: Template picker or token input with {{ variables → /images/guides/building-and-managing-workflows/template-picker.png | UI: frontend-app/src/features/workflow-builder/blocks/components/token-input.tsx | Route: /workflows/$workflowId/edit */}
-
 ### Working with Token Inputs
 
 Fields that support templates use a Token Input. It shows inserted variables as tokens. Click a token to edit or remove it. Type to search available variables.
@@ -229,8 +229,6 @@ Click **Run** in the toolbar to execute the workflow. For manual triggers, provi
 ### Viewing Workflow Run History
 
 Click the **Runs** (History) button in the toolbar to open the Runs drawer. It lists recent runs with status, duration, and timestamps. Click a run to expand and see step-by-step execution.
-
-{/* IMAGE: Runs drawer with run history and step details → /images/guides/building-and-managing-workflows/runs-drawer.png | UI: frontend-app/src/features/workflow-builder/components/runs-drawer.tsx | Route: /workflows/$workflowId/edit */}
 
 ### Understanding Workflow Run Details
 
@@ -273,13 +271,11 @@ The toolbar at the top includes:
 - **Enabled** — Toggle workflow on/off (publish/unpublish).
 - **AI** — Open the AI assistant to generate or modify workflows.
 
-{/* IMAGE: Workflow toolbar (Back, Run, Save, Settings, Enabled) → /images/guides/building-and-managing-workflows/workflow-toolbar.png | UI: frontend-app/src/features/workflow-builder/components/workflow-toolbar.tsx | Route: /workflows/$workflowId/edit */}
+![Workflow toolbar (Back, Run, Save, Settings, Enabled)](/images/guides/building-and-managing-workflows/workflow-toolbar.png)
 
 ### Understanding the Properties Panel
 
 When you select a node, the Properties panel opens on the right. It shows the configuration form for that node. For triggers: trigger type, schedule or event settings, conditions. For actions: operation-specific inputs. For conditions: field, operator, value.
-
-{/* IMAGE: Properties panel with node configuration form → /images/guides/building-and-managing-workflows/properties-panel.png | UI: frontend-app/src/features/workflow-builder/components/properties-panel.tsx | Route: /workflows/$workflowId/edit */}
 
 ### Configuring Node Settings
 
