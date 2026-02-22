@@ -57,6 +57,12 @@ a[href*="harmony.io"]:hover {
   text-align: center !important;
 }
 
+/* Compliance cards: stretch to fill grid height so text reaches bottom */
+.compliance-cards [class*="card"],
+.compliance-cards [class*="Card"] {
+  height: 100% !important;
+}
+
 /* Ensure consistent sizing for certification logos */
 img[src*="/certifications/"] {
   width: 80px !important;
