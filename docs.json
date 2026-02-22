@@ -272,7 +272,7 @@
         "icon": "shield",
         "groups": [
           {
-            "group": " ",
+            "group": "Overview",
             "icon": "shield",
             "pages": [
               "trust-security/overview"
