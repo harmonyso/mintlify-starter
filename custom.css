@@ -1,3 +1,31 @@
+/* Welcome page integration cards - match built-in Card styling */
+.welcome-integration-cards a {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+}
+[data-theme="dark"] .welcome-integration-cards a,
+.dark .welcome-integration-cards a {
+  background-color: #16161a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.welcome-integration-cards a:hover {
+  border-color: rgba(102, 98, 255, 0.4);
+}
+[data-theme="dark"] .welcome-integration-cards a:hover,
+.dark .welcome-integration-cards a:hover {
+  border-color: rgba(102, 98, 255, 0.4);
+}
+.welcome-integration-cards h3 {
+  color: inherit;
+}
+.welcome-integration-cards .card-desc {
+  color: #71717a;
+}
+[data-theme="dark"] .welcome-integration-cards .card-desc,
+.dark .welcome-integration-cards .card-desc {
+  color: #a1a1aa;
+}
+
 /* Add white background to integration icons in the sidebar navigation for better dark mode visibility */
 img[src*="/images/integrations/"] {
   background-color: white !important;
