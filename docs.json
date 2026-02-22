@@ -60,44 +60,6 @@
             ]
           },
           {
-            "group": "AI Agents",
-            "pages": [
-              "guides/working-with-ai-agents",
-              "guides/configuring-ai-agents",
-              {
-                "group": "Software Management",
-                "pages": [
-                  "guides/agents/app-access",
-                  "guides/agents/license-expiration-monitoring",
-                  "guides/agents/software-compliance-report"
-                ]
-              },
-              {
-                "group": "Access Control",
-                "pages": [
-                  "guides/agents/device-recovery",
-                  "guides/agents/idp-password-reset",
-                  "guides/agents/idp-mfa-reset",
-                  "guides/agents/idp-group-management"
-                ]
-              },
-              {
-                "group": "Hardware Management",
-                "pages": [
-                  "guides/agents/asset-acknowledgment",
-                  "guides/agents/device-uptime-monitoring",
-                  "guides/agents/low-storage-monitoring"
-                ]
-              },
-              {
-                "group": "Employee Lifecycle",
-                "pages": [
-                  "guides/agents/employee-account-termination"
-                ]
-              }
-            ]
-          },
-          {
             "group": "Workflows & Automation",
             "pages": [
               "guides/building-and-managing-workflows"
@@ -126,6 +88,49 @@
               "guides/understanding-integrations",
               "guides/connecting-and-managing-integrations",
               "guides/configuring-integration-sync-and-credentials"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "AI Agents",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "guides/working-with-ai-agents",
+              "guides/configuring-ai-agents"
+            ]
+          },
+          {
+            "group": "Software Management",
+            "pages": [
+              "guides/agents/app-access",
+              "guides/agents/license-expiration-monitoring",
+              "guides/agents/software-compliance-report"
+            ]
+          },
+          {
+            "group": "Access Control",
+            "pages": [
+              "guides/agents/device-recovery",
+              "guides/agents/idp-password-reset",
+              "guides/agents/idp-mfa-reset",
+              "guides/agents/idp-group-management"
+            ]
+          },
+          {
+            "group": "Hardware Management",
+            "pages": [
+              "guides/agents/asset-acknowledgment",
+              "guides/agents/device-uptime-monitoring",
+              "guides/agents/low-storage-monitoring"
+            ]
+          },
+          {
+            "group": "Employee Lifecycle",
+            "pages": [
+              "guides/agents/employee-account-termination"
             ]
           }
         ]
@@ -284,6 +289,10 @@
     {
       "name": "Guides",
       "url": "guides"
+    },
+    {
+      "name": "AI Agents",
+      "url": "ai-agents"
     }
   ]
 }
