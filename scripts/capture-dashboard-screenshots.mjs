@@ -7,6 +7,9 @@
  *   pnpm run screenshots:dashboard:login   # First time: opens browser, log in, then close
  *   pnpm run screenshots:dashboard         # Subsequent runs: uses saved session
  *   pnpm run screenshots:dashboard -- --force   # Overwrite existing screenshots
+ *   pnpm run screenshots:dashboard -- --guides=analyzing-service-desk-metrics   # Only capture for selected guide(s)
+ *
+ * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents
  *
  * Prerequisites:
  * - Frontend running at BASE_URL (default localhost:5173 for all 8 widgets; demo.harmony.io yields 4 until deployed)
@@ -45,6 +48,83 @@ const SYSTEM_DASHBOARD_PATH = "/dashboard/system-dashboard";
 const needsLogin = process.argv.includes("--login");
 const forceOverwrite = process.argv.includes("--force");
 const useHeaded = process.argv.includes("--headed");
+const guidesArg = process.argv.find((a) => a.startsWith("--guides="));
+const selectedGuides = guidesArg ? guidesArg.replace("--guides=", "").split(",").map((s) => s.trim()) : null;
+
+/** Navigate to /agents and click an agent that has Run Schedule (e.g. Asset Acknowledgment, Low Storage). */
+async function clickAgentWithSchedule(page) {
+  const scheduleAgentNames = [
+    "Asset Acknowledgment",
+    "Low Storage Monitoring",
+    "Device Uptime Monitoring",
+    "License Expiration Monitoring",
+    "Software Compliance Report",
+    "Asset Ownership",
+  ];
+  await navigateAndClickAgent(page, scheduleAgentNames);
+}
+
+/** Navigate to /agents and click an agent that has Approval logic (e.g. Application Access, Employee Termination). */
+async function clickAgentWithApprovals(page) {
+  const approvalAgentNames = [
+    "Application Access Request",
+    "Application Access",
+    "Employee Account Termination",
+    "Employee Termination",
+    "IDP Group Management",
+    "Provision Application Access",
+    "Revoke Application Access",
+  ];
+  await navigateAndClickAgent(page, approvalAgentNames);
+}
+
+async function navigateAndClickAgent(page, agentNames) {
+  const base = process.env.BASE_URL || "http://localhost:5173";
+  await page.goto(`${base}/agents`, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForLoadState("networkidle");
+  await new Promise((r) => setTimeout(r, 2000));
+  await hideImpersonationBanner(page);
+  for (const name of agentNames) {
+    const link = page.locator(`a[href*="/agents/"]`).filter({ hasText: name }).first();
+    if (await link.isVisible().catch(() => false)) {
+      await link.click();
+      await page.waitForURL((u) => u.pathname.includes("/agents/") && u.pathname.includes("/v2"), { timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 4000));
+      return;
+    }
+    const card = page.locator(`[class*="grid"] .cursor-pointer`).filter({ hasText: name }).first();
+    if (await card.isVisible().catch(() => false)) {
+      await card.click();
+      await page.waitForURL((u) => u.pathname.includes("/agents/") && u.pathname.includes("/v2"), { timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 4000));
+      return;
+    }
+    const row = page.locator("table tbody tr.cursor-pointer").filter({ hasText: name }).first();
+    if (await row.isVisible().catch(() => false)) {
+      await row.click();
+      await page.waitForURL((u) => u.pathname.includes("/agents/") && u.pathname.includes("/v2"), { timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 4000));
+      return;
+    }
+  }
+  console.log("⚠ No matching agent found; trying first agent");
+  const fallbacks = [
+    page.locator('a[href*="/agents/"]').first(),
+    page.locator('[class*="grid"] .cursor-pointer').first(),
+    page.locator("table tbody tr.cursor-pointer").first(),
+    page.getByText(/Application Access Request|Asset Acknowledgment|Asset Ownership|Device Recovery|Low Storage|New Hire Onboarding/).first(),
+  ];
+  for (const el of fallbacks) {
+    try {
+      await el.click({ timeout: 5000 });
+      await page.waitForURL((u) => u.pathname.includes("/agents/") && u.pathname.includes("/v2"), { timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 4000));
+      return;
+    } catch {
+      /* try next */
+    }
+  }
+}
 
 // Screenshot targets: { title, filename, dir } for widgets, or { type: "region", filename, dir, clip } for regions
 const SCREENSHOT_TARGETS = [
@@ -80,6 +160,7 @@ const SCREENSHOT_TARGETS = [
     filename: "agent-schedule.png",
     dir: "configuring-ai-agents",
     path: "agents",
+    prepare: clickAgentWithSchedule,
   },
   {
     type: "element",
@@ -87,6 +168,7 @@ const SCREENSHOT_TARGETS = [
     filename: "agent-approvals.png",
     dir: "configuring-ai-agents",
     path: "agents",
+    prepare: clickAgentWithApprovals,
   },
   {
     type: "element",
@@ -209,8 +291,17 @@ async function main() {
       }
     };
 
+    const targets = selectedGuides
+      ? SCREENSHOT_TARGETS.filter((t) => selectedGuides.includes(t.dir))
+      : SCREENSHOT_TARGETS;
+
+    if (selectedGuides?.length && targets.length === 0) {
+      console.log(`\n⚠ No targets for guides: ${selectedGuides.join(", ")}`);
+      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents\n");
+    }
+
     const byPath = {};
-    for (const t of SCREENSHOT_TARGETS) {
+    for (const t of targets) {
       const p = t.path ?? SYSTEM_DASHBOARD_PATH;
       if (!byPath[p]) byPath[p] = [];
       byPath[p].push(t);
