@@ -9,7 +9,7 @@
  *   pnpm run screenshots:dashboard -- --force   # Overwrite existing screenshots
  *   pnpm run screenshots:dashboard -- --guides=analyzing-service-desk-metrics   # Only capture for selected guide(s)
  *
- * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard
+ * Guide names (for --guides): analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard, managing-asset-organization-and-importing, managing-asset-views-and-details
  *
  * Prerequisites:
  * - Frontend running at BASE_URL (default localhost:5173 for all 8 widgets; demo.harmony.io yields 4 until deployed)
@@ -25,11 +25,13 @@ import { fileURLToPath } from "url";
 const exists = async (p) => access(p).then(() => true).catch(() => false);
 
 async function hideImpersonationBanner(page) {
+  await new Promise((r) => setTimeout(r, 200));
   await page.evaluate(() => {
-    let banner = document.querySelector("[data-impersonation-banner]");
+    const sel = "[data-impersonation-banner]";
+    let banner = document.querySelector(sel);
     if (!banner) {
       const el = Array.from(document.querySelectorAll("*")).find((e) => e.textContent?.includes("IMPERSONATION MODE ACTIVE"));
-      banner = el?.closest("[class*='bg-red']");
+      banner = el?.closest("[class*='bg-red'], [class*='bg-red-600']");
     }
     if (banner) banner.style.setProperty("display", "none");
   });
@@ -468,6 +470,186 @@ const SCREENSHOT_TARGETS = [
       await new Promise((r) => setTimeout(r, 800));
     },
   },
+  // managing-asset-organization-and-importing (path: /assets or /assets/$assetId)
+  {
+    type: "element",
+    selector: 'div:has([data-table-search="true"]):has(button:has-text("Import assets"))',
+    filename: "assets-toolbar-export.png",
+    dir: "managing-asset-organization-and-importing",
+    path: "assets",
+  },
+  {
+    type: "element",
+    selector: 'div:has(span:has-text("selected")):has(button:has-text("Change location"))',
+    filename: "asset-bulk-actions.png",
+    dir: "managing-asset-organization-and-importing",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await new Promise((r) => setTimeout(r, 3000));
+      const checkbox = p.locator('table tbody tr').first().locator('input[type="checkbox"], [role="checkbox"]').first();
+      await checkbox.click().catch(() => p.locator('table tbody tr td').first().click());
+      await new Promise((r) => setTimeout(r, 800));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has(h2:has-text("Import assets"))',
+    filename: "asset-import-dialog.png",
+    dir: "managing-asset-organization-and-importing",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      if (!p.url().endsWith("/assets") && !p.url().includes("/assets?")) {
+        await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await new Promise((r) => setTimeout(r, 2000));
+      }
+      const checkbox = p.locator('table tbody tr').first().locator('input[type="checkbox"], [role="checkbox"]').first();
+      if (await checkbox.isVisible().catch(() => false)) {
+        const isChecked = await checkbox.isChecked().catch(() => false);
+        if (isChecked) await checkbox.click();
+        await new Promise((r) => setTimeout(r, 500));
+      }
+      await p.getByRole("button", { name: /Import assets/i }).click();
+      await new Promise((r) => setTimeout(r, 1000));
+    },
+  },
+  {
+    type: "element",
+    selector: 'div:has(h3:has-text("Asset details")):has(div:has-text("Ownership"))',
+    filename: "asset-detail-org-fields.png",
+    dir: "managing-asset-organization-and-importing",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await new Promise((r) => setTimeout(r, 3000));
+      const row = p.locator('table tbody tr.cursor-pointer').first();
+      await row.waitFor({ state: "visible", timeout: 10000 });
+      await row.click();
+      await p.waitForURL((u) => u.pathname.match(/\/assets\/[^/]+/), { timeout: 10000 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 2000));
+    },
+  },
+  // managing-asset-views-and-details (path: /assets or /assets/$assetId)
+  {
+    type: "element",
+    selector: 'div.overflow-auto.border-t:has(table:has(th:has-text("Availability")))',
+    filename: "warehouse-view.png",
+    dir: "managing-asset-views-and-details",
+    path: "assets",
+    clipToContent: true,
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await p.waitForLoadState("networkidle");
+      await p.waitForSelector('[data-table-search="true"], button:has-text("Import assets")', { state: "visible", timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 2000));
+      const warehouseBtn = p.locator('[data-slot="toggle-group"] button').nth(1);
+      await warehouseBtn.waitFor({ state: "visible", timeout: 15000 });
+      await warehouseBtn.click();
+      await new Promise((r) => setTimeout(r, 3000));
+    },
+  },
+  {
+    type: "element",
+    selector: 'div.grid:has(div:has-text("Unassigned assets")):has(div:has-text("Assets reached EOL"))',
+    filename: "asset-quick-filters.png",
+    dir: "managing-asset-views-and-details",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await new Promise((r) => setTimeout(r, 3000));
+      if (await p.getByRole("button", { name: "List view" }).isVisible().catch(() => false)) {
+        await p.getByRole("button", { name: "List view" }).click();
+        await new Promise((r) => setTimeout(r, 2000));
+      }
+    },
+  },
+  {
+    type: "element",
+    selector: '[id="overview"]',
+    filename: "asset-detail-overview.png",
+    dir: "managing-asset-views-and-details",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await p.waitForLoadState("networkidle");
+      await new Promise((r) => setTimeout(r, 3000));
+      if (await p.locator('[data-slot="toggle-group"] button').first().isVisible().catch(() => false)) {
+        await p.locator('[data-slot="toggle-group"] button').first().click();
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+      const row = p.locator('table tbody tr[data-row-index]').first();
+      await row.waitFor({ state: "visible", timeout: 15000 });
+      await row.click();
+      await p.waitForURL((u) => u.pathname.match(/\/assets\/[^/]+/), { timeout: 15000 });
+      await p.waitForSelector('[id="overview"]', { state: "visible", timeout: 15000 });
+      await p.locator('[id="overview"]').first().scrollIntoViewIfNeeded();
+      await new Promise((r) => setTimeout(r, 500));
+    },
+  },
+  {
+    type: "element",
+    selector: '[role="dialog"]:has(h2:has-text("Mark asset as retired"))',
+    filename: "retirement-modal.png",
+    dir: "managing-asset-views-and-details",
+    path: "assets",
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await new Promise((r) => setTimeout(r, 3000));
+      const row = p.locator('table tbody tr.cursor-pointer').first();
+      await row.waitFor({ state: "visible", timeout: 10000 });
+      await row.click();
+      await p.waitForURL((u) => u.pathname.match(/\/assets\/[^/]+/), { timeout: 10000 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 2000));
+      await p.getByRole("combobox").first().click();
+      await new Promise((r) => setTimeout(r, 500));
+      await p.getByRole("option", { name: "Retired" }).click();
+      await new Promise((r) => setTimeout(r, 1000));
+    },
+  },
+  {
+    type: "element",
+    selector: '[data-slot="sheet-content"]:has(h2:has-text("Activity"))',
+    filename: "activity-log-sheet.png",
+    dir: "managing-asset-views-and-details",
+    path: "assets",
+    clipToContent: true,
+    contentEndSelector: 'div.overflow-y-auto div.flex.gap-3',
+    prepare: async (p) => {
+      await p.keyboard.press("Escape");
+      await new Promise((r) => setTimeout(r, 300));
+      const base = process.env.BASE_URL || "http://localhost:5173";
+      await p.goto(`${base}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await new Promise((r) => setTimeout(r, 3000));
+      const row = p.locator('table tbody tr.cursor-pointer').first();
+      await row.waitFor({ state: "visible", timeout: 10000 });
+      await row.click();
+      await p.waitForURL((u) => u.pathname.match(/\/assets\/[^/]+/), { timeout: 10000 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 2000));
+      await p.getByRole("button", { name: "Activity log" }).click();
+      await new Promise((r) => setTimeout(r, 1500));
+    },
+  },
 ];
 
 async function main() {
@@ -545,6 +727,7 @@ async function main() {
         return;
       }
 
+      await hideImpersonationBanner(page);
       if (target.type === "region") {
         await page.screenshot({ path: filepath, clip: target.clip });
         console.log(`✓ ${dir}/${filename}`);
@@ -552,11 +735,35 @@ async function main() {
       } else if (target.type === "element") {
         if (typeof target.prepare === "function") {
           await target.prepare(page);
+          await hideImpersonationBanner(page);
         }
         const el = page.locator(target.selector).first();
         const isVisible = await el.isVisible().catch(() => false);
         if (isVisible) {
-          await el.screenshot({ path: filepath });
+          if (target.clipToContent) {
+            const box = await el.boundingBox();
+            const contentEndSel = target.contentEndSelector ?? 'div.sticky.border-t, div:has-text("Showing")';
+            const contentEnd = target.contentEndSelector ? el.locator(contentEndSel).last() : el.locator(contentEndSel).first();
+            const endBox = await contentEnd.boundingBox().catch(() => null);
+            if (box) {
+              const clipHeight = endBox
+                ? Math.ceil(endBox.y + endBox.height - box.y) + 16
+                : Math.min(box.height, 800);
+              await page.screenshot({
+                path: filepath,
+                clip: {
+                  x: Math.round(box.x),
+                  y: Math.round(box.y),
+                  width: Math.round(box.width),
+                  height: Math.min(Math.ceil(clipHeight), box.height + 120),
+                },
+              });
+            } else {
+              await el.screenshot({ path: filepath });
+            }
+          } else {
+            await el.screenshot({ path: filepath });
+          }
           console.log(`✓ ${dir}/${filename}`);
           captured.add(key);
         } else {
@@ -584,7 +791,7 @@ async function main() {
 
     if (selectedGuides?.length && targets.length === 0) {
       console.log(`\n⚠ No targets for guides: ${selectedGuides.join(", ")}`);
-      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard\n");
+      console.log("  Valid: analyzing-asset-and-automation-metrics, analyzing-service-desk-metrics, configuring-ai-agents, configuring-asset-management, configuring-automation-and-sla, configuring-integration-sync-and-credentials, connecting-and-managing-integrations, creating-and-managing-custom-dashboards, getting-started-with-harmony-dashboard, managing-asset-organization-and-importing, managing-asset-views-and-details\n");
     }
 
     const byPath = {};
@@ -594,7 +801,7 @@ async function main() {
       byPath[p].push(t);
     }
 
-    for (const path of [SYSTEM_DASHBOARD_PATH, "agents", "settings/asset-management", "settings/desks", "settings/integrations"]) {
+    for (const path of [SYSTEM_DASHBOARD_PATH, "agents", "assets", "settings/asset-management", "settings/desks", "settings/integrations"]) {
       const targets = byPath[path];
       if (!targets?.length) continue;
 
@@ -615,6 +822,12 @@ async function main() {
           await page.waitForURL((u) => u.pathname.match(/\/settings\/desks\/[^/]+/), { timeout: 10000 });
         }
         await new Promise((r) => setTimeout(r, 2000));
+        await hideImpersonationBanner(page);
+      } else if (path === "assets") {
+        console.log(`\nNavigating to /assets...`);
+        await page.goto(`${BASE_URL}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.waitForLoadState("networkidle");
+        await new Promise((r) => setTimeout(r, 4000));
         await hideImpersonationBanner(page);
       } else if (path === "settings/asset-management") {
         console.log(`\nNavigating to /settings/asset-management...`);
