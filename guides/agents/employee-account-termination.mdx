@@ -1,0 +1,33 @@
+---
+title: "Employee Account Termination"
+description: "Automated employee account termination with approval, identity provider deactivation, and session termination."
+---
+
+The **Employee Account Termination** agent automates offboarding workflows. It runs when a termination is initiated, collects approval, deactivates accounts in the identity provider, and terminates active sessions.
+
+## What it does
+
+- Triggered when an employee termination is initiated (`employee_termination_initiated` event)
+- Routes to approvers (e.g., direct manager, HR)
+- On approval: deactivates employee in IdP (Okta, Entra, Google Workspace)
+- Terminates active sessions
+- Updates the ticket with the outcome
+
+## Triggers
+
+**Event** — Runs when `employee_termination_initiated` is raised with `is_termination_request: true`.
+
+## Approval
+
+Requires approval before deactivating accounts. Configure approvers (e.g., direct manager), strategy, and timeout.
+
+## Configuration
+
+- **Approval** — Strategy, approvers, timeout, reminders
+- **Identity provider** — Which IdP to deactivate in
+- **Session termination** — Behavior for active sessions
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure approval and IdP deactivation</Card>
+</CardGroup>

@@ -1,0 +1,33 @@
+---
+title: "Low Storage Device Monitoring"
+description: "Automated monitoring for devices with critically low storage capacity."
+---
+
+The **Low Storage Device Monitoring** agent finds devices with critically low free storage and sends alerts or creates tickets so IT can remediate before users are blocked.
+
+## What it does
+
+- Queries device storage from MDM integrations
+- Compares free space against a configurable threshold (e.g., % or GB)
+- Sends alerts or creates tickets when devices fall below the threshold
+- Can target specific devices or an entire scope
+
+## Triggers
+
+**Schedule** — Runs at configured frequency (e.g., daily, weekly) via cron.
+
+## Approval
+
+No approval required. The agent monitors and alerts; remediation is handled manually or by other workflows.
+
+## Configuration
+
+- **Run Schedule** — Frequency, day, time, timezone
+- **Storage threshold** — Percentage (e.g., under 10%) or absolute amount (e.g., under 5 GB)
+- **Scope** — All devices or filtered subset
+- **Alert/Ticket** — Desk, assignee, priority for created tickets
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedule and thresholds</Card>
+</CardGroup>

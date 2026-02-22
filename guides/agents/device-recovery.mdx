@@ -1,0 +1,33 @@
+---
+title: "Device Recovery"
+description: "Automated device recovery with identity verification and recovery key delivery."
+---
+
+The **Device Recovery** agent handles device recovery requests when a device is lost or stolen. It verifies the requester’s identity, retrieves the recovery key, and delivers it securely to the employee.
+
+## What it does
+
+- Detects device recovery requests from tickets (`is_device_recovery_request`)
+- Verifies employee identity
+- Retrieves recovery key from MDM integration
+- Delivers recovery key to the employee through the configured channel
+- Updates the ticket with status and outcome
+
+## Triggers
+
+**Event** — Runs when a ticket is created with `is_device_recovery_request: true`.
+
+## Approval
+
+Typically does not require approval; identity verification is built in. Configuration may add approval steps for sensitive cases.
+
+## Configuration
+
+- **Identity verification** — Method and requirements
+- **Delivery channel** — How the recovery key is sent (in-app, email, etc.)
+- **Ticket desk** — Where recovery requests are routed
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure verification and delivery</Card>
+</CardGroup>

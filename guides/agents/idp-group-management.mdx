@@ -1,0 +1,32 @@
+---
+title: "Group Membership Management"
+description: "Manage group membership with approval - add or remove users from groups."
+---
+
+The **Group Membership Management** agent manages identity provider group assignments. It supports adding or removing users from groups (Okta, Entra, Google Workspace) with approval when required.
+
+## What it does
+
+- Triggered by ticket or event when a group change is requested
+- Routes to approvers when configured
+- On approval: adds or removes the user from the specified group in the IdP
+- Updates the ticket with the outcome
+
+## Triggers
+
+**Event** — Runs when a group membership request is detected (e.g., from a ticket with specific metadata).
+
+## Approval
+
+Requires approval by default. Configure approvers (e.g., direct manager, app owner), strategy, and timeout.
+
+## Configuration
+
+- **Approval** — Strategy, approvers, timeout, reminders
+- **Identity provider** — Supported: Okta, Microsoft Entra, Google Workspace
+- **Group operations** — Add, remove, or both
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure approval and IdP settings</Card>
+</CardGroup>

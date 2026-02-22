@@ -1,0 +1,33 @@
+---
+title: "Software Compliance Report"
+description: "Request managers to acknowledge or reject their direct reports' application access. Creates a summary ticket with all responses on completion."
+---
+
+The **Software Compliance Report** agent runs periodic checks on software access across the organization. It asks managers to acknowledge or reject their direct reports’ application access, then creates a summary report ticket.
+
+## What it does
+
+- Lists employees and their application access
+- Sends manager notifications requesting acknowledgment or rejection
+- Tracks responses and sends reminders within the configured timeout
+- Generates a CSV report of all responses
+- Creates an IT desk ticket with the compliance report attached
+
+## Triggers
+
+**Schedule** — Runs at configured frequency (e.g., weekly on Monday 8am) via cron. Default: weekly on Monday.
+
+## Approval
+
+Managers acknowledge or reject; no separate approval step for the agent itself. The agent aggregates their responses into a report.
+
+## Configuration
+
+- **Run Schedule** — Frequency, day, time, timezone (default: Mondays 8am UTC)
+- **Notification** — Timeout hours, deadline days, reminder interval, max reminders
+- **Ticket** — Desk, assignee, priority for the summary ticket
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedule and notification</Card>
+</CardGroup>

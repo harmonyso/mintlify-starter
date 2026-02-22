@@ -1,0 +1,34 @@
+---
+title: "Application Access Request"
+description: "Automated application access requests with approval and provisioning."
+---
+
+The **Application Access Request** agent handles requests for application access. It resolves the identity provider, checks provisioning policy, and optionally routes through approval before provisioning access.
+
+## What it does
+
+- Detects app access requests from tickets (`is_app_access_request`)
+- Resolves identity provider (Okta, Entra, Google Workspace)
+- Resolves provisioning policy (auto-approve vs. approval required)
+- Routes to approvers when needed
+- Provisions access on approval; supports JIT (just-in-time) temporary access
+- Escalates to app owner when IdP resolution fails
+
+## Triggers
+
+**Event** — Runs when a ticket is created with `is_app_access_request: true`.
+
+## Approval
+
+Requires approval unless the provisioning policy has auto-approve enabled. Configure approvers by role (e.g., app owner) or by employee, approval strategy, and timeout.
+
+## Configuration
+
+- **Approval** — Strategy, approvers, timeout, reminders
+- **Provisioning** — Access duration, JIT options
+- **Approval strategy** — Require all, require one, or escalate
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedules, approvals, and provisioning</Card>
+</CardGroup>

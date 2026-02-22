@@ -1,0 +1,33 @@
+---
+title: "Device Uptime Monitoring"
+description: "Automated monitoring for devices with high uptime (haven't restarted)."
+---
+
+The **Device Uptime Monitoring** agent identifies devices that have been running for an extended period without a restart. Long uptime can indicate missing restarts and security updates.
+
+## What it does
+
+- Queries devices for uptime
+- Compares uptime against a configurable threshold (e.g., days)
+- Sends alerts or creates tickets when devices exceed the threshold
+- Can target specific devices or an entire scope
+
+## Triggers
+
+**Schedule** — Runs at configured frequency (e.g., weekly) via cron.
+
+## Approval
+
+No approval required. The agent monitors and alerts; remediation is handled manually or by other workflows.
+
+## Configuration
+
+- **Run Schedule** — Frequency, day, time, timezone
+- **Uptime threshold** — Days without restart (e.g., 14, 30)
+- **Scope** — All devices or filtered subset
+- **Alert/Ticket** — Desk, assignee, priority for created tickets
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedule and thresholds</Card>
+</CardGroup>

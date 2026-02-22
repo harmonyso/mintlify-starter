@@ -1,0 +1,33 @@
+---
+title: "Asset Ownership Confirmation Report"
+description: "Periodically request asset acknowledgment from employees with MDM-managed devices."
+---
+
+The **Asset Ownership Confirmation Report** agent sends asset acknowledgment requests to employees who have MDM-managed devices. It runs on a schedule and collects acknowledgments for compliance and inventory accuracy.
+
+## What it does
+
+- Targets employees with assigned devices (or specific employee IDs)
+- Sends asset acknowledgment requests (via portal or configured channel)
+- Tracks responses and sends reminders as configured
+- Creates tickets for non-responders or escalations
+
+## Triggers
+
+**Schedule** — Runs at configured frequency (daily, weekly, monthly, etc.) via cron.
+
+## Approval
+
+No approval required for sending requests. Approval workflows can be configured for escalation or follow-up.
+
+## Configuration
+
+- **Run Schedule** — Frequency, day, time, timezone
+- **Notification** — Timeout, reminder intervals, max reminders
+- **Ticket** — Desk, assignee, priority for escalation tickets
+- **Target scope** — All employees with assets, or specific employee IDs
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedules and settings</Card>
+</CardGroup>

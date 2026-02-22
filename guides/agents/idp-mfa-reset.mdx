@@ -1,0 +1,33 @@
+---
+title: "MFA Device Reset"
+description: "Automated MFA device reset with identity verification and re-enrollment instructions."
+---
+
+The **MFA Device Reset** agent resets MFA for identity provider users. It verifies identity and guides the user through re-enrolling their MFA device.
+
+## What it does
+
+- Detects MFA reset requests (typically from tickets)
+- Verifies employee identity
+- Resets MFA in the IdP (Okta, Entra, Google Workspace)
+- Delivers re-enrollment instructions to the user
+- Updates the ticket with status
+
+## Triggers
+
+**Event** — Runs when an MFA reset request is detected (e.g., ticket created with `is_mfa_reset_request`).
+
+## Approval
+
+Typically does not require approval; identity verification is the primary control. Approval can be added via configuration if needed.
+
+## Configuration
+
+- **Identity verification** — Method and requirements
+- **Identity provider** — Okta, Entra, Google Workspace
+- **Delivery channel** — How re-enrollment instructions are sent
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure verification and delivery</Card>
+</CardGroup>

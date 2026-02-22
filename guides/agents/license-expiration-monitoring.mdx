@@ -1,0 +1,33 @@
+---
+title: "License Expiration Monitoring"
+description: "Automated monitoring for software licenses expiring soon."
+---
+
+The **License Expiration Monitoring** agent tracks software license expiration dates and sends notifications when licenses are nearing expiration. It helps avoid service disruptions and supports license renewal planning.
+
+## What it does
+
+- Queries software licenses from integrations (e.g., Torii)
+- Compares expiration dates against a configurable threshold (e.g., 30 days)
+- Sends notifications or creates tickets when licenses are expiring soon
+- Can target specific applications or all licenses
+
+## Triggers
+
+**Schedule** — Runs at configured frequency (e.g., weekly) via cron.
+
+## Approval
+
+No approval required. The agent monitors and alerts; renewal actions are handled manually or by other workflows.
+
+## Configuration
+
+- **Run Schedule** — Frequency, day, time, timezone
+- **Expiration threshold** — Days before expiration to alert (e.g., 30, 14)
+- **Scope** — All licenses or filtered by application
+- **Ticket/Notification** — Desk, assignee, recipients
+
+<CardGroup cols={2}>
+  <Card title="Working with agents" icon="file" href="/guides/working-with-ai-agents">Learn how to run and monitor agents</Card>
+  <Card title="Configuring AI agents" icon="gear" href="/guides/configuring-ai-agents">Configure schedule and thresholds</Card>
+</CardGroup>
