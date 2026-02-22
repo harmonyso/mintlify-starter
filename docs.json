@@ -3,29 +3,98 @@
   "theme": "mint",
   "name": "Harmony",
   "colors": {
-    "primary": "#6B3ED7",
-    "light": "#B272EB",
-    "dark": "#4E2ABD"
+    "primary": "#6662ff",
+    "light": "#9996ff",
+    "dark": "#4d4acc"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/branding/favicon.ico",
   "css": "/custom.css",
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
-        {
-          "group": "Getting started",
-          "pages": [
-            "index"
-          ]
-        },
-        {
-          "group": "Guides",
-          "pages": [
-            "guides/dashboard-overview"
-          ]
-        }
+          {
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "guides/getting-started-with-harmony-dashboard",
+              "guides/navigating-the-interface",
+              "guides/managing-your-profile-and-preferences",
+              "guides/understanding-user-roles-and-permissions"
+            ]
+          },
+          {
+            "group": "Dashboard & Analytics",
+            "pages": [
+              "guides/creating-and-managing-custom-dashboards",
+              "guides/working-with-dashboard-widgets",
+              "guides/analyzing-service-desk-metrics",
+              "guides/analyzing-asset-and-automation-metrics"
+            ]
+          },
+          {
+            "group": "Service Desk & Tickets",
+            "pages": [
+              "guides/understanding-service-desk-and-managing-tickets",
+              "guides/organizing-tickets-and-table-views"
+            ]
+          },
+          {
+            "group": "People Management",
+            "pages": [
+              "guides/managing-people"
+            ]
+          },
+          {
+            "group": "Asset Management",
+            "pages": [
+              "guides/managing-asset-views-and-details",
+              "guides/managing-asset-organization-and-importing"
+            ]
+          },
+          {
+            "group": "Software Management",
+            "pages": [
+              "guides/managing-software-applications"
+            ]
+          },
+          {
+            "group": "AI Agents",
+            "pages": [
+              "guides/working-with-ai-agents"
+            ]
+          },
+          {
+            "group": "Workflows & Automation",
+            "pages": [
+              "guides/building-and-managing-workflows"
+            ]
+          },
+          {
+            "group": "Portal (End-User View)",
+            "pages": [
+              "guides/using-the-harmony-portal"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "guides/managing-service-desks-and-teams",
+              "guides/configuring-automation-and-sla",
+              "guides/managing-ticket-settings-and-users",
+              "guides/configuring-asset-management-and-agents",
+              "guides/managing-preferences-and-knowledge-base"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "guides/understanding-integrations",
+              "guides/connecting-and-managing-integrations",
+              "guides/configuring-integration-sync-and-credentials"
+            ]
+          }
         ]
       },
       {
@@ -149,8 +218,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/branding/Harmony-horizontal-purple.png",
+    "dark": "/images/branding/Harmony-horizontal-white.png"
   },
   "navbar": {
     "links": [
@@ -185,5 +254,11 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/company/harmonyio"
     }
-  }
+  },
+  "tabs": [
+    {
+      "name": "Guides",
+      "url": "guides"
+    }
+  ]
 }

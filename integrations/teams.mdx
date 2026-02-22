@@ -51,6 +51,8 @@ Before connecting Microsoft Teams to Harmony, ensure you have:
     3. Review the requested permissions
     4. Click **Accept** to authorize
     5. You'll be redirected back to Harmony
+
+    ![Microsoft Entra ID Connection Dialog](/images/teams/entra-connection-dialog.png)
   </Step>
 
   <Step title="Verify Connection">
@@ -76,6 +78,8 @@ Before connecting Microsoft Teams to Harmony, ensure you have:
     2. Review the requested permissions (see [Permissions](#permissions-explained) below)
     3. Click **Accept** to authorize the connection
     4. You'll be redirected back to Harmony
+
+    ![Microsoft Teams Connection Dialog](/images/teams/teams-connect.png)
   </Step>
 </Steps>
 
@@ -95,9 +99,11 @@ The Harmony app must be uploaded to your Microsoft Teams environment by a Teams 
   <Step title="Upload to Teams Admin Center">
     1. Navigate to the [Microsoft Teams admin center](https://admin.teams.microsoft.com/policies/manage-apps)
     2. Click the **Actions** dropdown button
-    3. Select **Upload new app**
-    4. Upload the Harmony Teams app package (`.zip` file)
-    5. Click **Upload** to complete the installation
+    3. Select **+ Upload new app**
+    4. Upload the Harmony Teams app package (`.zip` file) when prompted
+    5. Follow the on-screen instructions and click **Upload** to complete the installation
+
+    ![Upload Custom App Dialog](/images/teams/upload-dialog.png)
 
     <Tip>
       The app will be available to users within a few minutes, but organization-wide deployment may take several hours.
@@ -121,6 +127,8 @@ By default, users must manually add the Harmony app to their Teams. To automatic
     1. Under **Installed apps**, click **+ Add apps**
     2. Search for **Harmony** and add it to the list
     3. Click **Save**
+
+    ![Setup Policies](/images/teams/setup-policies.png)
 
     <Note>
       It may take a few minutes to several hours for the app to propagate to all users in your organization.
@@ -203,6 +211,30 @@ Configure how Harmony operates in each Teams channel:
 - Responses sync automatically to end users
 - Egress-only (doesn't create new tickets from messages)
 - **Use a private channel with only IT support agents**
+
+***
+
+## What Harmony Does in Teams
+
+### Receive IT Ticket Notifications
+
+Harmony automatically sends notifications to your designated Teams channels for:
+
+- **New IT Tickets**: Employee requests for hardware, software, or technical support
+- **Ticket Updates**: Status changes, assignments, priority updates, and resolutions
+- **Escalations**: High-priority tickets requiring immediate attention
+- **Service Requests**: Equipment orders, access requests, and account changes
+
+### Ask the Bot IT-Related Questions
+
+Interact with the Harmony bot in channels by mentioning @Harmony to get instant answers from your corporate IT knowledge base:
+
+| Question Type | Example |
+| ------------- | ------- |
+| IT Procedures | "@Harmony How do I set up a new employee's laptop?" |
+| Troubleshooting | "@Harmony User can't connect to WiFi, what should I check?" |
+| Policy Questions | "@Harmony What's our password policy for new accounts?" |
+| Knowledge Base | "@Harmony Show me the steps to install Office 365" |
 
 ***
 
@@ -358,17 +390,20 @@ Harmony requests the following Microsoft Teams permissions:
 
 ***
 
-Need help? Contact **[support@harmony.io](mailto:support@harmony.io)** for assistance with your Microsoft Teams integration.
+## Getting Help
+
+Need assistance? Here's how to get support:
+
+- **In-app Help**: Use the help button on the sidebar to reach us
+- **Support Team**: Contact [support@harmony.io](mailto:support@harmony.io) with your workspace details
 
 ***
 
-## Data & Privacy
+## Privacy & Security
 
-For information about how Harmony handles your data, see our [Privacy Policy](https://harmony.io/privacy).
+- **Channel support**: Harmony is only supported in public channels
+- **Encryption**: All data transmission is encrypted using industry-standard protocols
+- **Revocation**: Integration can be revoked at any time from your Microsoft 365 admin center or Harmony settings
+- **Compliance**: Harmony complies with Microsoft's security and compliance standards
 
-**Key privacy principles:**
-- Harmony only accesses channels where explicitly added
-- All data transmission is encrypted using Microsoft's security standards
-- Message content is processed to provide AI responses and ticket management
-- Integration can be revoked from Teams admin center or Harmony settings
-- Complies with Microsoft 365 security and compliance requirements
+For more on how Harmony handles your data, see our [Privacy Policy](https://harmony.io/privacy).

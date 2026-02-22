@@ -1,0 +1,134 @@
+---
+title: "Asset Organization & Import"
+description: "Learn how to update asset location, ownership, and assignment; use bulk actions; import assets from CSV; and export asset data."
+---
+
+## Managing Asset Organization
+
+Asset organization controls where assets are, who owns them, and who they are assigned to. Update these values individually on the asset detail page or in bulk from the asset list.
+
+### Updating Asset Location
+
+**Single asset:** On the asset detail page or in the list view Location column, click the cell to open the location selector. Choose an existing location, type to create a new one, or select **Clear location** to remove it. Location is stored as manual location; it overrides MDM-derived location when set.
+
+**Bulk:** Select multiple assets, then use **Change location** in the bulk actions toolbar. Pick a location or create a new one; it applies to all selected assets.
+
+### Changing Asset Ownership
+
+**Single asset:** On the asset detail page, use the **Ownership** dropdown in the Asset details card. Options: Company Owned, Leased, Personal, Released.
+
+**Bulk:** Select multiple assets, then use **Change ownership** in the bulk actions toolbar. Choose an ownership value; it applies to all selected assets.
+
+### Assigning Assets to Employees
+
+On the asset detail page, use the **Assigned to** dropdown in the Asset details card. Search for an employee and select them, or clear the selection to unassign. Assigned assets appear in the employee's profile in the People directory.
+
+### Understanding Asset Compliance Status
+
+Compliance status comes from your MDM or integration (e.g., policy compliance). It is read-only and cannot be edited directly. Use the compliance filter in the list and the compliance badge on the asset detail page.
+
+### Managing Asset Metadata
+
+Asset metadata (name, model, serial, manufacturer, source, etc.) is primarily sourced from MDM or integrations. For manually imported assets, you can add or edit purchase details, notes, location, ownership, and assignment. The asset detail page shows the full set of properties.
+
+---
+
+## Using Bulk Actions on Assets
+
+### Selecting Multiple Assets
+
+In the asset List view, use the checkboxes in the first column to select rows. Select individual assets or use the header checkbox to select all on the current page. Bulk actions apply only to the currently selected assets.
+
+### Bulk Updating Asset Location
+
+1. Select one or more assets.
+2. Click **Change location** in the bulk actions bar.
+3. Choose an existing location or type to create a new one. Use **Clear location** to remove location from all selected assets.
+4. Confirm. The update applies to all selected assets.
+
+### Bulk Updating Asset Ownership
+
+1. Select one or more assets.
+2. Click **Change ownership** in the bulk actions bar.
+3. Select an ownership value (Company Owned, Leased, Personal, Released).
+4. Confirm. The update applies to all selected assets.
+
+### Understanding Bulk Action Limits
+
+Bulk location and ownership updates apply to all assets you have selected. Selection is limited to assets on the current page unless you select all on the page. For large updates, apply filters first to narrow the list, then use the header checkbox to select the filtered set.
+
+---
+
+## Importing Assets
+
+### Importing Assets from CSV
+
+1. Open **Assets** and click **Import** in the toolbar.
+2. Download the CSV template from the import dialog.
+3. Fill the template with your asset data. Required columns: Display name, Asset type, Manufacturer.
+4. Upload the CSV file. The file is validated before import.
+5. If validation passes, click **Import**. After import completes, a summary shows records created, updated, and failed.
+
+### Understanding Asset Import Fields
+
+The CSV must use these exact column headers. Data is matched by column name, not by position.
+
+| Column | Required | Description |
+|--------|----------|-------------|
+| **Display name** | Yes | Asset name. Max 100 characters. |
+| **Asset type** | Yes | One of: LAPTOP, DESKTOP, MONITOR, PRINTER, MOUSE, KEYBOARD, PHONE, TABLET, SERVER, DOCKING_HUB, HEADPHONES, MICROPHONE, WEBCAM, UNKNOWN. |
+| **Manufacturer** | Yes | Manufacturer name. Max 100 characters. |
+| **Asset Tag** | No | Stored in note with Description. |
+| **Description** | No | Stored in note with Asset Tag. |
+| **Asset State** | No | Status: in_stock, active, in_repair, planned, grace_period, expired, retired. Case insensitive. Defaults to in_stock. |
+| **Serial number** | No | Max 100 characters. Auto-generated if empty or if Quantity &gt; 1. |
+| **Model** | No | Model name. Max 100 characters. |
+| **P.O Number** | No | Purchase order number. Max 100 characters. |
+| **Location** | No | Manual location. Max 255 characters. |
+| **Quantity** | No | 1–1000. Defaults to 1. When &gt; 1, serial numbers are auto-generated. |
+| **Ownership** | No | COMPANY_OWNED, LEASED, PERSONAL, RELEASED. |
+| **MDM Status** | No | ACTIVE, INACTIVE, IN_REPAIR, END_OF_LIFE. |
+
+### Mapping CSV Columns During Import
+
+Import uses fixed column headers. Your CSV must include the exact header names from the template (e.g., `Display name`, `Asset type`, `Manufacturer`). Rename your columns to match; there is no column-mapping UI.
+
+### Previewing Asset Import Data
+
+After you upload a CSV, the import dialog validates the file. If validation succeeds, a green message shows how many assets are ready for import. If validation fails, up to 10 errors are shown (row number, field, and message). Fix errors in your CSV and upload again.
+
+### Handling Import Errors
+
+- **File-level errors:** Missing required columns, file too large (5MB max), too many rows (1000 max), total assets exceed limit (10,000 after quantity expansion). Resolve these before import.
+- **Row-level errors:** Invalid asset type, invalid status, invalid ownership, invalid MDM status, length limits exceeded. Rows with errors are skipped; valid rows are imported.
+- **Post-import:** The summary shows successful inserts, successful updates, and failed inserts. Duplicate assets from MDM supersede manually imported assets when both exist.
+
+---
+
+## Exporting Assets
+
+### Exporting Assets to CSV
+
+Click **Export** in the Assets toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-assets-export-YYYY-MM-DD.csv`. Export includes all assets that match the filters; large exports may take a moment.
+
+### Filtering Assets for Export
+
+Apply filters before exporting to limit which assets are included. Supported export filters: search, MDM status, status, compliance, assignee, source, asset type, vendor, model, supplier, OS version, ownership, retirement reason, age, location. Sort order is also applied to the export.
+
+### Understanding Asset Export Fields
+
+The CSV includes columns such as Asset, Asset Type, Status, Retirement Reason, Vendor, Model, Serial, OS Version, Supplier, Ownership, Source, Location, Compliance, MDM Status, EOL Date, Warranty End Date, Assignee, Last seen, and others. Column visibility and order from the table are respected when possible.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Asset & Agent Settings" icon="cog" href="/guides/configuring-asset-management-and-agents">
+    EOL policies, low stock, discovery policies.
+  </Card>
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
+    View asset details, purchase info, and specifications.
+  </Card>
+  <Card title="Managing People" icon="users" href="/guides/managing-people">
+    Assign assets to employees and view employee profiles.
+  </Card>
+</CardGroup>

@@ -1,0 +1,184 @@
+---
+title: "Working with AI Agents"
+description: "Learn how to use Harmony AI agents to automate tasks, configure settings, run workflows manually, monitor execution, and handle approvals."
+---
+
+## Understanding AI Agents
+
+Harmony AI agents are automated workflows that perform tasks such as software compliance checks, asset acknowledgment, device recovery, app access requests, password resets, and more. Agents are configured per workflow, can run on a schedule or manually, and may require approval before executing certain actions.
+
+### Understanding Agent Categories
+
+Agents are grouped by category (e.g., HR operations, Access control, Security, Software compliance, Hardware). Categories help organize agents in the list. The category icon reflects the agent type.
+
+### Agent Types
+
+| Agent Type | Description |
+|------------|-------------|
+| **Software Compliance** | Checks software compliance across devices and generates reports. |
+| **Asset Acknowledgment** | Sends asset acknowledgment requests to employees for assigned devices. |
+| **Uptime Monitoring** | Monitors device uptime and sends alerts when thresholds are exceeded. |
+| **Device Recovery** | Initiates device recovery workflows for lost or stolen devices. |
+| **App Access Request** | Handles requests for application access. |
+| **Low Storage Alert** | Monitors device storage and alerts when space is low. |
+| **License Expiration** | Tracks license expiration dates and sends notifications. |
+| **IDP Password Reset** | Sends password reset workflows for IdP users. |
+| **IDP MFA Reset** | Resets MFA for IdP users. |
+| **IDP Group Management** | Manages IdP group assignments for users. |
+| **Employee Termination** | Handles employee offboarding and account deactivation workflows. |
+
+---
+
+## Managing Agents
+
+### Navigating the Agents List
+
+Open **Agents** from the sidebar to view the list at `/agents`. The page shows all available agents with name, category, status, approval requirement, run count, and last run time. Use the toolbar for search, filters, and refresh.
+
+### Viewing Agent Cards vs Table View
+
+Toggle between **Card layout** and **Table layout** to change how agents are displayed. Card view shows larger cards with agent details; table view shows a compact data table with sortable columns.
+
+### Viewing Agent Details
+
+Click an agent to open its detail page at `/agents/{agentId}/{slug}/v2`. The page has tabs: **Overview**, **Runs history**, and **Provisioning** (when applicable). The Overview tab shows triggers, steps, and configuration.
+
+### Configuring Agent Settings
+
+On the agent detail page, the right panel shows the configuration for that agent type. Configure options such as schedule, approval requirements, ticket destination, thresholds, and agent-specific settings. Click **Save** to apply changes.
+
+### Enabling and Disabling Agents
+
+Use the **Enabled** toggle in the agent header to enable or disable the agent. When disabled, the agent will not run on schedule or respond to triggers. Configuration is preserved when disabled.
+
+### Setting Agent Schedules
+
+In the configuration panel, use the **Run Schedule** section to set when the agent runs. Options include:
+
+- **Frequency** — Daily, Weekly, Monthly, or custom (Quarterly, Semi-annually, Annually)
+- **Day** — For weekly: day of week; for monthly/quarterly: day of month
+- **Time** — Hour and minute
+- **Timezone** — Timezone for the schedule
+
+Save the configuration to apply the schedule.
+
+### Configuring Agent Approval Requirements
+
+For agents that support approvals, configure:
+
+- **Approval strategy** — Require all approvers, require one of, or escalate if first doesn't respond
+- **Approvers** — Add approvers by role (e.g., Direct manager) or by specific employees
+- **Timeout** — How long to wait for approval before escalation or expiry
+- **Reminders** — Optional reminder intervals to nudge approvers
+
+---
+
+## Running and Monitoring Agents
+
+### Running Agents Manually
+
+On the agent detail page, click **Run** to open the run dialog. Fill in the required inputs (e.g., employee, device, application) and click **Run** to start the workflow. The dialog varies by agent type.
+
+### Understanding Agent Runs
+
+Each run has a unique Run ID, status, subject, duration, requester, and start time. Runs are triggered by schedules, events, or manual execution.
+
+### Viewing Agent Run Details
+
+Click a run in the Runs history table to open the run details page at `/agents/{agentId}/{slug}/v2/runs/{runId}`. The page shows run metadata, step-by-step execution status, and outputs. Expand steps to see inputs, outputs, and errors.
+
+### Viewing Agent Execution History
+
+On the agent detail page, open the **Runs history** tab. The table lists past runs with Run ID, Status, Subject, Duration, Requester, and Start Time. Use search and the status filter to find specific runs. Sort by column headers.
+
+### Understanding Agent Run Status
+
+| Status | Description |
+|--------|-------------|
+| **Running** | Execution in progress. |
+| **Completed** | All steps finished successfully. |
+| **Failed** | One or more steps failed. |
+| **Aborted** | Run was cancelled by user. |
+| **Time out** | Run exceeded the time limit. |
+| **Skipped** | Run or step was skipped. |
+
+### Monitoring Active Agent Runs
+
+Runs with status **Running** show a live duration timer in the Runs history. Open the run details page to see which step is running and monitor progress in real time.
+
+### Aborting Agent Runs
+
+On the run details page, for runs that are still **Running**, click **Abort** to stop execution. Confirm in the dialog. Aborting stops all remaining steps; actions already completed in external systems may need manual review.
+
+---
+
+## Working with Agent Run Results and Approvals
+
+### Reviewing Agent Run Results
+
+Open a run's detail page to review results. Each step shows its status, duration, and output. Expand steps to view JSON inputs and outputs. For failed steps, the error message is displayed and can be copied.
+
+### Understanding Agent Run Dialogs
+
+When you run an agent manually, a dialog opens to collect inputs. Each agent type has a different dialog:
+
+- **Software Compliance** — Select employee scope and options.
+- **Asset Acknowledgment** — Select employees and configure reminder settings.
+- **Uptime** — Configure threshold and select devices or scope.
+- **Device Recovery** — Select employee and device.
+- **App Access** — Select employee and application.
+- **Low Storage** — Select scope and threshold.
+- **License Expiration** — Select scope.
+- **Password Reset** — Select employee (Okta users).
+- **Group Management** — Select employee and groups to add/remove.
+- **Employee Termination** — Select employee and configure offboarding options.
+
+### Understanding Agent Approvals
+
+Some agents require approval before executing sensitive actions. When an agent reaches an approval step, designated approvers receive a notification. They can approve or deny from the notification or from the run details.
+
+### Approving Agent Actions
+
+When you are an approver, use the approval link in the notification or navigate to the run. Approve the action to allow the workflow to continue.
+
+### Denying Agent Actions
+
+From the approval notification or run details, deny the action to stop the workflow. The run will reflect the denied status.
+
+---
+
+## Exporting Agent Data
+
+### Exporting Agent Run History
+
+On the agent detail page, open the **Runs history** tab. Click **Export** in the toolbar to export the run history to CSV. The export uses the current filters and search. Only the runs currently loaded (based on filters) are exported.
+
+### Understanding Agent Run Export Fields
+
+The CSV includes: Run ID, Status, Subject, Duration, Requester, Start Time. The filename format is `{agent-slug}-runs-YYYY-MM-DD.csv`.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Preferences & Knowledge Base" icon="book-open" href="/guides/managing-preferences-and-knowledge-base">
+    Knowledge Base for agent responses.
+  </Card>
+  <Card title="Asset & Agent Settings" icon="cog" href="/guides/configuring-asset-management-and-agents">
+    Schedules, approval workflows, provisioning.
+  </Card>
+  <Card title="Building Workflows" icon="diagram-project" href="/guides/building-and-managing-workflows">
+    Create custom workflows with triggers, actions, and conditional logic.
+  </Card>
+  <Card title="Harmony Portal" icon="user" href="/guides/using-the-harmony-portal">
+    How end users chat with agents and manage tickets.
+  </Card>
+  <Card title="Service Desk & Tickets" icon="ticket" href="/guides/understanding-service-desk-and-managing-tickets">
+    Assign tickets to AI agents and track related requests.
+  </Card>
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
+    Manage assets that agents monitor and report on.
+  </Card>
+  <Card title="Asset & Automation Metrics" icon="bar-chart" href="/guides/analyzing-asset-and-automation-metrics">
+    Analyze agent runs and automation performance.
+  </Card>
+</CardGroup>

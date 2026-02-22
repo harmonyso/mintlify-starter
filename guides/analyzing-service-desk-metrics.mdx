@@ -1,0 +1,91 @@
+---
+title: "Service Desk Metrics"
+description: "Understand and interpret service desk metrics in the Harmony Dashboard: ticket volume, response and resolution times, SLA compliance, and ticket breakdowns."
+---
+
+## Tracking Service Desk Overview
+
+The dashboard surface key service desk metrics at a glance. Add these widgets to monitor current state:
+
+| Widget | What it shows |
+|--------|---------------|
+| **Tickets Opened** | Number of tickets created in the selected date range |
+| **Open Tickets** | Current count of tickets in open or active states (Open, In Progress, Pending) |
+| **Unassigned Tickets** | Current count of tickets without an assignee |
+| **SLA Breached** | Current count of open tickets that have exceeded their resolution SLA deadline |
+
+These metrics use live data from your service desk and update when you refresh.
+
+## Understanding Ticket Volume Trends
+
+### Total Tickets
+
+The **Tickets Opened** widget shows how many tickets were created during the selected time range. It counts unique tickets by `ticket-created` events and is useful for tracking support demand over time.
+
+### Opened vs Resolved Tickets
+
+The **Opened vs Resolved Tickets** chart compares ticket creation and resolution over time. It shows:
+- **Open** — Tickets created each day
+- **Resolved** — Tickets resolved each day
+
+Use it to see whether backlog is growing or shrinking. Available as line or bar chart.
+
+## Monitoring Response and Resolution Time
+
+### Average Response Time
+
+Time from ticket creation to the first non-internal reply. Displayed as a single number (e.g. `45m`, `2h 15m`) for the selected range.
+
+### Average Resolution Time
+
+Time from ticket creation to resolution. Also shown as a single number for the selected range.
+
+### Response vs Resolution Time Trends
+
+The **Response vs Resolution Time** chart shows daily averages for both metrics over time. Helps spot trends and correlate response speed with resolution speed.
+
+## Tracking SLA Compliance
+
+### SLA Compliance Percentage
+
+The **SLA Compliance** number widget shows the percentage of tickets that met their SLA (no breach) within the selected range. Computed as `tickets without breach / (tickets + breaches) × 100`.
+
+### SLA Compliance Trends
+
+The **SLA Compliance Trend** chart shows how SLA compliance changes over time. It stacks "SLA met" and "SLA breached" so you can see the proportion of each by day.
+
+### SLA Breaches
+
+The **SLA Breached** widget shows how many open tickets have passed their resolution deadline without being completed. This is a point-in-time count, not a trend.
+
+## Analyzing Ticket Breakdowns
+
+### Breakdown by Status
+
+**Ticket Breakdown by Status** shows tickets grouped by status: Open, In Progress, Pending (all pending sub-types combined), Resolved, Closed. Use donut or bar view. Statuses use consistent colors (e.g. green for Open, orange for Pending).
+
+### Breakdown by Priority
+
+**Ticket Breakdown by Priority** shows ticket volume by priority over time: Low, Medium, High, Urgent. Available as bar or line chart. Clicking a bar can navigate to filtered tickets.
+
+### Breakdown by Employee (Created/Resolved)
+
+- **Tickets Resolved by Employee** — Resolution count by employee over time (top contributors by resolver).
+- **Tickets Created by Employee** — Creation count by employee over time (requesters or internal creators).
+
+Both use the reports API with `groupBy` on the actor. Useful for workload and contribution analysis.
+
+## Measuring User Satisfaction Scores
+
+The **User Satisfaction** widget shows an average satisfaction score from survey responses. Scores are shown with a label (e.g. excellent, very good, good, fair, needs improvement) based on the average rating. Add this widget from the Widget Library to include it on your dashboard.
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Automation & SLA" icon="clock" href="/guides/configuring-automation-and-sla" />
+  <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams" />
+  <Card title="Working with Widgets" icon="grid-2" href="/guides/working-with-dashboard-widgets" />
+  <Card title="Managing Custom Dashboards" icon="grid-2" href="/guides/creating-and-managing-custom-dashboards" />
+</CardGroup>

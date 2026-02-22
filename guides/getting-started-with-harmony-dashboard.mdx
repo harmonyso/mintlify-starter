@@ -1,0 +1,137 @@
+---
+title: "Getting Started"
+description: "Learn the basics of Harmony Dashboard, including key features, system requirements, and how to access and navigate the platform for the first time."
+---
+
+## Welcome to Harmony Dashboard
+
+Harmony Dashboard is your central command center for IT operations. The platform combines service desk ticketing, asset management, software inventory, AI agents, and workflow automation in one interface.
+
+<Info>
+**First time here?** This guide covers everything from what Harmony does to how to use the dashboard home screen. Navigation and advanced features are covered in separate guides.
+</Info>
+
+## What is Harmony Dashboard?
+
+Harmony Dashboard is an IT operations platform that unifies:
+
+- **Service Desk** — Manage tickets across multiple desks with team-based routing
+- **Asset Management** — Track hardware inventory, software licenses, and compliance
+- **AI Agents** — Automate tasks like password resets, compliance checks, and onboarding
+- **Workflows** — Build and run automation with the visual workflow builder
+- **Analytics** — Custom dashboards with metrics on tickets, SLA, assets, and agents
+
+Your experience depends on your role. Platform users (Admin, Agent, Observer) see the full dashboard. Desk-only users land on their tickets. Other users are directed to the Portal for self-service.
+
+## Key Features Overview
+
+The main sidebar gives access to core areas (based on your permissions):
+
+| Section | Description |
+|--------|-------------|
+| **Dashboard** | Metrics and widgets for service desk, assets, AI agents, and workflows |
+| **Tickets** | Service desk with desks, ticket lists, and conversations |
+| **Agents** | AI agents for compliance, acknowledgments, and automation |
+| **Workflows** | Visual workflow builder (when enabled) |
+| **Assets** | Hardware inventory and details |
+| **Software** | Software applications and licenses |
+| **People** | Employee directory |
+| **Settings** | Configuration for desks, integrations, and preferences |
+
+The sidebar is collapsible. Use the search icon or **Cmd+K** / **Ctrl+K** to open the command palette for quick navigation.
+
+## System Requirements
+
+Harmony runs in a web browser. Supported:
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- JavaScript enabled
+- Network access to your Harmony tenant
+
+The app uses React, TanStack Router, and Descope for authentication. Data is cached in the browser (IndexedDB) for offline resilience.
+
+## Accessing the Dashboard
+
+1. **Log in** at your tenant URL (e.g. `https://demo.harmony.io`).
+2. **After login**, you’re redirected by role:
+   - **Platform roles** (Admin, Agent, Observer) → `/dashboard`
+   - **Desk-only users** → first accessible ticket desk
+   - **Other users** → `/portal`
+3. **Dashboard URL**: `/dashboard` shows your default or system dashboard.
+
+Admins can create custom dashboards; the system dashboard is read-only and serves as the default view.
+
+## First Login Experience
+
+Authentication is handled by Descope. On first visit:
+
+1. You’re redirected to the login flow if not authenticated.
+2. After login, the app loads with ThemeProvider, feature flags, and analytics.
+3. Your tenant name appears in the sidebar header.
+4. Permissions are checked to show the correct sidebar items.
+
+If you land on `/portal` instead of `/dashboard`, your role may not include platform access.
+
+## Dashboard Home Screen
+
+The dashboard shows a grid of widgets. You can change the date range, refresh data, and—for custom dashboards—edit the layout.
+
+### Default metrics (system dashboard)
+
+The system dashboard includes:
+
+**Number widgets:**
+- Average Response Time
+- Average Resolution Time
+- SLA Compliance
+- Total Tickets
+
+**Chart widgets:**
+- Ticket breakdown
+- Software breakdown
+- Asset breakdown by compliance
+- Tickets resolved by employee
+- Tickets solved by AI
+- AI resolved vs escalated
+- Tickets created by employee / AI
+- Opened vs resolved
+- SLA compliance
+- Response vs resolution
+- Ticket priority
+- Agent ended by status
+- Agent started by name / category
+
+### Date range
+
+Use the date range selector for 1d, 7d, 30d, or 90d. All widgets use this range.
+
+### Custom dashboards
+
+When you can edit:
+- **Edit** — Enter edit mode to add, remove, or reposition widgets
+- **Add widgets** — Open the widget library
+- **Save & Exit** — Save layout changes
+- **Cancel** — Discard edits
+
+Widget types include line, bar, and donut charts plus number widgets.
+
+## Getting Help and Support
+
+Use the **Help** button in the sidebar (message circle icon) to open Intercom support.
+
+You can also use the command palette (**Cmd+K** / **Ctrl+K**) to search for navigation and actions across the app.
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Navigating the Interface" icon="compass" href="/guides/navigating-the-interface" />
+  <Card title="Understanding Integrations" icon="plug" href="/guides/understanding-integrations">
+    Connect Slack, Okta, and other tools.
+  </Card>
+  <Card title="Managing Your Profile" icon="user" href="/guides/managing-your-profile-and-preferences" />
+  <Card title="Harmony Portal" icon="user-circle" href="/guides/using-the-harmony-portal">
+    End-user portal for chat, tickets, and approvals.
+  </Card>
+</CardGroup>

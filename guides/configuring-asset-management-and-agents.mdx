@@ -1,0 +1,204 @@
+---
+title: "Asset & Agent Settings"
+description: "Learn how to configure asset management (EOL policies, low stock alerts, discovery) and AI agent settings (schedules, approval workflows, provisioning)."
+---
+
+## Configuring Asset Management Settings
+
+Asset management settings control how assets are discovered, when EOL (End-of-Life) notifications are sent, and when low stock alerts trigger. Open **Settings** → **Asset management** to access these sections.
+
+### Understanding Asset Settings
+
+Asset settings include:
+
+- **EOL policies** — Lifecycle and notification rules per asset type
+- **Low stock alerts** — Thresholds for in-stock inventory
+- **Discovery policies** — Rules for which assets are included in discovery
+- **EOL notifications** — Where to send EOL and low stock alerts (Slack, Teams, Email)
+
+### Configuring Asset Settings
+
+Each section has its own form or table. Changes save when you click Save or confirm the action. EOL notifications use the same destination model as desk notifications: add destinations and select event types per channel.
+
+### Managing EOL (End-of-Life) Policies
+
+EOL policies define when assets reach end-of-life and when to notify. Configure at **Settings** → **Asset management** → **EOL policies**.
+
+**Creating EOL policies**
+
+1. Click **Create policy**.
+2. Select **Asset type** (e.g., Laptop, Monitor).
+3. Set **Lifecycle** — Expected lifespan in months (1–120).
+4. Set **Notification threshold** — How many months before EOL to send the first notification.
+5. Set **Grace period** — Months after EOL before the asset is considered fully EOL (0–12).
+6. Optionally scope by **Vendor**.
+7. Save.
+
+**Editing EOL policies**
+
+Click **Edit** on a policy. Default (system) policies cannot be edited; you can create a new policy instead.
+
+**Deleting EOL policies**
+
+Click **Delete** on a non-default policy. Default policies cannot be deleted.
+
+**Understanding EOL notifications**
+
+EOL events are sent to the destinations configured in **EOL notifications**:
+
+- **eol_planned** — When an asset reaches the notification threshold
+- **eol_reached** — When an asset reaches its EOL date
+- **eol_grace_period_expired** — When the grace period ends
+
+Configure destinations (Slack, Teams, Email) and select which events to receive per channel.
+
+### Managing Low Stock Alerts
+
+Low stock alerts fire when in-stock quantity falls below a threshold. Configure at **Settings** → **Asset management** → **Low stock alerts**.
+
+**Creating low stock alerts**
+
+1. Click **Create alert**.
+2. Select **Asset type**.
+3. Set **Stock threshold** (1–10,000).
+4. Optionally scope by **Vendor** and **Warehouse location**.
+5. Save.
+
+**Editing stock alert thresholds**
+
+Click **Edit** on an alert. Asset type is locked; you can change the threshold, vendor, and warehouse.
+
+**Deleting stock alerts**
+
+Click **Delete** on an alert. Confirm to remove it.
+
+**Understanding alert triggers**
+
+An alert triggers when the in-stock count for the matching assets (type, vendor, warehouse) drops below the threshold. The UI shows a live count and a green/red indicator. Use the in-stock assets link to view filtered assets for that alert.
+
+### Managing Discovery Policies
+
+Discovery policies control which assets are included when discovery runs. Configure at **Settings** → **Asset management** → **Discovery policies**.
+
+**Creating discovery policies**
+
+Each asset type has one policy. Open the policy for an asset type (or create if none exists) and configure rules.
+
+**Configuring discovery rules**
+
+- **Vendor/model rules** — Add rows with vendor and optional model(s). Only assets matching these vendor/model combinations are included.
+- **Network rules** — Add IP subnets (CIDR) and WiFi SSIDs. Assets discovered on matching networks are included.
+
+Add multiple rules as needed. Rules are validated (e.g., CIDR format).
+
+**Excluding asset types from discovery**
+
+Use **Exclude asset type** to hide an asset type from discovery. Toggle the switch to exclude or include. Excluded types do not appear in asset views from discovery.
+
+**Managing asset type exclusions**
+
+Each asset type can be excluded independently. Change the exclusion toggle to update the policy.
+
+**Preview**
+
+Use **Check matching assets** to preview how many assets match the current policy before saving.
+
+---
+
+## Configuring Agent Settings
+
+Agent settings control when agents run, how approvals work, and provisioning behavior. Open an agent at **Agents** → *agent* to access its configuration panel.
+
+### Understanding Agent Configuration
+
+Each agent type has a configuration panel on the right side of the detail page. Options vary by agent but typically include:
+
+- **Schedule** — When the agent runs (daily, weekly, etc.)
+- **Approval** — Who must approve and how (for agents that require approval)
+- **Provisioning** — Access duration, auto-approval (for app access and similar agents)
+- **Agent-specific options** — Thresholds, ticket desk, filters, etc.
+
+### Configuring Agent Settings
+
+1. Open the agent detail page.
+2. Use the configuration panel on the right.
+3. Change options (schedule, approval, thresholds, etc.).
+4. Click **Save** to apply.
+
+### Enabling and Disabling Agents
+
+Use the **Enabled** toggle in the agent header. When disabled, the agent does not run on schedule or respond to triggers. Configuration is preserved. The agent list and detail view show status (Enabled / Disabled).
+
+### Setting Agent Schedules
+
+In the **Run Schedule** section:
+
+**Recurring schedules**
+
+- **Frequency** — Daily, Weekly, Monthly, Quarterly (every 3 months), Semi-annually (every 6 months), Annually
+- **Day** — For weekly: day of week; for monthly/quarterly/semi-annually/annually: day of month (e.g., first, last, specific day)
+- **Time** — Hour and minute
+- **Timezone** — When the schedule runs in local time
+
+**Cron-based schedules**
+
+Agents use cron expressions internally. The UI exposes frequency, day, time, and timezone; these are converted to a 5-field cron expression for the backend.
+
+**One-time runs**
+
+Agents can be run manually. Use the **Run** button (or Run dialog) to trigger a one-time execution. This does not affect the schedule.
+
+### Configuring Agent Approval Workflows
+
+For agents that require approval (e.g., App Access, IDP Group Management):
+
+**Approval strategy**
+
+| Strategy | Description |
+|----------|-------------|
+| **Require approval from all** | Every listed approver must approve. |
+| **Require approval from one of** | Any one approver can approve. |
+| **Escalate if first approver doesn't respond** | First approver is tried; if no response within the timeout, escalation occurs. |
+
+**Approvers**
+
+- **Role-based** — Direct manager, app owners, IT approvers, budget approvers, etc. (options vary by agent)
+- **Employee-based** — Specific people from the employee directory
+
+Add up to 10 approvers. Configure per agent based on available role options.
+
+**Timeout**
+
+Set how many days (1–7) to wait for approval before timeout or escalation.
+
+**Reminders**
+
+Enable reminders (first and second) at configurable intervals (e.g., 4 hours, 24 hours) to nudge approvers.
+
+### Understanding Agent Permissions (Provisioning)
+
+For app access and similar agents, the **Provisioning** tab shows:
+
+- **Provisioning method** — How access is granted (e.g., Okta, Microsoft Entra)
+- **Access duration** — JIT (Just-in-Time) duration: 1D, 7D, 30D, 90D, 6M, 1Y
+- **Auto approval** — When on, requests are approved automatically (no dynamic provisioning)
+- **Application owners** — Stakeholders for the application
+
+Configure these per app instance. Changes affect how the agent provisions access when approval is granted.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
+    Navigate and manage assets in the asset list.
+  </Card>
+  <Card title="Asset Organization" icon="upload" href="/guides/managing-asset-organization-and-importing">
+    Import and organize assets.
+  </Card>
+  <Card title="Working with AI Agents" icon="robot" href="/guides/working-with-ai-agents">
+    Use agents, run workflows, and view history.
+  </Card>
+  <Card title="Ticket Settings & Users" icon="cog" href="/guides/managing-ticket-settings-and-users">
+    Configure EOL and asset notification destinations.
+  </Card>
+</CardGroup>
