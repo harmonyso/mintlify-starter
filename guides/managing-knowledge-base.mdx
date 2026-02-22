@@ -34,6 +34,8 @@ Each source can have multiple articles. Articles sync periodically; status (Comp
    - **Upload file** — For manual PDF uploads
    - **Third-party** — Confluence, Notion, Freshservice, or SharePoint (when the integration is configured)
 
+{/* IMAGE: Add source dropdown (Upload file, third-party) → /images/guides/managing-knowledge-base/kb-add-source.png | UI: frontend-app/src/features/settings/components/knowledge-base/add-knowledge-source-button.tsx | Route: /settings/knowledge-base */}
+
 ### Uploading Files Manually
 
 1. Choose **Upload file** from the Add source dropdown.
@@ -54,6 +56,8 @@ Each source can have multiple articles. Articles sync periodically; status (Comp
 4. Select the items to add.
 5. Click **Save & sync** to add them and start syncing.
 
+{/* IMAGE: Selection dialog with tree of spaces/pages → /images/guides/managing-knowledge-base/kb-third-party-dialog.png | UI: frontend-app/src/features/settings/components/knowledge-base/kb-source-selection-dialog.tsx | Route: /settings/knowledge-base */}
+
 ### Understanding KB Sync Status
 
 Each article has a sync status:
@@ -67,6 +71,8 @@ Each article has a sync status:
 ### Monitoring KB Sync Progress
 
 The Knowledge Base table shows sync status per article. Use the status filter to see Pending or Failed items. For Failed items, hover the status badge to view the failure reason (e.g., permission error, invalid source).
+
+{/* IMAGE: Knowledge Base table with articles and sync status → /images/guides/managing-knowledge-base/kb-table-sync-status.png | UI: frontend-app/src/features/settings/components/knowledge-base/knowledge-base-pane.tsx, columns.tsx | Route: /settings/knowledge-base */}
 
 ### Understanding Sync Failures
 
@@ -120,6 +126,8 @@ KB permissions determine who can access articles. Permissions come from the sour
 
 In the permissions view (or article detail), **Authorized groups** shows groups that have access. Each group appears as a badge. Groups are synced from the source.
 
+{/* IMAGE: KB permissions dialog with Authorized groups → /images/guides/managing-knowledge-base/kb-permissions-dialog.png | UI: frontend-app/src/features/settings/components/knowledge-base/kb-permissions-dialog.tsx | Route: /settings/knowledge-base */}
+
 ### Viewing Authorized Users
 
 **Authorized users** shows individuals with direct access. Displayed as avatars or email badges.
@@ -141,6 +149,8 @@ For Confluence (and similar) sources, a **Permissions** warning button (lock or 
 1. In the Knowledge Base table, select one or more articles (checkboxes).
 2. Click **Delete** in the toolbar.
 3. Confirm in the dialog. Selected articles are removed from the Knowledge Base.
+
+{/* IMAGE: Knowledge Base table with selection and Delete button → /images/guides/managing-knowledge-base/kb-bulk-delete.png | UI: frontend-app/src/features/settings/components/knowledge-base/knowledge-base-bulk-delete-button.tsx, knowledge-base-pane.tsx | Route: /settings/knowledge-base */}
 
 ### Single Delete
 

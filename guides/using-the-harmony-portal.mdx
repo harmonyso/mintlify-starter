@@ -38,6 +38,8 @@ The Portal home shows:
 
 Click **Threads** (or the chat icon) to open the thread view with a sidebar of conversation history.
 
+{/* IMAGE: Portal home with hero and Tabs (Tickets, Approvals) → /images/guides/using-the-harmony-portal/portal-home.png | UI: frontend-app/src/routes/portal/index.tsx | Route: /portal */}
+
 ### Using the Portal Hero Section
 
 The hero appears at the top of the Portal. It includes:
@@ -47,6 +49,8 @@ The hero appears at the top of the Portal. It includes:
 - **Chat input** — Main place to start a new conversation; type your message and press Enter or click Send
 
 Entering a message in the hero creates a new thread and opens the conversation view.
+
+{/* IMAGE: Hero with chat input and branding → /images/guides/using-the-harmony-portal/portal-hero-chat.png | UI: frontend-app/src/routes/portal/index.tsx, features/portal/v2/components/chat-input-v2.tsx | Route: /portal */}
 
 ### Understanding Portal Branding
 
@@ -83,6 +87,8 @@ The chat input supports:
 
 Each conversation is a separate thread. Use **New chat** in the Threads sidebar to start a fresh conversation. You can also start from the hero input—sending a message there creates a new thread.
 
+{/* IMAGE: Threads view with sidebar and conversation → /images/guides/using-the-harmony-portal/portal-threads.png | UI: frontend-app/src/features/portal/v2/components/threads-sidebar-v2.tsx, thread-view-v2.tsx | Route: /portal/threads */}
+
 ### Viewing Thread History
 
 The Threads sidebar lists your past conversations. Click a thread to open it. Threads are ordered by activity. You can rename threads (in the V2 experience) or delete them from the sidebar menu.
@@ -111,6 +117,8 @@ After you send a message, the agent processes it. While processing, you see a th
 
 Open the **Tickets** tab on the Portal home. The table lists tickets you've submitted, with columns for title, ticket type, status, priority, desk, and created date. Use pagination to browse if you have many tickets.
 
+{/* IMAGE: Portal Tickets tab with ticket list → /images/guides/using-the-harmony-portal/portal-tickets-tab.png | UI: frontend-app/src/features/portal/components/tickets-section.tsx | Route: /portal */}
+
 ### Checking Ticket Status
 
 The **Status** column shows the current state (e.g., open, in progress, pending, resolved, closed). Use the status filter in the toolbar to show only certain statuses (open, in progress, pending, resolved, closed, canceled). Use the priority filter to narrow by priority (low, medium, high, urgent).
@@ -118,6 +126,8 @@ The **Status** column shows the current state (e.g., open, in progress, pending,
 ### Viewing Ticket Details from Portal
 
 Click a ticket to open its detail view. You see:
+
+{/* IMAGE: Portal ticket detail with Chat and Activity tabs → /images/guides/using-the-harmony-portal/portal-ticket-detail.png | UI: frontend-app/src/routes/portal/tickets/$ticketId/$slug/index.tsx | Route: /portal/tickets/$ticketId/$slug */}
 
 - **Chat tab** — Conversation and messages; add replies here
 - **Activity tab** — History of updates and changes
@@ -144,6 +154,8 @@ Approval requests are items that require your decision—for example, approving 
 ### Viewing Pending Approvals
 
 Open the **Approvals** tab on the Portal home. The table lists active approval requests. Each row shows the request type, subject (app or service), reporter, ticket ID, and created date. Use search and filters to find specific requests.
+
+{/* IMAGE: Portal Approvals tab with Approve/Deny actions → /images/guides/using-the-harmony-portal/portal-approvals-tab.png | UI: frontend-app/src/features/portal/components/approvals-section.tsx, approval-approve-modal.tsx, approval-deny-modal.tsx | Route: /portal */}
 
 ### Viewing Approval Details
 

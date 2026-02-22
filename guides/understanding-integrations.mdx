@@ -30,6 +30,8 @@ Integrations connect third-party systems to Harmony. They enable Harmony to sync
 
 Each integration card shows the name, description, category, and connection status.
 
+{/* IMAGE: Integrations list with category filter and cards → /images/guides/understanding-integrations/integrations-list.png | UI: frontend-app/src/features/settings/components/integrations/integrations-pane.tsx | Route: /settings/integrations */}
+
 ---
 
 ## Understanding Integration Categories
@@ -60,6 +62,8 @@ Integrations are organized into categories:
 
 When an integration is connected, the card shows a **Connected** badge (green). For multi-instance integrations (e.g., multiple Slack workspaces), the count of instances is shown. Hover for a tooltip listing the instances.
 
+{/* IMAGE: Integration card with Connected badge → /images/guides/understanding-integrations/integration-connected.png | UI: frontend-app/src/features/settings/components/integrations/integration-card.tsx | Route: /settings/integrations */}
+
 ### Disconnected Status
 
 When no instances exist, the integration is disconnected. There is no explicit "Disconnected" badge; the absence of "Connected" indicates it is not set up. Click **Connect** to start the setup flow.
@@ -83,6 +87,8 @@ Many integrations use OAuth for secure, delegated access. Harmony supports diffe
 OAuth lets Harmony access a third-party service on your behalf without storing your password. You authorize the connection once; Harmony receives tokens to make API calls. Tokens can be refreshed automatically.
 
 ### OAuth Flow Overview
+
+{/* IMAGE: Integration card with Connect button → /images/guides/understanding-integrations/integration-connect.png | UI: frontend-app/src/features/settings/components/integrations/integration-card.tsx | Route: /settings/integrations */}
 
 **Standard OAuth2 flow:**
 

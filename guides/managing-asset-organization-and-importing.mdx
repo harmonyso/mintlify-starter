@@ -11,6 +11,8 @@ description: "Learn how to update asset location, ownership, and assignment; use
 
 Asset organization controls where assets are, who owns them, and who they are assigned to. Update these values individually on the asset detail page or in bulk from the asset list.
 
+{/* IMAGE: Asset detail page with Asset details card (Ownership, Assigned to) → /images/guides/managing-asset-organization-and-importing/asset-detail-org-fields.png | UI: frontend-app/src/routes/assets/$assetId.tsx | Route: /assets/$assetId */}
+
 ### Updating Asset Location
 
 **Single asset:** On the asset detail page or in the list view Location column, click the cell to open the location selector. Choose an existing location, type to create a new one, or select **Clear location** to remove it. Location is stored as manual location; it overrides MDM-derived location when set.
@@ -43,6 +45,8 @@ Asset metadata (name, model, serial, manufacturer, source, etc.) is primarily so
 
 In the asset List view, use the checkboxes in the first column to select rows. Select individual assets or use the header checkbox to select all on the current page. Bulk actions apply only to the currently selected assets.
 
+{/* IMAGE: Asset list with checkboxes and bulk actions bar → /images/guides/managing-asset-organization-and-importing/asset-bulk-actions.png | UI: frontend-app/src/features/asset-management/components/assets-bulk-actions.tsx, assets-table/columns.tsx | Route: /assets */}
+
 ### Bulk Updating Asset Location
 
 1. Select one or more assets.
@@ -68,6 +72,9 @@ Bulk location and ownership updates apply to all assets you have selected. Selec
 ### Importing Assets from CSV
 
 1. Open **Assets** and click **Import** in the toolbar.
+
+{/* IMAGE: Import dialog with template download → /images/guides/managing-asset-organization-and-importing/asset-import-dialog.png | UI: frontend-app/src/features/asset-management/components/import-assets-dialog.tsx | Route: /assets */}
+
 2. Download the CSV template from the import dialog.
 3. Fill the template with your asset data. Required columns: Display name, Asset type, Manufacturer.
 4. Upload the CSV file. The file is validated before import.
@@ -114,6 +121,8 @@ After you upload a CSV, the import dialog validates the file. If validation succ
 ### Exporting Assets to CSV
 
 Click **Export** in the Assets toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-assets-export-YYYY-MM-DD.csv`. Export includes all assets that match the filters; large exports may take a moment.
+
+{/* IMAGE: Assets toolbar with Import and Export buttons → /images/guides/managing-asset-organization-and-importing/assets-toolbar-export.png | UI: frontend-app/src/routes/assets/index.tsx | Route: /assets */}
 
 ### Filtering Assets for Export
 

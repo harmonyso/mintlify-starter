@@ -22,6 +22,8 @@ User management shows users who have roles (Platform or Desk) and the groups the
 3. Use search (name/email), filter by role, and pagination to find users.
 4. Click a row to open the user detail pane.
 
+{/* IMAGE: Settings > User Management > Users tab → /images/guides/managing-user-management/users-tab.png | UI: frontend-app/src/features/settings/components/user-management/users-tab.tsx | Route: /settings/user-management */}
+
 ### Viewing User Details
 
 In the user detail pane:
@@ -32,6 +34,8 @@ In the user detail pane:
 
 Click a group or desk row to go to its settings.
 
+{/* IMAGE: User detail pane with Groups and Desks → /images/guides/managing-user-management/user-detail-pane.png | UI: frontend-app/src/features/settings/components/user-management/user-detail-pane.tsx | Route: /settings/user-management/$userId */}
+
 ### Managing User Groups
 
 **Viewing groups**
@@ -39,6 +43,8 @@ Click a group or desk row to go to its settings.
 1. Go to **Settings** → **User Management** → **Groups** tab.
 2. The table shows group name, roles, desks count, and members count.
 3. Click a row to open the group detail pane.
+
+{/* IMAGE: Groups tab with Import group button → /images/guides/managing-user-management/groups-tab.png | UI: frontend-app/src/features/settings/components/user-management/groups-tab.tsx | Route: /settings/user-management */}
 
 **Creating user groups**
 
@@ -58,6 +64,8 @@ Groups come from your IdP. Use **Import group** to bring an IdP group into Harmo
 3. Assign Platform roles (Platform admin, Platform agent, Platform observer) if needed.
 4. Assign Desk roles (Desk manager, Desk agent, Desk observer) and select which desks each role applies to.
 5. Save. The group's roles replace any previous assignment.
+
+{/* IMAGE: Import group modal with IdP dropdown → /images/guides/managing-user-management/import-group-modal.png | UI: frontend-app/src/features/settings/components/user-management/import-group-modal.tsx | Route: /settings/user-management */}
 
 **Deleting groups**
 
@@ -117,6 +125,8 @@ Configure where notifications are sent (Slack, Teams, Email). Destinations are c
 4. Enable with the switch.
 5. Select which event types to receive.
 6. Save.
+
+{/* IMAGE: Add destination with Slack, Teams, Email options → /images/guides/managing-user-management/add-destination.png | UI: frontend-app/src/features/settings/components/shared/destinations/add-destination-button.tsx, destinations-pane.tsx | Route: /settings/desks/$deskId/notifications */}
 
 ### Setting Up Slack Notifications
 

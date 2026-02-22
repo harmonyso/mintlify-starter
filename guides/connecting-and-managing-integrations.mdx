@@ -36,9 +36,13 @@ Prerequisites depend on the integration type:
    - **OAuth2** — A popup opens; log in to the provider and approve permissions.
    - **Descope OAuth2** — Complete the Descope flow; if the integration has post-OAuth config fields, fill those and submit.
 
+{/* IMAGE: Settings > Integrations with Connect on card → /images/guides/connecting-and-managing-integrations/integrations-connect.png | UI: frontend-app/src/features/settings/components/integrations/integrations-pane.tsx, integration-card.tsx | Route: /settings/integrations */}
+
 ### Authorizing Integration Access
 
 For OAuth integrations, the provider's authorization page opens in a popup. You grant Harmony permission to access the service (users, channels, data, etc.). Harmony does not control the permission list; it is defined by the integration and provider.
+
+{/* IMAGE: OAuth popup or provider approval page → /images/guides/connecting-and-managing-integrations/oauth-authorization.png | UI: External provider (Slack, Okta, etc.) auth screen — captured during Connect flow | Route: /settings/integrations */}
 
 ### Granting Permissions
 
@@ -65,6 +69,8 @@ Configuration is driven by the backend. Each integration defines **configuration
 3. For plugins (e.g., Confluence), use the extended UI (space selection, subdomain) to set options.
 4. Click **Save Changes** when done.
 
+{/* IMAGE: Integration config modal with form fields and Save Changes → /images/guides/connecting-and-managing-integrations/integration-config-form.png | UI: frontend-app/src/features/settings/components/integrations/integration-config-modal.tsx | Route: /settings/integrations */}
+
 ### Setting Integration Preferences
 
 - **Required fields** — Must be filled before saving.
@@ -90,6 +96,8 @@ Some integrations support **multiple instances** (e.g., multiple Slack workspace
 3. **Form-based** — Enter an instance name and fill the configuration form.
 4. **Descope** — Enter an instance name and complete the OAuth flow. Each instance uses one Descope app ID; when all are used, you must delete an instance before adding another.
 5. Submit. The new instance appears in the list.
+
+{/* IMAGE: Multi-instance modal with Add instance and instance list → /images/guides/connecting-and-managing-integrations/multi-instance-modal.png | UI: frontend-app/src/features/settings/components/integrations/multi-instance-integration-modal.tsx | Route: /settings/integrations */}
 
 ### Managing Multiple Instances
 

@@ -41,6 +41,8 @@ Each chart widget is predefined to support one or more chart types (line, bar, d
 
 Hover over a widget in the library to see a preview before adding.
 
+{/* IMAGE: Widget library side panel → /images/guides/working-with-dashboard-widgets/widget-library.png | UI: frontend-app/src/features/dashboard/components/widget-library.tsx | Route: /dashboard */}
+
 ### Quick Add in View Mode
 
 On a custom dashboard (not the system dashboard), you can add widgets without entering edit mode. Click **Add widgets**, choose a widget, and it is added and saved automatically.
@@ -78,6 +80,9 @@ Widget titles and data sources are predefined. Each widget is configured to show
 1. Click **Edit** to enter edit mode.
 2. Grab the **drag handle** (grip icon) on the left side of a widget header.
 3. Drag the widget to a new position. It snaps to the grid.
+
+{/* IMAGE: Edit mode with drag handle on widget header → /images/guides/working-with-dashboard-widgets/widget-drag-handle.png | UI: frontend-app/src/features/dashboard/components/layout/dashboard-grid.tsx, widgets/chart-widget.tsx | Route: /dashboard */}
+
 4. Click **Save & Exit** to save the layout.
 
 ## Resizing Widgets
@@ -104,6 +109,8 @@ Row height is fixed at 99px per row. Margins between widgets are 16px.
 The date range selector in the dashboard header applies to all widgets.
 
 ### Setting Date Range Presets
+
+{/* IMAGE: Dashboard with date range selector → /images/guides/working-with-dashboard-widgets/date-range-selector.png | UI: frontend-app/src/features/dashboard/components/date-range-selector.tsx | Route: /dashboard */}
 
 Click the date range button to open the selector. Choose a preset:
 - **Last 24 hours** (1d)

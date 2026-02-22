@@ -44,6 +44,8 @@ Filter by team (subdesk) within a desk.
 - **Assigned to me** — Built-in view that filters tickets assigned to you. Same as setting assignee to your employee ID.
 - **Default view** — Shows open statuses and unassigned by default. You can change the default view.
 
+{/* IMAGE: Ticket table with filter popover → /images/guides/organizing-tickets-and-table-views/ticket-filters.png | UI: frontend-app/src/routes/tickets/desk.$deskId.tsx, components/common/data-table/data-table-toolbar.tsx | Route: /tickets/desk/$deskId */}
+
 ---
 
 ## Searching for Tickets
@@ -60,6 +62,8 @@ Search matches ticket title. For full-text content search across descriptions an
 
 Click a column header to sort by that column. Click again to toggle ascending/descending. Sortable columns include: Priority, Status, Title, Source, Created at, Resolution SLA, and others. The default sort is Created at (newest first). Sorting is persisted in saved views.
 
+{/* IMAGE: Ticket table with sortable column headers → /images/guides/organizing-tickets-and-table-views/ticket-table-sorting.png | UI: frontend-app/src/routes/tickets/desk.$deskId.tsx, components/common/data-table | Route: /tickets/desk/$deskId */}
+
 ---
 
 ## Managing Saved Ticket Views
@@ -74,6 +78,8 @@ Saved views store filters, sorting, and search. Switch views from the dropdown n
 4. Enter a name and click **Save view**.
 
 The new view is created and selected.
+
+{/* IMAGE: View dropdown with Save current view → /images/guides/organizing-tickets-and-table-views/saved-views-dropdown.png | UI: frontend-app/src/features/service-desk/components/ticket-views-dropdown.tsx | Route: /tickets/desk/$deskId */}
 
 ### Updating Saved Views
 
@@ -126,6 +132,8 @@ Some columns are hidden on mobile. Column visibility and order can be customized
 
 Click the **Manage columns** (settings) button in the toolbar. A dropdown lists all hideable columns with checkboxes. Toggle columns on or off to show or hide them. Changes are saved per user.
 
+{/* IMAGE: Manage columns dropdown with column checkboxes → /images/guides/organizing-tickets-and-table-views/manage-columns.png | UI: frontend-app/src/components/common/data-table/data-table-view-options.tsx | Route: /tickets/desk/$deskId */}
+
 ---
 
 ## Reordering Table Columns
@@ -163,6 +171,8 @@ Arrow key navigation tracks a focused row. Press Enter to open that ticket. Hove
 ## Using Bulk Actions on Tickets
 
 Select multiple tickets with the row checkboxes. When rows are selected, bulk action buttons appear in the toolbar.
+
+{/* IMAGE: Ticket table with selection and bulk action toolbar → /images/guides/organizing-tickets-and-table-views/ticket-bulk-actions.png | UI: frontend-app/src/features/service-desk/components/tickets-bulk-actions.tsx | Route: /tickets/desk/$deskId */}
 
 ### Selecting Multiple Tickets
 

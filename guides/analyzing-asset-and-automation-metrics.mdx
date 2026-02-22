@@ -13,6 +13,8 @@ description: "Understand asset compliance, software status, AI resolution, agent
 
 **Asset Breakdown by Compliance** shows how many assets are compliant vs non-compliant (e.g. with MDM or security policies). Use it to monitor compliance across hardware. Click a segment to filter the Assets page by that compliance status.
 
+{/* IMAGE: Dashboard widget with compliance segments → /images/guides/analyzing-asset-and-automation-metrics/asset-compliance-widget.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#asset-breakdown-by-compliance | Route: /dashboard */}
+
 ### Viewing Asset Distribution
 
 Add these widgets from the Widget Library to analyze asset distribution:
@@ -23,6 +25,8 @@ Add these widgets from the Widget Library to analyze asset distribution:
 | **By Model Family** | Assets grouped by device model family (e.g. MacBook Pro, iPhone 14). |
 
 Clicking a segment opens the Assets page filtered by that dimension.
+
+{/* IMAGE: Asset distribution widgets (By Vendor, By Model Family) → /images/guides/analyzing-asset-and-automation-metrics/asset-distribution-widgets.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#asset-breakdown-by-vendor, asset-breakdown-by-model-family | Route: /dashboard */}
 
 ### Tracking Asset Lifecycle Status
 
@@ -36,6 +40,8 @@ Clicking a segment opens the Assets page filtered by that dimension.
 - **EOL reached** — Expired
 - **Retired**
 
+{/* IMAGE: Asset Breakdown by Status widget (lifecycle) → /images/guides/analyzing-asset-and-automation-metrics/asset-status-widget.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#asset-breakdown-by-status | Route: /dashboard */}
+
 ### Understanding Asset Age Breakdown
 
 **Asset Breakdown by Age** groups assets by purchase date into buckets:
@@ -47,6 +53,8 @@ Clicking a segment opens the Assets page filtered by that dimension.
 - N/A (no purchase date)
 
 Color coding highlights older assets (e.g. orange for 4-5 years, red for 6+). Use it for refresh planning and lifecycle management.
+
+{/* IMAGE: Asset age breakdown chart → /images/guides/analyzing-asset-and-automation-metrics/asset-age-chart.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#asset-breakdown-by-age | Route: /dashboard */}
 
 ---
 
@@ -61,6 +69,8 @@ Color coding highlights older assets (e.g. orange for 4-5 years, red for 6+). Us
 - **Ignored** — Explicitly excluded
 
 Click a segment to filter the Software page by that status.
+
+{/* IMAGE: Software status donut chart → /images/guides/analyzing-asset-and-automation-metrics/software-status-chart.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#software-breakdown | Route: /dashboard */}
 
 ---
 
@@ -84,6 +94,8 @@ Click a segment to filter the Software page by that status.
 
 Use it to measure deflection and escalation rates.
 
+{/* IMAGE: AI vs Human Resolution chart (deflection/escalation) → /images/guides/analyzing-asset-and-automation-metrics/ai-vs-human-resolution.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#ai-resolved-vs-escalated | Route: /dashboard */}
+
 ### Monitoring Agent Run Status
 
 **Agent Runs by Status** shows outcomes of Harmony AI agent runs over time:
@@ -93,6 +105,8 @@ Use it to measure deflection and escalation rates.
 - **Cancelled** — Runs that were cancelled
 
 Built-in agents only; custom workflows are excluded.
+
+{/* IMAGE: Agent Runs by Status widget (Completed/Failed/Cancelled) → /images/guides/analyzing-asset-and-automation-metrics/agent-runs-status.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#agent-ended-by-status | Route: /dashboard */}
 
 ### Analyzing Agent Runs by Name
 
@@ -111,6 +125,8 @@ Built-in agents only; custom workflows are excluded.
 - **Cancelled**
 
 Custom workflows only; built-in agents are excluded.
+
+{/* IMAGE: Workflow Runs by Status widget → /images/guides/analyzing-asset-and-automation-metrics/workflow-runs-status.png | UI: frontend-app/src/features/dashboard/components/widgets/widgets.ts#workflow-ended-by-status | Route: /dashboard */}
 
 ### Analyzing Workflow Runs by Name
 

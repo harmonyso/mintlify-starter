@@ -24,6 +24,8 @@ Automation includes:
 
 Automation is configured per desk. Open the **Automation** tab for the desk. Each section has its own enable/disable and configuration. Changes save immediately when you update settings.
 
+{/* IMAGE: Automation tab with ticket assignment (round-robin, etc.) → /images/guides/configuring-automation-and-sla/auto-assignment.png | UI: frontend-app/src/features/settings/components/teams/auto-assign-section.tsx | Route: /settings/desks/$deskId/automation */}
+
 ### Configuring Auto-Close Settings
 
 **Inactivity-based closure**
@@ -42,6 +44,8 @@ When a parent ticket is resolved, downstream linked tickets can auto-close based
 **Mandatory close comment**
 
 Require an internal comment when closing a ticket. When enabled, agents must add a comment before closing.
+
+{/* IMAGE: Automation tab with inactivity-based closure options → /images/guides/configuring-automation-and-sla/auto-close-settings.png | UI: frontend-app/src/features/settings/components/automation/auto-close-settings-section.tsx, automation-pane.tsx | Route: /settings/desks/$deskId/automation */}
 
 ### Setting Up Status Management
 
@@ -90,6 +94,9 @@ An SLA policy sets:
 ### Setting Up SLA Policies
 
 1. Open the desk → **SLA** tab.
+
+{/* IMAGE: SLA tab with response/resolution targets by priority → /images/guides/configuring-automation-and-sla/sla-policies.png | UI: frontend-app/src/features/settings/components/sla/sla-pane.tsx | Route: /settings/desks/$deskId/sla */}
+
 2. Enable SLA for the desk (if disabled).
 3. Set response and resolution times for each priority.
 4. Configure working hours (or use 24/7).

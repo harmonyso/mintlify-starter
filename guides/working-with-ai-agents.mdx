@@ -39,6 +39,8 @@ Agents are grouped by category (e.g., HR operations, Access control, Security, S
 
 Open **Agents** from the sidebar to view the list at `/agents`. The page shows all available agents with name, category, status, approval requirement, run count, and last run time. Use the toolbar for search, filters, and refresh.
 
+{/* IMAGE: Agents page with card/table toggle → /images/guides/working-with-ai-agents/agents-list.png | UI: frontend-app/src/routes/agents/index.tsx, features/agents/components/agents-card-grid.tsx | Route: /agents */}
+
 ### Viewing Agent Cards vs Table View
 
 Toggle between **Card layout** and **Table layout** to change how agents are displayed. Card view shows larger cards with agent details; table view shows a compact data table with sortable columns.
@@ -47,9 +49,13 @@ Toggle between **Card layout** and **Table layout** to change how agents are dis
 
 Click an agent to open its detail page at `/agents/{agentId}/{slug}/v2`. The page has tabs: **Overview**, **Runs history**, and **Provisioning** (when applicable). The Overview tab shows triggers, steps, and configuration.
 
+{/* IMAGE: Agent detail page with Overview, Runs, Provisioning tabs → /images/guides/working-with-ai-agents/agent-detail-tabs.png | UI: frontend-app/src/routes/agents/$agentId/$slug/v2/index.tsx | Route: /agents/$agentId/$slug/v2 */}
+
 ### Configuring Agent Settings
 
 On the agent detail page, the right panel shows the configuration for that agent type. Configure options such as schedule, approval requirements, ticket destination, thresholds, and agent-specific settings. Click **Save** to apply changes.
+
+{/* IMAGE: Agent configuration panel with schedule and settings → /images/guides/working-with-ai-agents/agent-configuration-panel.png | UI: frontend-app/src/features/agents/components/agent-details-v2/agent-overview-v2.tsx | Route: /agents/$agentId/$slug/v2 */}
 
 ### Enabling and Disabling Agents
 
@@ -83,6 +89,8 @@ For agents that support approvals, configure:
 
 On the agent detail page, click **Run** to open the run dialog. Fill in the required inputs (e.g., employee, device, application) and click **Run** to start the workflow. The dialog varies by agent type.
 
+{/* IMAGE: Agent Run dialog with inputs → /images/guides/working-with-ai-agents/agent-run-dialog.png | UI: frontend-app/src/features/agents/components/agent-details-v2/run-dialogs/base-run-dialog.tsx | Route: /agents/$agentId/$slug/v2 */}
+
 ### Understanding Agent Runs
 
 Each run has a unique Run ID, status, subject, duration, requester, and start time. Runs are triggered by schedules, events, or manual execution.
@@ -90,6 +98,8 @@ Each run has a unique Run ID, status, subject, duration, requester, and start ti
 ### Viewing Agent Run Details
 
 Click a run in the Runs history table to open the run details page at `/agents/{agentId}/{slug}/v2/runs/{runId}`. The page shows run metadata, step-by-step execution status, and outputs. Expand steps to see inputs, outputs, and errors.
+
+{/* IMAGE: Agent run details page with step execution → /images/guides/working-with-ai-agents/agent-run-details.png | UI: frontend-app/src/routes/agents/$agentId/$slug/v2/runs/$runId.tsx, features/agents/components/run-details/run-details-content.tsx | Route: /agents/$agentId/$slug/v2/runs/$runId */}
 
 ### Viewing Agent Execution History
 

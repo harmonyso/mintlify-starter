@@ -11,6 +11,8 @@ description: "Master the Harmony Dashboard interface with the sidebar, command p
 
 The Harmony layout uses a collapsible sidebar on the left, main content in the center, and a user menu in the sidebar footer. The layout adapts for mobile. When you're on the Portal, the sidebar is hidden and a different layout is shown.
 
+{/* IMAGE: Full layout with sidebar expanded → /images/guides/navigating-the-interface/layout-full.png | UI: frontend-app/src/components/layout/app-layout/index.tsx, app-sidebar/index.tsx | Route: /dashboard */}
+
 ## Using the Main Sidebar
 
 The main sidebar is the primary way to move between sections of Harmony.
@@ -53,6 +55,8 @@ The Tickets item is a collapsible menu. Expand it to see the list of desks.
 
 When the sidebar is collapsed (icon-only mode), hover over a desk item to see a preview card. The card shows the desk name and its teams. Desks with teams show a chevron. Use this to identify desks before clicking.
 
+{/* IMAGE: Sidebar collapsed with desk hover card → /images/guides/navigating-the-interface/desk-hover-preview.png | UI: frontend-app/src/components/layout/app-sidebar/desk-with-teams-hover-item.tsx, tickets-menu-item.tsx | Route: /dashboard */}
+
 ### Understanding Desk Hierarchy
 
 Desks are top-level units; each can have teams. In the sidebar, desks appear under Tickets. Teams are shown in the hover preview when the sidebar is collapsed.
@@ -78,6 +82,8 @@ With the palette open, type to search. It shows:
 - **Utility** — Reload page, copy URL, toggle theme, toggle sidebar, open help
 
 Live search results (employees, assets, tickets, software) appear after you type at least 2 characters. Results are grouped by category. Select an item and press Enter to open it.
+
+{/* IMAGE: Command palette with search results → /images/guides/navigating-the-interface/command-palette.png | UI: frontend-app/src/core/command-palette | Route: / (Cmd+K from anywhere) */}
 
 ### Understanding Command Categories
 
@@ -158,6 +164,8 @@ Breadcrumbs appear on pages with nested structure, such as:
 
 Breadcrumb segments are links; click them to go back to that level.
 
+{/* IMAGE: Breadcrumbs on Settings desk page → /images/guides/navigating-the-interface/breadcrumbs.png | UI: frontend-app/src/features/settings/components/desks/desk-settings-layout.tsx | Route: /settings/desks/$deskId */}
+
 ### Navigating Back Through Breadcrumbs
 
 Click any breadcrumb segment to return to that page. For example, from **Settings → Desks → IT** → Teams → Support, click **Desks** to go back to the desks list, or **Settings** to go to settings home. On some detail pages (e.g., tickets, software), a back arrow uses browser history or falls back to the parent route.
@@ -201,6 +209,8 @@ The user menu is in the sidebar footer. It shows your avatar, name, and email.
 - **Documentation** — Open docs.harmony.io
 - **Theme** — Switch between light and dark
 - **Log out** — Sign out
+
+{/* IMAGE: User menu dropdown in sidebar footer → /images/guides/navigating-the-interface/user-menu.png | UI: frontend-app/src/components/layout/app-sidebar/user-sidebar-menu.tsx | Route: /dashboard */}
 
 <Tip>
 Use the command palette (`Cmd+K`) to reach most areas without using the sidebar.

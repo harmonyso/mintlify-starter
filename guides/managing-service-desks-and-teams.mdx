@@ -40,6 +40,10 @@ Desks also have settings for email inbox, automation, SLA, notifications, tags, 
    - **From template** — Select a template that preconfigures common desk setups.
 4. Click **Create**.
 
+{/* IMAGE: Desks list with Create Desk button → /images/guides/managing-service-desks-and-teams/desks-list.png | UI: frontend-app/src/features/settings/components/desks/desks-pane.tsx | Route: /settings/desks */}
+
+{/* IMAGE: Create Desk modal (custom vs template) → /images/guides/managing-service-desks-and-teams/create-desk-modal.png | UI: frontend-app/src/features/settings/components/desks/new-desk-form-dialog.tsx, desk-template-selector.tsx | Route: /settings/desks */}
+
 ### Editing Desk Settings
 
 1. Open a desk from the Desks list.
@@ -62,11 +66,15 @@ From the desk overview, you can configure:
 - **Tickets** — Tags, custom fields.
 - **Templates** — Canned responses.
 
+{/* IMAGE: Desk overview with Email, Members, Automation, SLA tabs → /images/guides/managing-service-desks-and-teams/desk-overview-tabs.png | UI: frontend-app/src/features/settings/components/desks/desk-configurations.tsx | Route: /settings/desks/$deskId */}
+
 ### Deleting a Desk
 
 1. Open the desk and go to **Settings** or use the delete option.
 2. Confirm by typing the desk name.
 3. The desk and all associated tickets are permanently deleted.
+
+{/* IMAGE: Delete confirmation dialog with name confirmation → /images/guides/managing-service-desks-and-teams/delete-desk-dialog.png | UI: frontend-app/src/features/settings/components/desks/delete-desk-dialog.tsx | Route: /settings/desks */}
 
 ### Understanding Desk Status
 
@@ -85,6 +93,8 @@ When the disabled-desks feature is enabled, desks can be turned on or off. Use t
 1. Go to **Settings** → **Desks** → select a desk → **Members** tab.
 2. Click **Add Member** (or use the command/search popover).
 3. Search for employees and add them to the desk.
+
+{/* IMAGE: Members tab with Add Member and member list → /images/guides/managing-service-desks-and-teams/members-tab.png | UI: frontend-app/src/features/settings/components/teams/members-and-teams-pane.tsx, members-section.tsx | Route: /settings/desks/$deskId/members */}
 
 All team members must first be desk members.
 
@@ -111,6 +121,8 @@ Member roles depend on your configuration:
 2. Click **Create Team**.
 3. Enter team name, timezone (default from desk or browser), and description.
 4. Click **Create**.
+
+{/* IMAGE: Create Team dialog and Teams list → /images/guides/managing-service-desks-and-teams/create-team-dialog.png | UI: frontend-app/src/features/settings/components/teams/create-team-dialog.tsx, teams-pane.tsx | Route: /settings/desks/$deskId/members */}
 
 ### Editing Team Details
 
@@ -168,6 +180,8 @@ Working hours define when a team (or the main desk) is "open" for SLA calculatio
 2. Find **Working hours**.
 3. Choose **24 × 7 support** (always open) or **Custom working hours**.
 4. For custom hours, set timezone and enable/disable each day with start and end times (30-minute steps).
+
+{/* IMAGE: Working hours section with 24/7 and Custom options → /images/guides/managing-service-desks-and-teams/working-hours.png | UI: frontend-app/src/features/settings/components/teams/working-hours-section.tsx | Route: /settings/desks/$deskId/sla or /settings/desks/$deskId/teams/$teamId */}
 
 ### Configuring 24/7 Availability
 

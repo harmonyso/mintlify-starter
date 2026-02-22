@@ -23,6 +23,8 @@ The List view displays assets with columns for: Asset (name and type), Status, R
 
 The Warehouse view aggregates assets by asset type, model, and vendor. Each row shows counts for different statuses (in stock, active, in repair, EOL planned, EOL grace period, EOL reached, retired) and locations. Click a row, a status, or a location to apply filters and navigate to the List view. Use the view-mode toggle to switch back.
 
+{/* IMAGE: Warehouse view with aggregated counts → /images/guides/managing-asset-views-and-details/warehouse-view.png | UI: frontend-app/src/routes/assets/index.tsx, features/asset-management/components/warehouse-columns.tsx | Route: /assets */}
+
 ### Understanding Aggregated Asset Counts
 
 In the Warehouse view, counts reflect how many assets match each model/vendor/type combination for a given status or location. Clicking a count filters the List view accordingly.
@@ -65,11 +67,15 @@ Quick filter cards at the top of the page apply preset filters with one click:
 
 Click a card to apply the filter; click again to clear. Active quick filters are highlighted.
 
+{/* IMAGE: Quick filter cards (Unassigned, EOL, MacOS, etc.) → /images/guides/managing-asset-views-and-details/asset-quick-filters.png | UI: frontend-app/src/features/asset-management/components/asset-quick-filters.tsx | Route: /assets */}
+
 ---
 
 ## Managing Asset Details
 
 Click an asset row to open its detail page at `/assets/{assetId}`. The page shows the header (name, status, location, building, source), action buttons, and sections for Overview, Specifications, and (when applicable) Related software.
+
+{/* IMAGE: Asset detail page Overview with header and cards → /images/guides/managing-asset-views-and-details/asset-detail-overview.png | UI: frontend-app/src/routes/assets/$assetId.tsx | Route: /assets/$assetId */}
 
 ### Viewing Asset Details
 
@@ -112,6 +118,8 @@ To retire an asset:
 3. The retirement modal opens. Select a reason: Disposed, Sold, Given away, Broken, Stolen, or Other (with optional notes).
 4. Confirm. The modal reminds you to unenroll from MDM, wipe data, and reclaim licenses before disposition.
 
+{/* IMAGE: Retirement modal with reason selection → /images/guides/managing-asset-views-and-details/retirement-modal.png | UI: frontend-app/src/features/asset-management/components/retirement-modal.tsx | Route: /assets/$assetId */}
+
 ### Understanding Asset Retirement Workflow
 
 Retirement sets the status to Retired and stores the reason and notes. Retired assets appear in filters and the Warehouse view. Retirement reasons help with reporting and audits.
@@ -147,6 +155,8 @@ For MDM-managed devices, the **Related software** section lists applications ins
 ### Viewing Asset Activity Log
 
 Click the **Activity log** button in the asset header to open the activity sheet. It tracks changes to the asset: user actions, system updates, MDM syncs, automation events, and discovery events. New activity is indicated by an unread badge on the button.
+
+{/* IMAGE: Activity log sheet with event list → /images/guides/managing-asset-views-and-details/activity-log-sheet.png | UI: frontend-app/src/features/asset-management/components/activity-log/activity-log-sheet.tsx | Route: /assets/$assetId */}
 
 ### Filtering Asset Activity
 

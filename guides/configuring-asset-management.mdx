@@ -38,6 +38,8 @@ EOL policies define when assets reach end-of-life and when to notify. Configure 
 6. Optionally scope by **Vendor**.
 7. Save.
 
+{/* IMAGE: EOL policy form with asset type, lifecycle, notification → /images/guides/configuring-asset-management/eol-policy-form.png | UI: frontend-app/src/features/settings/components/asset-management/eol-policies/eol-policy-form-modal.tsx | Route: /settings/asset-management */}
+
 **Editing EOL policies**
 
 Click **Edit** on a policy. Default (system) policies cannot be edited; you can create a new policy instead.
@@ -56,6 +58,8 @@ EOL events are sent to the destinations configured in **EOL notifications**:
 
 Configure destinations (Slack, Teams, Email) and select which events to receive per channel.
 
+{/* IMAGE: EOL notifications pane with destinations → /images/guides/configuring-asset-management/eol-notifications.png | UI: frontend-app/src/features/settings/components/asset-management/eol-notifications/eol-notifications-pane.tsx | Route: /settings/asset-management */}
+
 ### Managing Low Stock Alerts
 
 Low stock alerts fire when in-stock quantity falls below a threshold. Configure at **Settings** → **Asset management** → **Low stock alerts** (within `/settings/asset-management`).
@@ -67,6 +71,8 @@ Low stock alerts fire when in-stock quantity falls below a threshold. Configure 
 3. Set **Stock threshold** (1–10,000).
 4. Optionally scope by **Vendor** and **Warehouse location**.
 5. Save.
+
+{/* IMAGE: Low stock alert form with threshold → /images/guides/configuring-asset-management/low-stock-alert-form.png | UI: frontend-app/src/features/settings/components/asset-management/low-stock-alerts/low-stock-alert-form-modal.tsx | Route: /settings/asset-management */}
 
 **Editing stock alert thresholds**
 
@@ -94,6 +100,8 @@ Each asset type has one policy. Open the policy for an asset type (or create if 
 - **Network rules** — Add IP subnets (CIDR) and WiFi SSIDs. Assets discovered on matching networks are included.
 
 Add multiple rules as needed. Rules are validated (e.g., CIDR format).
+
+{/* IMAGE: Discovery policy with vendor/model and network rules → /images/guides/configuring-asset-management/discovery-policy.png | UI: frontend-app/src/features/settings/components/asset-management/discovery-policies | Route: /settings/asset-management */}
 
 **Excluding asset types from discovery**
 

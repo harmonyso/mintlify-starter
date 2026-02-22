@@ -32,11 +32,15 @@ Use the desk selector (sidebar or page header) to switch desks. Select a desk to
 
 When you have access to multiple desks, choose **All desks** to see tickets from every desk you can access.
 
+{/* IMAGE: Ticket table with desk selector → /images/guides/understanding-service-desk-and-managing-tickets/ticket-table-all-desks.png | UI: frontend-app/src/routes/tickets/desk.all.tsx | Route: /tickets/desk/all */}
+
 ---
 
 ## Creating and Managing Tickets
 
 ### Creating a New Ticket
+
+{/* IMAGE: Create Ticket dialog with form fields → /images/guides/understanding-service-desk-and-managing-tickets/create-ticket-dialog.png | UI: frontend-app/src/components/common/forms/create-ticket-dialog.tsx, create-ticket-form.tsx | Route: /tickets/desk/$deskId */}
 
 Click **Create Ticket** to open the creation dialog. Fill in the form and click **Create**.
 
@@ -91,6 +95,8 @@ The new ticket is created and linked in one action.
 ### Viewing Ticket Details
 
 Click a ticket row to open the **ticket preview panel** on the right. It shows description, properties, SLA, approvals, linked tickets, related assets/software, and chat.
+
+{/* IMAGE: Ticket preview panel with chat and properties → /images/guides/understanding-service-desk-and-managing-tickets/ticket-preview-panel.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/resizable-ticket-preview.tsx, ticket-preview-controls.tsx | Route: /tickets/desk/$deskId */}
 
 ### Understanding the Ticket Preview Panel
 
@@ -160,6 +166,8 @@ Canned responses are created in desk settings (Settings → Tickets → Canned R
 
 In the ticket chat, use the canned response action to open the **Search canned responses** dialog. Search by name, preview the content, and click to insert. Variables in the template are replaced with current ticket data before insertion.
 
+{/* IMAGE: Search canned responses dialog → /images/guides/understanding-service-desk-and-managing-tickets/canned-response-search.png | UI: frontend-app/src/features/service-desk/components/canned-response-search-dialog.tsx | Route: /tickets/desk/$deskId */}
+
 ### Using Variables in Canned Responses
 
 Insert variables into templates. They are replaced when the template is used:
@@ -195,6 +203,8 @@ Templates can include attachments. Upload them when creating or editing the temp
 
 When a ticket has a **KB resolution** (AI-suggested solution from the knowledge base), you can use **Respond with knowledge base solution**. A modal shows the answer summary. Use **Add as comment** to insert it as a message (from Harmony AI) into the ticket.
 
+{/* IMAGE: Respond with knowledge base solution modal → /images/guides/understanding-service-desk-and-managing-tickets/kb-solution-modal.png | UI: frontend-app/src/features/service-desk/components/kb-solution-modal.tsx | Route: /tickets/desk/$deskId */}
+
 ### Using the KB Solution Search
 
 The KB solution is surfaced when the AI finds a matching article. The modal displays the summary and sources. You can copy the answer or add it as a comment.
@@ -211,6 +221,8 @@ Some tickets require approval before they can proceed. Approvals are configured 
 
 The **Approvals** section in the ticket preview shows each approval step with status: Requested, Pending, Approved, or Rejected. Approvers are displayed with avatars.
 
+{/* IMAGE: Approvals section in ticket preview → /images/guides/understanding-service-desk-and-managing-tickets/ticket-approvals-section.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/ticket-approvals-section.tsx | Route: /tickets/desk/$deskId */}
+
 ### Approving and Denying Ticket Requests
 
 Approval actions (approve/deny) are available from the Approvals section or workflow actions when the ticket is in an approval state. Exact UI depends on workflow configuration.
@@ -226,6 +238,8 @@ Multiple approval steps are shown in order. A connector indicates flow: once a s
 ### Closing Tickets with Comments
 
 To close a ticket, change the status to Resolved or Closed. If **mandatory close comment** is enabled for the desk, a dialog prompts for an internal comment (min 3 characters) before closing. Enter the comment and confirm.
+
+{/* IMAGE: Mandatory close comment dialog → /images/guides/understanding-service-desk-and-managing-tickets/close-ticket-comment-dialog.png | UI: frontend-app/src/features/service-desk/components/close-ticket-comment-dialog.tsx | Route: /tickets/desk/$deskId */}
 
 ### Understanding Ticket Closure Workflow
 
@@ -250,6 +264,8 @@ Each ticket can have SLA timers: **Response** (time to first reply) and **Resolu
 ### Viewing Ticket SLA Status
 
 The **SLA** section in the ticket preview shows each timer with deadline, hours remaining, and status (e.g. in progress, completed, breached). Expand to see details.
+
+{/* IMAGE: SLA section in ticket preview → /images/guides/understanding-service-desk-and-managing-tickets/ticket-sla-section.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/ticket-sla-section.tsx | Route: /tickets/desk/$deskId */}
 
 ### Tracking Time to Response (TTR)
 
