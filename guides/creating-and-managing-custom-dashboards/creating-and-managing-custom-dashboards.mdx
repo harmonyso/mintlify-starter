@@ -1,0 +1,82 @@
+---
+title: "Managing Custom Dashboards"
+description: "Learn how to create, navigate, duplicate, rename, and manage custom dashboards in Harmony."
+---
+
+<Note>
+**Path:** `/dashboard`
+</Note>
+
+## Understanding the Dashboard Overview
+
+The Dashboard is your central view for IT operations metrics. Harmony shows one dashboard at a time. When you open **Dashboard** from the sidebar, you see either your default dashboard or the built-in system dashboard.
+
+The main area displays widgets in a responsive grid: drag to reorder, resize by dragging corners (in edit mode), and add or remove widgets as needed.
+
+## Understanding the System Dashboard
+
+The **system dashboard** is a built-in dashboard named "Dashboard" that includes a predefined set of metrics: response time, resolution time, SLA compliance, ticket breakdowns, software and asset metrics, and more. It is always available and appears first in the dashboard list.
+
+<Important>
+The system dashboard **cannot be edited**, duplicated, or deleted. To customize your view, create a new dashboard or duplicate an existing one.
+</Important>
+
+## Creating Your First Dashboard
+
+1. Click the dashboard title (or the chevron next to it) to open the dashboard dropdown.
+2. Click **Create dashboard** at the bottom.
+
+A new empty dashboard is created and opened. The backend assigns a name such as "Untitled Dashboard" or "Untitled Dashboard 2". You can rename it in edit mode and add widgets.
+
+![Dashboard dropdown with Create dashboard, star, and copy icons](/guides/creating-and-managing-custom-dashboards/screenshots/dashboard-dropdown.png)
+
+## Navigating Between Multiple Dashboards
+
+- Click the dashboard title in the header to open a dropdown of all dashboards.
+- Use the search field to filter by name.
+- Click a dashboard to switch to it. The list shows "All dashboards" with each dashboard's name and creator.
+
+When you visit **/dashboard** (without an ID), Harmony shows your default dashboard, or the system dashboard if no default is set.
+
+## Setting a Default Dashboard
+
+The default dashboard is the one that opens when you go to **/dashboard**.
+
+1. Open the dashboard dropdown (click the title).
+2. Find the dashboard you want as default.
+3. Click the **star** icon. A filled star indicates the current default.
+
+You can set the system dashboard as default by starring it when no other dashboard is starred.
+
+## Duplicating Dashboards
+
+1. Open the dashboard dropdown.
+2. Hover a dashboard and click the **copy** icon.
+3. A duplicate is created and opened. Custom dashboards copy their layout; the system dashboard is copied with the default layout and named "Dashboard Copy".
+
+
+## Renaming Dashboards
+
+1. Click **Edit** to enter edit mode.
+2. Click the dashboard title or the **Edit** icon next to it.
+3. Type the new name (up to 32 characters).
+4. Press Enter or click away to commit, then click **Save & Exit**.
+
+Names are saved when you exit edit mode.
+
+## Deleting Custom Dashboards
+
+1. Click **Edit** to enter edit mode.
+2. Click **Delete** in the header.
+3. Confirm in the dialog.
+
+The system dashboard cannot be deleted. You must keep at least one dashboard; the Delete button appears only when more than one dashboard exists.
+
+![Edit mode with Delete button in header](/guides/creating-and-managing-custom-dashboards/screenshots/dashboard-edit-delete.png)
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Dashboard Widgets" icon="grid-2" href="/guides/working-with-dashboard-widgets" />
+  <Card title="Getting Started" icon="rocket" href="/guides/getting-started-with-harmony-dashboard" />
+</CardGroup>

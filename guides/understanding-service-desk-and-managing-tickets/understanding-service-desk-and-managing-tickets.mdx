@@ -1,0 +1,316 @@
+---
+title: "Service Desk & Tickets"
+description: "Learn how to use the Harmony Service Desk to create tickets, manage conversations, assign work, use canned responses, and track SLA."
+---
+
+<Note>
+**Path:** `/tickets/desk/$deskId` (or `/tickets/desk/all` for all desks)
+</Note>
+
+## Understanding the Service Desk
+
+The Service Desk is where you create, triage, and resolve IT support tickets. Tickets can be submitted via Slack, Microsoft Teams, email, or the web portal. The Harmony AI agent handles many requests automatically; human agents handle escalations and complex cases.
+
+### Understanding Desks
+
+A **desk** is a service desk that groups teams and tickets. You may have access to one or more desks based on your roles. Each desk has its own teams, custom fields, tags, and canned responses.
+
+### Navigating the Tickets View
+
+Open **Tickets** from the sidebar. Routes:
+
+- **`/tickets/desk/$deskId`** — Tickets for a specific desk
+- **`/tickets/desk/all`** — All tickets across desks (when you have access to multiple desks)
+
+The main view shows a table of tickets with columns for subject, status, priority, assignee, desk, SLA, and more. Use the toolbar filters and search to find specific tickets.
+
+### Switching Between Different Desks
+
+Use the desk selector (sidebar or page header) to switch desks. Select a desk to see only its tickets.
+
+### Viewing All Tickets Across Desks
+
+When you have access to multiple desks, choose **All desks** to see tickets from every desk you can access.
+
+{/* IMAGE: Ticket table with desk selector → /guides/understanding-service-desk-and-managing-tickets/screenshots/ticket-table-all-desks.png | UI: frontend-app/src/routes/tickets/desk.all.tsx | Route: /tickets/desk/all */}
+
+---
+
+## Creating and Managing Tickets
+
+### Creating a New Ticket
+
+{/* IMAGE: Create Ticket dialog with form fields → /guides/understanding-service-desk-and-managing-tickets/screenshots/create-ticket-dialog.png | UI: frontend-app/src/components/common/forms/create-ticket-dialog.tsx, create-ticket-form.tsx | Route: /tickets/desk/$deskId */}
+
+Click **Create Ticket** to open the creation dialog. Fill in the form and click **Create**.
+
+### Understanding Ticket Properties
+
+| Property | Description |
+|----------|-------------|
+| **Title** | Required. Up to 255 characters. |
+| **Description** | Required. Rich text (markdown). Up to 5000 characters. You can paste images from the clipboard or attach files from the editor. |
+| **Ticket Type** | Request, Incident, Question, Task, or Change. |
+| **Priority** | Low, Medium, High, or Urgent. |
+| **Desk** | Which desk the ticket belongs to. Required. |
+| **Assignee** | Team member or Harmony AI. Optional; defaults to Unassigned. |
+| **Reporter** | (Service desk variant) Who reported the ticket. |
+
+### Setting Ticket Priority and Status
+
+**Priority** is set when creating a ticket. **Status** is changed in the ticket preview panel: use the status selector in the Properties section. Statuses include Open, In Progress, Pending (Reporter, Approval, Internal Team, Third Party), Resolved, Closed, Canceled.
+
+### Attaching Files to Tickets
+
+- **Create form:** Use the Attachments dropzone. Drag and drop files or paste images from the clipboard. Files upload before the ticket is created.
+- **Description editor:** Use the file picker in the Tiptap editor to attach files inline.
+
+### Using Custom Fields in Tickets
+
+Custom fields are configured per desk and appear when you select that desk. Supported types:
+
+| Type | Control |
+|------|---------|
+| **Text** | Text input |
+| **Number** | Number input |
+| **Checkbox** | Yes/No |
+| **Single Select** | Dropdown with predefined options |
+| **Multi Select** | Multi-select with predefined options |
+
+Mandatory custom fields are marked with an asterisk. Custom fields reset when you change desks.
+
+### Creating and Linking Related Tickets
+
+When creating a ticket (service desk variant), you can link it to an existing ticket:
+
+1. In the **Linked ticket from your desk** section, choose a **Relationship type**: Relates to, Blocks, Blocked by, Duplicate of, Duplicated by, Depends on, Used by.
+2. Use the **Ticket** combobox to search and select the ticket to link.
+
+The new ticket is created and linked in one action.
+
+---
+
+## Working with Ticket Conversations
+
+### Viewing Ticket Details
+
+Click a ticket row to open the **ticket preview panel** on the right. It shows description, properties, SLA, approvals, linked tickets, related assets/software, and chat.
+
+{/* IMAGE: Ticket preview panel with chat and properties → /guides/understanding-service-desk-and-managing-tickets/screenshots/ticket-preview-panel.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/resizable-ticket-preview.tsx, ticket-preview-controls.tsx | Route: /tickets/desk/$deskId */}
+
+### Understanding the Ticket Preview Panel
+
+The preview panel has configurable sections: SLA, Approvals, Properties, Linked tickets, Assigned assets, Assigned software, and Chat. Use the header settings to show, hide, or reorder sections. Some sections (e.g. Approvals, Linked tickets) can be set to "If exist" so they only appear when there is data.
+
+### Resizing the Ticket Chat Panel
+
+The chat section has a drag handle at the top. Drag it to resize the chat area. The entire preview panel can also be resized horizontally by dragging the left edge.
+
+### Adding Messages to Tickets
+
+Type in the chat input at the bottom and send. You can mark messages as **internal** (visible only to agents) or **external** (visible to the reporter).
+
+### Using @Mentions in Messages
+
+Type `@` to open a list of participants (reporter, assignee, watchers, others in the conversation). Select a person to insert a mention. Mentioned users receive notifications. Mentions use the format `<@employeeId|DisplayName>` and render as clickable badges that link to the person's profile.
+
+### Replying to Ticket Conversations
+
+Send messages in the chat. Replies appear in chronological order. You can attach files to messages.
+
+### Viewing Ticket Activity History
+
+Activity (status changes, assignments, etc.) appears in the chat timeline or in the ticket’s activity log, depending on configuration.
+
+---
+
+## Assigning and Reassigning Tickets
+
+### Assigning Tickets to Team Members
+
+Use the **Assignee** selector in the ticket Properties section. You can assign to any employee on the desk (or on the ticket’s team when a team is set).
+
+### Assigning Tickets to Teams
+
+Use the **Team** selector in Properties to assign the ticket to a team. Team membership filters the assignee list to that team’s members.
+
+### Assigning Tickets to AI Agents
+
+The assignee selector includes **Harmony AI** as an option. Assigning to Harmony AI routes the ticket to the AI agent for triage and resolution.
+
+### Moving Tickets Between Desks
+
+Use **Move to another desk** in Properties. Select the target desk and confirm. The ticket’s desk changes; custom fields may reset for the new desk.
+
+### Moving Tickets Between Teams
+
+Use **Move to team** in Properties. Select the target team on the same desk. Assignee options update to the new team’s members.
+
+### Reassigning Your Tickets
+
+Change the assignee in Properties. The previous assignee is replaced by the new one.
+
+---
+
+## Using Canned Responses
+
+### What are Canned Responses?
+
+Canned responses are reusable templates for common replies. Insert them into ticket messages to save time and keep responses consistent.
+
+### Creating Canned Response Templates
+
+Canned responses are created in desk settings (Settings → Tickets → Canned Responses). Each template has a name, content, availability (Personal or Shared), and optional attachments.
+
+### Searching and Inserting Canned Responses
+
+In the ticket chat, use the canned response action to open the **Search canned responses** dialog. Search by name, preview the content, and click to insert. Variables in the template are replaced with current ticket data before insertion.
+
+{/* IMAGE: Search canned responses dialog → /guides/understanding-service-desk-and-managing-tickets/screenshots/canned-response-search.png | UI: frontend-app/src/features/service-desk/components/canned-response-search-dialog.tsx | Route: /tickets/desk/$deskId */}
+
+### Using Variables in Canned Responses
+
+Insert variables into templates. They are replaced when the template is used:
+
+| Variable | Replaced with |
+|----------|---------------|
+| `{{ticket.subject}}` | Ticket title |
+| `{{ticket.id}}` | Ticket ID |
+| `{{ticket.description}}` | Ticket description |
+| `{{ticket.reporter}}` | Reporter name |
+| `{{ticket.agent}}` | Assignee/agent name |
+| `{{ticket.status}}` | Status |
+| `{{ticket.priority}}` | Priority |
+| `{{ticket.source}}` | Source |
+| `{{ticket.ticket_type}}` | Type |
+| `{{desk_name}}` | Desk name |
+| `{{currentUser}}` | Current user name |
+| `{{portalUrl}}` | Portal URL |
+
+### Creating Personal vs Shared Canned Responses
+
+When creating a template, set **availability** to Personal (only you) or Shared (all desk members).
+
+### Managing Canned Response Attachments
+
+Templates can include attachments. Upload them when creating or editing the template. Attachments are included when the template is inserted.
+
+---
+
+## Working with Knowledge Base Solutions
+
+### Inserting KB Solutions into Tickets
+
+When a ticket has a **KB resolution** (AI-suggested solution from the knowledge base), you can use **Respond with knowledge base solution**. A modal shows the answer summary. Use **Add as comment** to insert it as a message (from Harmony AI) into the ticket.
+
+{/* IMAGE: Respond with knowledge base solution modal → /guides/understanding-service-desk-and-managing-tickets/screenshots/kb-solution-modal.png | UI: frontend-app/src/features/service-desk/components/kb-solution-modal.tsx | Route: /tickets/desk/$deskId */}
+
+### Using the KB Solution Search
+
+The KB solution is surfaced when the AI finds a matching article. The modal displays the summary and sources. You can copy the answer or add it as a comment.
+
+---
+
+## Managing Ticket Approvals
+
+### Understanding Ticket Approvals
+
+Some tickets require approval before they can proceed. Approvals are configured in workflows and appear in the ticket’s Approvals section when present.
+
+### Viewing Ticket Approval Status
+
+The **Approvals** section in the ticket preview shows each approval step with status: Requested, Pending, Approved, or Rejected. Approvers are displayed with avatars.
+
+{/* IMAGE: Approvals section in ticket preview → /guides/understanding-service-desk-and-managing-tickets/screenshots/ticket-approvals-section.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/ticket-approvals-section.tsx | Route: /tickets/desk/$deskId */}
+
+### Approving and Denying Ticket Requests
+
+Approval actions (approve/deny) are available from the Approvals section or workflow actions when the ticket is in an approval state. Exact UI depends on workflow configuration.
+
+### Understanding Approval Chains
+
+Multiple approval steps are shown in order. A connector indicates flow: once a step is approved, the next can proceed. Rejected steps halt the chain.
+
+---
+
+## Closing Tickets
+
+### Closing Tickets with Comments
+
+To close a ticket, change the status to Resolved or Closed. If **mandatory close comment** is enabled for the desk, a dialog prompts for an internal comment (min 3 characters) before closing. Enter the comment and confirm.
+
+{/* IMAGE: Mandatory close comment dialog → /guides/understanding-service-desk-and-managing-tickets/screenshots/close-ticket-comment-dialog.png | UI: frontend-app/src/features/service-desk/components/close-ticket-comment-dialog.tsx | Route: /tickets/desk/$deskId */}
+
+### Understanding Ticket Closure Workflow
+
+Closing moves the ticket to Resolved or Closed. The ticket remains in the list but is excluded from "open" filters by default.
+
+### Ticket Status After Closure
+
+Resolved and Closed are terminal states. Reopening requires changing status back to Open or In Progress, if your workflow allows it.
+
+---
+
+## Understanding and Tracking SLA
+
+### Understanding SLA Policies
+
+SLA policies define response and resolution targets per desk. They are configured in desk settings.
+
+### Understanding SLA Timers
+
+Each ticket can have SLA timers: **Response** (time to first reply) and **Resolution** (time to resolve). Timers start when the ticket is created and may pause based on status or business hours.
+
+### Viewing Ticket SLA Status
+
+The **SLA** section in the ticket preview shows each timer with deadline, hours remaining, and status (e.g. in progress, completed, breached). Expand to see details.
+
+{/* IMAGE: SLA section in ticket preview → /guides/understanding-service-desk-and-managing-tickets/screenshots/ticket-sla-section.png | UI: frontend-app/src/features/service-desk/components/ticket-preview/ticket-sla-section.tsx | Route: /tickets/desk/$deskId */}
+
+### Tracking Time to Response (TTR)
+
+The Response SLA shows the deadline for the first external reply. It completes when a non-internal message is sent.
+
+### Tracking Time to Resolution
+
+The Resolution SLA shows the deadline for resolving the ticket. It completes when the ticket is resolved.
+
+### Understanding SLA Breaches
+
+A timer is breached if the deadline passes before it is completed. The SLA section indicates breached timers. Breach count is also available in dashboard widgets.
+
+### Monitoring Active SLA Timers
+
+Active timers show hours remaining. Paused timers (e.g. when waiting on reporter) display a paused state.
+
+---
+
+## Exporting Tickets
+
+### Exporting Tickets to CSV
+
+Use the export action in the tickets toolbar. Export uses the current filters (status, priority, assignee, desk, search, etc.). Tickets are fetched in batches and written to a CSV file.
+
+### Filtering Tickets for Export
+
+Apply filters before exporting: status, priority, source, tags, assignee, reporter, desk, team, assigned to me, VIP reporter. The export includes only tickets matching the active filters.
+
+### Understanding Ticket Export Data
+
+The CSV includes standard columns (ID, title, status, priority, assignee, reporter, desk, created at, etc.) plus custom fields and other configured columns. Employee IDs are resolved to names where possible.
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Harmony Portal" icon="user" href="/guides/using-the-harmony-portal" />
+  <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams" />
+  <Card title="Building Workflows" icon="diagram-project" href="/guides/building-and-managing-workflows" />
+  <Card title="Organizing Tickets" icon="table" href="/guides/organizing-tickets-and-table-views" />
+  <Card title="AI Agents" icon="robot" href="/guides/working-with-ai-agents" />
+  <Card title="Managing People" icon="users" href="/guides/managing-people" />
+  <Card title="Ticket Settings" icon="cog" href="/guides/managing-ticket-settings" />
+  <Card title="Automation & SLA" icon="clock" href="/guides/configuring-automation-and-sla" />
+  <Card title="Service Desk Metrics" icon="bar-chart" href="/guides/analyzing-service-desk-metrics" />
+</CardGroup>

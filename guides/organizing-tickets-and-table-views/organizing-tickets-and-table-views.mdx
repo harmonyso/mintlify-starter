@@ -1,0 +1,206 @@
+---
+title: "Organizing Tickets"
+description: "Learn how to filter, search, sort, and manage ticket views and table columns in the Harmony Service Desk."
+---
+
+<Note>
+**Path:** `/tickets/desk/$deskId`
+</Note>
+
+## Filtering Tickets
+
+The ticket table supports faceted filters. Use the filter popover in the toolbar to apply one or more filters. Filters are combined (AND logic). Clear individual filters or use **Reset filters** to remove all.
+
+### By Status
+
+Filter by ticket status: Open, In Progress, Pending (Reporter, Approval, Internal Team, Third Party), Resolved, Closed, Canceled. The default view shows open statuses (excludes Resolved and Closed). Select multiple statuses to include in the view.
+
+### By Priority
+
+Filter by Low, Medium, High, or Urgent.
+
+### By Assignee
+
+Filter by assignee. Include **Unassigned** to see tickets without an assignee. **Assigned to me** is a quick filter that shows only tickets assigned to you.
+
+### By Reporter
+
+Filter by the employee who reported the ticket.
+
+### By Source
+
+Filter by ticket source: Slack, Harmony, Teams, Freshservice, Email, JSM, SolarWinds, SIIT.
+
+### By Tags
+
+Filter by desk tags. Tags are defined per desk and applied to tickets.
+
+### By Team
+
+Filter by team (subdesk) within a desk.
+
+### Quick Filters
+
+- **Assigned to me** — Built-in view that filters tickets assigned to you. Same as setting assignee to your employee ID.
+- **Default view** — Shows open statuses and unassigned by default. You can change the default view.
+
+{/* IMAGE: Ticket table with filter popover → /guides/organizing-tickets-and-table-views/screenshots/ticket-filters.png | UI: frontend-app/src/routes/tickets/desk.$deskId.tsx, components/common/data-table/data-table-toolbar.tsx | Route: /tickets/desk/$deskId */}
+
+---
+
+## Searching for Tickets
+
+Use the **Search** input in the toolbar. Search queries the ticket title (subject). Results update as you type (debounced). Search is combined with active filters.
+
+<Note>
+Search matches ticket title. For full-text content search across descriptions and messages, use export with filters or external tools.
+</Note>
+
+---
+
+## Sorting Ticket Lists
+
+Click a column header to sort by that column. Click again to toggle ascending/descending. Sortable columns include: Priority, Status, Title, Source, Created at, Resolution SLA, and others. The default sort is Created at (newest first). Sorting is persisted in saved views.
+
+{/* IMAGE: Ticket table with sortable column headers → /guides/organizing-tickets-and-table-views/screenshots/ticket-table-sorting.png | UI: frontend-app/src/routes/tickets/desk.$deskId.tsx, components/common/data-table | Route: /tickets/desk/$deskId */}
+
+---
+
+## Managing Saved Ticket Views
+
+Saved views store filters, sorting, and search. Switch views from the dropdown next to the desk name (e.g. **Desk name > View name**). System views (Default view, Assigned to me) cannot be modified or deleted.
+
+### Creating Saved Views
+
+1. Apply the filters, sorting, and search you want.
+2. Click the view dropdown.
+3. Select **Save current view**.
+4. Enter a name and click **Save view**.
+
+The new view is created and selected.
+
+{/* IMAGE: View dropdown with Save current view → /guides/organizing-tickets-and-table-views/screenshots/saved-views-dropdown.png | UI: frontend-app/src/features/service-desk/components/ticket-views-dropdown.tsx | Route: /tickets/desk/$deskId */}
+
+### Updating Saved Views
+
+1. Select the view to update.
+2. Change filters, sorting, or search.
+3. Open the view dropdown → click the ⋮ next to the view name.
+4. Select **Update view**.
+
+The view is updated with the current settings. Modified views show **(Modified)** until you update or switch away.
+
+### Renaming Saved Views
+
+Open the view dropdown → ⋮ next to the view → **Rename**. Enter the new name and confirm.
+
+### Deleting Saved Views
+
+Open the view dropdown → ⋮ next to the view → **Delete**. System views cannot be deleted.
+
+### Setting Default View
+
+Open the view dropdown → click the star icon next to a view to set it as default. The default view is applied when you first open the desk (unless you arrive via a shared link with URL parameters).
+
+---
+
+## Understanding Ticket Table Columns
+
+The ticket table includes columns such as:
+
+| Column | Description |
+|--------|-------------|
+| **Ticket ID** | Ticket identifier with type icon. Click to open. |
+| **Title** | Ticket subject. |
+| **Status** | Current status. Editable inline. |
+| **Priority** | Priority level. Editable inline. |
+| **Source** | Origin (Slack, Teams, etc.). |
+| **Assignee** | Assigned employee or AI. Editable inline. |
+| **Reporter** | Who reported. Editable inline. |
+| **Desk** | Desk the ticket belongs to. |
+| **Team** | Team (subdesk) if assigned. |
+| **Resolution SLA** | SLA deadline and status. |
+| **Created at** | Creation timestamp. |
+| **Approval** | Approval status when applicable. |
+| **Insights** | Automated solution or knowledge base indicator (if enabled). |
+
+Some columns are hidden on mobile. Column visibility and order can be customized.
+
+---
+
+## Customizing Column Visibility
+
+Click the **Manage columns** (settings) button in the toolbar. A dropdown lists all hideable columns with checkboxes. Toggle columns on or off to show or hide them. Changes are saved per user.
+
+{/* IMAGE: Manage columns dropdown with column checkboxes → /guides/organizing-tickets-and-table-views/screenshots/manage-columns.png | UI: frontend-app/src/components/common/data-table/data-table-view-options.tsx | Route: /tickets/desk/$deskId */}
+
+---
+
+## Reordering Table Columns
+
+In **Manage columns**, drag the grip handle next to a column to reorder. The new order is persisted. Some columns (e.g. selection) are fixed to the left and cannot be moved.
+
+---
+
+## Using Table Pagination
+
+The table paginates tickets. Use the pagination controls at the bottom to change page or page size. Page size options typically range from 10 to 200 rows. Page index and size are reflected in the URL for sharing.
+
+---
+
+## Navigating Large Datasets
+
+### Keyboard Shortcuts
+
+When the tickets table is focused:
+
+| Shortcut | Action |
+|----------|--------|
+| `/` | Focus search |
+| `Escape` | Clear search |
+| `↑` / `↓` | Move focus between rows |
+| `Enter` | Open focused ticket (after using arrow keys) |
+| `←` / `→` | Previous / Next page |
+| `Shift+R` | Refresh table |
+| `Shift+X` | Reset all filters |
+
+Arrow key navigation tracks a focused row. Press Enter to open that ticket. Hovering a row also updates focus.
+
+---
+
+## Using Bulk Actions on Tickets
+
+Select multiple tickets with the row checkboxes. When rows are selected, bulk action buttons appear in the toolbar.
+
+{/* IMAGE: Ticket table with selection and bulk action toolbar → /guides/organizing-tickets-and-table-views/screenshots/ticket-bulk-actions.png | UI: frontend-app/src/features/service-desk/components/tickets-bulk-actions.tsx | Route: /tickets/desk/$deskId */}
+
+### Selecting Multiple Tickets
+
+Click the checkbox in each row, or use the header checkbox to select all visible rows on the current page.
+
+### Bulk Updating Ticket Status
+
+Use **Bulk status** to change status for all selected tickets. If the desk requires a close comment for Resolved/Closed, you will be prompted for an internal comment.
+
+### Bulk Updating Ticket Priority
+
+Use **Bulk priority** to set priority (Low, Medium, High, Urgent) for all selected tickets.
+
+### Bulk Assigning Tickets
+
+Use **Bulk assignee** to assign all selected tickets to an employee or Harmony AI. All selected tickets must be on the same desk; bulk assign across multiple desks is not supported.
+
+### Understanding Bulk Action Limits
+
+Bulk updates apply to all selected tickets on the current page. The API processes them in a single request. If assignment fails (e.g. tickets span multiple desks or assignee is not a desk member), an error toast explains the issue.
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams" />
+  <Card title="Service Desk & Tickets" icon="ticket" href="/guides/understanding-service-desk-and-managing-tickets" />
+  <Card title="Managing People" icon="users" href="/guides/managing-people" />
+  <Card title="Service Desk Metrics" icon="bar-chart" href="/guides/analyzing-service-desk-metrics" />
+</CardGroup>

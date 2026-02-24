@@ -1,0 +1,181 @@
+---
+title: "Managing Software"
+description: "Learn how to navigate the software list, view application details, manage licenses, assign and revoke user access, use bulk actions, and export software data."
+---
+
+<Note>
+**Path:** `/software`
+</Note>
+
+## Understanding Software Management
+
+The Software area shows applications discovered from your integrations (e.g., Okta, Microsoft Entra). Open **Software** from the sidebar to view the list at `/software`. Applications are synced from your identity provider; you manage their status, licenses, and user access in Harmony.
+
+### Navigating the Software List
+
+The Software page displays a data table with sortable columns. Click a row to open that application's detail page. Use the toolbar for search, filters, refresh, export, and bulk actions. The table supports pagination with configurable page size.
+
+{/* IMAGE: Software list with toolbar and filters → /guides/managing-software-applications/screenshots/software-list.png | UI: frontend-app/src/routes/software/index.tsx | Route: /software */}
+
+### Adding New Software
+
+Software applications are discovered automatically from your integrations (Okta, Microsoft Entra, etc.). There is no manual "Add Software" option. Connect and sync your identity provider to discover applications.
+
+### Viewing Software Details
+
+Click an application row to open its detail page at `/software/$appId` (or `/software/v2/$appId`). The page shows the header (name, icon, status, monthly cost, detected logins, end of contract), overview (description, category, vendor, source, stakeholders), licenses table, and users table.
+
+{/* IMAGE: Application detail page with Licenses and users → /guides/managing-software-applications/screenshots/software-detail.png | UI: frontend-app/src/routes/software/$appId.tsx | Route: /software/$appId */}
+
+### Understanding Application Types
+
+Applications have a **category** (e.g., Communication, Productivity, Security) from your integration. Use the category filter in the list to narrow results. Applications also have a **source** (Okta, Microsoft Entra, etc.) and **vendor**.
+
+### Updating Software Status
+
+On the application detail page, use the status dropdown in the header to change status. In the list, select one or more applications and use **Change status** in the bulk actions toolbar. Available statuses: Discovered, Under review, Approved, Rejected, Ignored, Retired.
+
+### Filtering Software by Status
+
+Use the filter popover to filter by status. By default, the view may show Discovered and Approved. Select one or more statuses; filters combine with AND logic.
+
+### Searching for Software
+
+Use the **Search** input in the toolbar. Search matches application names. Results update as you type (debounced). Search is combined with active filters.
+
+### Sorting Software Lists
+
+Click column headers to sort. Supported sort fields include total users, monthly cost, end of contract, application name, and others. Toggle between ascending and descending.
+
+### Understanding Software Status
+
+| Status | Description |
+|--------|-------------|
+| **Discovered** | Newly detected, not yet reviewed |
+| **Under review** | Pending approval decision |
+| **Approved** | Approved for use |
+| **Rejected** | Rejected for use |
+| **Ignored** | Excluded from tracking |
+| **Retired** | No longer in use |
+
+---
+
+## Managing Software Licenses
+
+### Understanding Software Licenses
+
+Licenses track seat counts, cost, billing cycle, and renewal dates for an application. Add licenses on the application detail page to record contract information. Monthly cost is derived from active licenses.
+
+### Adding Software Licenses
+
+1. Open an application detail page.
+2. In the **Licenses** section, click **Add license**.
+3. Fill in: License type, Status, Seats (or Unlimited), Cost, Currency, Billing cycle, PO number (optional), Start date, Renewal date.
+
+{/* IMAGE: Add license form with seats, cost, billing cycle → /guides/managing-software-applications/screenshots/add-license-form.png | UI: frontend-app/src/features/software-management/components/add-edit-license-modal.tsx | Route: /software/$appId */}
+
+4. Click **Add license** or **Save**.
+
+### Editing License Details
+
+In the Licenses table, use the row actions menu and select **Edit**. Update any field and save. You can also delete licenses from the row actions menu.
+
+### Tracking License Expiration
+
+The **Renewal date** and **Start date** are stored per license. Use the Licenses table to see expiration. Licenses can have status Active, Expired, Suspended, or Cancelled.
+
+### Viewing License Usage
+
+The Licenses table shows **Seats** as used/total (e.g., 45/50 or 45/Unlimited). Usage data comes from your integration when available.
+
+### Understanding License Types
+
+License type is a custom label (e.g., Enterprise, Professional, Standard). Enter the type that matches your contract. Billing cycle options include Monthly, Quarterly, and Yearly. Seats can be a fixed number or **Unlimited**.
+
+---
+
+## Managing App Permissions and User Access
+
+### Understanding App Permissions
+
+App permissions control who has access to an application. User access is managed through your identity provider (e.g., Okta). Harmony shows users per application and, for Okta test tenants, supports provisioning and revoking access via workflows.
+
+### Assigning App Permissions to Users
+
+For Okta test tenants: On the application detail page, in the **Users** section, click **Add** to open the Assign App Permissions dialog. Select an employee and confirm. The "Provision Application Access" workflow provisions access for that user across Okta instances. Refresh the page to see the updated user list.
+
+{/* IMAGE: Assign App Permissions dialog → /guides/managing-software-applications/screenshots/assign-app-permissions.png | UI: frontend-app/src/features/software-management/components/assign-app-permissions-modal.tsx | Route: /software/$appId */}
+
+### Managing User Access to Applications
+
+User access is controlled in your IdP (Okta, Microsoft Entra). Harmony displays detected users and their roles. For Okta test tenants, you can provision new access or revoke existing access from the application detail page.
+
+### Viewing Users Per Application
+
+The **Users** section on the application detail page lists employees with access to the application. Columns include name, email, role, source, department, and last login. Use the toolbar to search, filter by source or role, and export users.
+
+### Revoking Access
+
+For Okta test tenants: In the Users table, use the row actions menu and select **Revoke access**. Confirm the action. The "Revoke Application Access" workflow revokes access for that user. Refresh the page to see the updated list.
+
+---
+
+## Using Bulk Actions on Software
+
+### Selecting Multiple Software Items
+
+In the Software list, use the checkboxes in the first column to select rows. Select individual applications or use the header checkbox to select all on the current page. Bulk actions apply only to the currently selected applications.
+
+### Bulk Updating Software Status
+
+1. Select one or more applications.
+2. Use the **Change status** combobox in the bulk actions toolbar.
+3. Choose a status (Discovered, Under review, Approved, Rejected, Ignored, Retired).
+4. The update applies to all selected applications.
+
+### Using Bulk Actions Toolbar
+
+The bulk actions toolbar appears when you have selected applications. Available actions:
+
+- **Change status** — Set application status for all selected apps.
+- **Set owner** — Assign application owner(s) to selected apps. Supports partial selection (applies to apps that don't already have the owner).
+- **Set budget approver** — Assign budget approver(s) to selected apps.
+- **Set IT approver** — Assign IT approver(s) to selected apps.
+
+{/* IMAGE: Software bulk actions toolbar with Change status → /guides/managing-software-applications/screenshots/software-bulk-actions.png | UI: frontend-app/src/features/software-management/components/bulk-actions.tsx | Route: /software */}
+
+---
+
+## Exporting Software Data
+
+### Exporting Software to CSV
+
+Click **Export** in the Software toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-software-export-YYYY-MM-DD.csv`. Export includes all applications that match the filters.
+
+{/* IMAGE: Software toolbar with Export button → /guides/managing-software-applications/screenshots/software-toolbar-export.png | UI: frontend-app/src/routes/software/index.tsx | Route: /software */}
+
+### Exporting Application Users
+
+On an application detail page, in the **Users** section, click **Export** in the toolbar. A CSV downloads with users for that application. The export uses the current filters (source, role) and sort. Filename format: `harmony-application-users-export-YYYY-MM-DD.csv`.
+
+### Understanding Software Export Fields
+
+The software CSV includes columns such as Application Name, Status, Source, Users, Licenses, Monthly Cost, Category, Vendor, Application owner, Budget approver, IT approver, and others. Column visibility and order from the table are respected. Extra fields include Application ID, Total Seats, Used Seats, and Contract End Date when available.
+
+### Filtering Software for Export
+
+Apply filters before exporting to limit which applications are included. Supported export filters: search, status, source, category, vendor. Sort order is also applied to the export.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Managing People" icon="users" href="/guides/managing-people">
+    View employees and their assigned software.
+  </Card>
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
+    View software on assets and related applications.
+  </Card>
+  <Card title="Asset & Automation Metrics" icon="bar-chart" href="/guides/analyzing-asset-and-automation-metrics">
+    Analyze software and automation metrics.
+  </Card>
+</CardGroup>

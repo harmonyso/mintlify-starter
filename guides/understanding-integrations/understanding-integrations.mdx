@@ -1,0 +1,141 @@
+---
+title: "Understanding Integrations"
+description: "Learn how Harmony integrations work, how to view and connect them, and how OAuth authentication enables secure connections to third-party systems."
+---
+
+<Note>
+**Path:** `/settings/integrations`
+</Note>
+
+## Understanding Harmony Integrations
+
+### What are Integrations?
+
+Integrations connect third-party systems to Harmony. They enable Harmony to sync data, trigger actions, and work with tools like Slack, Okta, Jamf, Confluence, and many others. Each integration brings capabilities such as user sync, ticket creation, device management, knowledge base content, or notifications.
+
+### Benefits of Integrations
+
+- **Single entry point** — Support and operations from one place instead of switching between tools
+- **Unified workflows** — Automate across systems (e.g., create tickets from Slack, provision access via Okta)
+- **Data sync** — Keep employees, assets, and applications up to date across your stack
+- **AI and automation** — AI agents and workflows use integration data to resolve issues and route work
+
+### Viewing Available Integrations
+
+1. Go to **Settings** → **Integrations**.
+2. The page lists all available integrations, grouped by category.
+3. Use **Search** to find a specific integration by name.
+4. Use the **Category** filter to narrow by type (Collaboration, Identity Provider, MDM, etc.).
+5. The URL supports `?integration-id=...` for deep linking to a specific integration.
+
+Each integration card shows the name, description, category, and connection status.
+
+{/* IMAGE: Integrations list with category filter and cards → /guides/understanding-integrations/screenshots/integrations-list.png | UI: frontend-app/src/features/settings/components/integrations/integrations-pane.tsx | Route: /settings/integrations */}
+
+---
+
+## Understanding Integration Categories
+
+Integrations are organized into categories:
+
+| Category | Description | Examples |
+|----------|-------------|----------|
+| **Collaboration** | Team communication tools | Slack, Microsoft Teams |
+| **Identity Provider** | Identity and access management | Okta, Microsoft Entra, Google Workspace, JumpCloud |
+| **MDM** | Mobile device management | Jamf, Kandji, Intune, JumpCloud MDM |
+| **EDR** | Endpoint detection and response | CrowdStrike, SentinelOne |
+| **Ticketing** | Issue tracking and ticketing | Zendesk, Freshservice |
+| **ITSM** | IT Service Management | Atlassian, ManageEngine, SolarWinds |
+| **HRIS** | Human Resources systems | BambooHR, HiBob, Workday, Ceridian, Sage HR, UKG Pro |
+| **Knowledge Base** | Knowledge base platforms | Confluence, Notion, Freshservice, SharePoint, Simpplr |
+| **Software Management** | Software inventory and licensing | Torii |
+| **Asset Management** | IT asset management | Workwize |
+| **SaaS Applications** | General SaaS apps | GitHub, Monday, Zoom |
+| **Design** | Design and creative tools | — |
+| **AI** | AI and ML platforms | — |
+
+---
+
+## Understanding Integration Status
+
+### Connected Status
+
+When an integration is connected, the card shows a **Connected** badge (green). For multi-instance integrations (e.g., multiple Slack workspaces), the count of instances is shown. Hover for a tooltip listing the instances.
+
+{/* IMAGE: Integration card with Connected badge → /guides/understanding-integrations/screenshots/integration-connected.png | UI: frontend-app/src/features/settings/components/integrations/integration-card.tsx | Route: /settings/integrations */}
+
+### Disconnected Status
+
+When no instances exist, the integration is disconnected. There is no explicit "Disconnected" badge; the absence of "Connected" indicates it is not set up. Click **Connect** to start the setup flow.
+
+### Deprecated Status
+
+Some integrations may be marked **Deprecated**. Deprecated integrations that are already connected can continue to work, but new configuration may be restricted. Plan to migrate to a supported alternative when available.
+
+### Error and Syncing Status
+
+The UI does not currently display an "Error" or "Syncing" status on integration cards. Connection health is managed by the backend. If an integration stops working, disconnect and reconnect it, or check the integration's documentation for troubleshooting.
+
+---
+
+## Understanding OAuth Authentication
+
+Many integrations use OAuth for secure, delegated access. Harmony supports different auth types:
+
+### What is OAuth?
+
+OAuth lets Harmony access a third-party service on your behalf without storing your password. You authorize the connection once; Harmony receives tokens to make API calls. Tokens can be refreshed automatically.
+
+### OAuth Flow Overview
+
+{/* IMAGE: Integration card with Connect button → /guides/understanding-integrations/screenshots/integration-connect.png | UI: frontend-app/src/features/settings/components/integrations/integration-card.tsx | Route: /settings/integrations */}
+
+**Standard OAuth2 flow:**
+
+1. Click **Connect** on the integration card.
+2. Harmony requests an install URL from the backend.
+3. A popup window (600×700) opens the provider's authorization page.
+4. Log in to the provider (if needed) and approve the requested permissions.
+5. The provider redirects back; the popup closes.
+6. Harmony detects the success and refreshes the integration list. A toast confirms the connection.
+
+**Descope-hosted OAuth2:**
+
+Some integrations use a Descope-managed flow. The process is similar: click Connect, complete the auth in a redirect or popup, and return to Settings. The redirect URL includes `integration-id` for context.
+
+### Authorization Process
+
+When you authorize an integration:
+
+- The provider shows the permissions (scopes) Harmony is requesting.
+- Review and approve them. Without approval, the connection cannot be completed.
+- Some integrations may require admin approval in the provider (e.g., Slack workspace admin).
+
+### Token Management
+
+Tokens are stored and managed by Harmony's backend (or Descope for Descope-based integrations). The UI does not expose tokens. Token refresh happens automatically. If a token expires and cannot be refreshed (e.g., revoked in the provider), disconnect and reconnect the integration.
+
+### Understanding OAuth Scopes
+
+**Scopes** define what Harmony can do in the connected system (e.g., read users, send messages, list channels). Each integration has predefined scopes. The provider's authorization screen lists them. Harmony requests only the scopes needed for that integration's features.
+
+### Credentials-Based Integrations
+
+Some integrations use **credentials** (e.g., API keys) instead of OAuth. For these, you enter the credentials in a configuration form after clicking Connect. Credentials are stored securely by the backend.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Connecting Integrations" icon="plug" href="/guides/connecting-and-managing-integrations">
+    Connect, configure, and disconnect integrations.
+  </Card>
+  <Card title="Integrations Catalog" icon="list" href="/integrations/overview">
+    Browse available integrations.
+  </Card>
+  <Card title="User Management" icon="users" href="/guides/managing-user-management">
+    Notification destinations use connected integrations.
+  </Card>
+  <Card title="Knowledge Base" icon="book-open" href="/guides/managing-knowledge-base">
+    Connect KB sources (Confluence, Notion, etc.).
+  </Card>
+</CardGroup>

@@ -1,0 +1,109 @@
+---
+title: "User Roles & Permissions"
+description: "Understand the different user roles and permissions in Harmony Dashboard, including platform roles, desk roles, and how they affect feature access."
+---
+
+<Note>
+**Path:** View user roles at `/settings/user-management`
+</Note>
+
+## Overview of User Roles
+
+Harmony uses two types of roles to control access:
+
+1. **Platform roles** — Apply across the whole tenant (Admin, Agent, Observer)
+2. **Desk roles** — Apply per service desk (Manager, Agent, Observer)
+
+Your effective access depends on the combination of these roles.
+
+## Platform Roles
+
+Platform roles are tenant-wide and control access to the main dashboard areas.
+
+| Role | Access |
+|------|--------|
+| **Platform Admin** | Full access: Dashboard, Tickets, Agents, Workflows, Assets, Software, People, Settings. Implicit access to all desks. |
+| **Platform Agent** | Same areas as Admin except Settings requires desk manager. Can access assigned desks. |
+| **Platform Observer** | Read-only access to the same areas as Agent. |
+
+Platform roles are assigned through your identity provider (e.g., Okta, Entra ID). Harmony reads them from your JWT on login.
+
+## Desk Roles
+
+Desk roles are per-desk and control what you can do on each service desk.
+
+| Role | Access |
+|------|--------|
+| **Desk manager** | Manages the desk, its teams, and settings. Can access Settings for that desk. |
+| **Desk agent** | Works tickets on the desk. |
+| **Desk observer** | Read-only access to the desk. |
+
+You can have different desk roles on different desks. Platform Admins have implicit manager-level access to all desks.
+
+## Understanding Role Permissions
+
+Access is derived as follows:
+
+- **Dashboard, Agents, Workflows, Assets, Software, People** — Visible only with a platform role.
+- **Tickets** — Visible with a platform role or any desk access (platform or desk-level).
+- **Settings** — Visible to Platform Admins and desk managers (for their desks).
+- **Landing page** — Platform role → Dashboard; desk-only → first desk; otherwise → Portal.
+
+Desk access comes from your identity provider via groups. Your employee record is linked to desk resources with a `manager`, `agent`, or `observer` relation.
+
+## Viewing Your Assigned Roles
+
+To see another user’s roles, go to **Settings → User Management → Users**, then open the user. The detail view shows:
+
+- **Groups** — IdP groups with role badges
+- **Desks** — Desks with Desk manager / Desk agent / Desk observer badges
+
+{/* IMAGE: User detail pane with Groups, Desks, and role badges → /guides/understanding-user-roles-and-permissions/screenshots/user-roles-badges.png | UI: frontend-app/src/features/settings/components/user-management/user-detail-pane.tsx | Route: /settings/user-management/$userId */}
+
+Your own roles control what you see in the sidebar and where you land after login. There is no self-service “view my roles” page; admins manage roles in the identity provider.
+
+## Understanding Role Badges
+
+Role badges appear in:
+
+- **Users table** — Under the Role column, showing platform and group-derived roles
+- **User detail** — Next to each group and desk
+
+Badges use outline style and show role names such as "Platform Admin", "Desk manager", "Desk agent", "Desk observer".
+
+{/* IMAGE: Users table with Role column badges → /guides/understanding-user-roles-and-permissions/screenshots/users-table-role-column.png | UI: frontend-app/src/features/settings/components/user-management/users-tab.tsx, users-columns.tsx | Route: /settings/user-management */}
+
+## How Roles Affect Access to Features
+
+| Feature | Platform Admin | Platform Agent/Observer | Desk-only |
+|---------|----------------|-------------------------|-----------|
+| Dashboard | ✓ | ✓ | ✗ |
+| Tickets | ✓ (all desks) | ✓ (assigned desks) | ✓ (assigned desks) |
+| Agents | ✓ | ✓ | ✗ |
+| Workflows | ✓ | ✓ | ✗ |
+| Assets | ✓ | ✓ | ✗ |
+| Software | ✓ | ✓ | ✗ |
+| People | ✓ | ✓ | ✗ |
+| Settings | ✓ | ✓ (if desk manager) | ✗ |
+| Portal | ✓ | ✓ | ✓ |
+
+## Group-Based Role Assignments
+
+Roles are assigned through **groups** in your identity provider. Harmony does not edit roles directly; it consumes group membership and maps groups to platform and desk roles.
+
+Admins configure role mappings in the identity provider. Changes there sync to Harmony and determine what users can see and do.
+
+<Info>
+User and group management happens in your identity provider. Harmony reflects those assignments; it does not let you add or remove users or change their roles in the app.
+</Info>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="User Management" icon="users" href="/guides/managing-user-management" />
+  <Card title="Managing People" icon="users" href="/guides/managing-people" />
+  <Card title="Managing Your Profile" icon="user" href="/guides/managing-your-profile-and-preferences" />
+  <Card title="Navigating the Interface" icon="compass" href="/guides/navigating-the-interface" />
+</CardGroup>

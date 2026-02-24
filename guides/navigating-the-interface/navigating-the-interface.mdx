@@ -1,0 +1,233 @@
+---
+title: "Navigating the Interface"
+description: "Master the Harmony Dashboard interface with the sidebar, command palette, keyboard shortcuts, and navigation features."
+---
+
+<Note>
+**Key routes:** `/dashboard` · `/tickets` · `/agents` · `/workflows` · `/assets` · `/software` · `/people` · `/settings` · `/portal`
+</Note>
+
+## Understanding the Dashboard Layout
+
+The Harmony layout uses a collapsible sidebar on the left, main content in the center, and a user menu in the sidebar footer. The layout adapts for mobile. When you're on the Portal, the sidebar is hidden and a different layout is shown.
+
+{/* IMAGE: Full layout with sidebar expanded → /guides/navigating-the-interface/screenshots/layout-full.png | UI: frontend-app/src/components/layout/app-layout/index.tsx, app-sidebar/index.tsx | Route: /dashboard */}
+
+## Using the Main Sidebar
+
+The main sidebar is the primary way to move between sections of Harmony.
+
+### Collapsing and Expanding the Sidebar
+
+- **Toggle button** — A circular button appears on the right edge of the sidebar on hover. Click it to collapse or expand.
+- **Keyboard shortcut** — Press `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to toggle the sidebar.
+- **Collapsed mode** — When collapsed, the sidebar shows only icons. Click the logo or any icon to expand it again.
+
+The sidebar state is stored so it stays the same across sessions.
+
+### Understanding Sidebar Sections
+
+The sidebar shows different sections based on your permissions:
+
+| Section | Route | Who sees it |
+|---------|-------|-------------|
+| Dashboard | `/dashboard` | Platform roles (Admin, Agent, Observer) |
+| Tickets | `/tickets/desk/...` | Users with ticket access |
+| Agents | `/agents` | Platform roles |
+| Workflows | `/workflows` | Platform roles (when feature is enabled) |
+| Assets | `/assets` | Platform roles |
+| Software | `/software` | Platform roles |
+| People | `/people` | Platform roles |
+| Settings | `/settings` | Users with settings access |
+| Help | — | Opens Intercom |
+
+### Desk Navigation in Sidebar
+
+Under **Tickets**, you can switch between desks:
+
+- **All** — View tickets across all desks you can access.
+- **Individual desks** — Each desk appears as a sub-item. Click to open that desk's ticket list.
+- **Other** — Shown when the "disabled desks" feature is on, for desks you don't normally access.
+
+The Tickets item is a collapsible menu. Expand it to see the list of desks.
+
+### Desk Hover Previews
+
+When the sidebar is collapsed (icon-only mode), hover over a desk item to see a preview card. The card shows the desk name and its teams. Desks with teams show a chevron. Use this to identify desks before clicking.
+
+{/* IMAGE: Sidebar collapsed with desk hover card → /guides/navigating-the-interface/screenshots/desk-hover-preview.png | UI: frontend-app/src/components/layout/app-sidebar/desk-with-teams-hover-item.tsx, tickets-menu-item.tsx | Route: /dashboard */}
+
+### Understanding Desk Hierarchy
+
+Desks are top-level units; each can have teams. In the sidebar, desks appear under Tickets. Teams are shown in the hover preview when the sidebar is collapsed.
+
+## Using the Command Palette (Cmd+K / Ctrl+K)
+
+The command palette gives quick access to navigation, search, and actions.
+
+### Opening the Command Palette
+
+- **Keyboard** — Press `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux).
+- **Sidebar** — Click the search icon in the sidebar header.
+
+### Searching for Actions
+
+With the palette open, type to search. It shows:
+
+- **Navigation** — Go to Dashboard, Tickets, Agents, Workflows, Assets, Software, People, Settings
+- **Employees** — Jump to employee profiles by name (type 2+ characters)
+- **Tickets** — Find and open tickets (type 2+ characters to search by title)
+- **Assets** — Find and open assets (type 2+ characters to search)
+- **Software** — Find and open software applications (type 2+ characters)
+- **Utility** — Reload page, copy URL, toggle theme, toggle sidebar, open help
+
+Live search results (employees, assets, tickets, software) appear after you type at least 2 characters. Results are grouped by category. Select an item and press Enter to open it.
+
+{/* IMAGE: Command palette with search results → /guides/navigating-the-interface/screenshots/command-palette.png | UI: frontend-app/src/core/command-palette | Route: / (Cmd+K from anywhere) */}
+
+### Understanding Command Categories
+
+Categories include Navigation, search results (Employees, Tickets, Assets, Software), and Utility. Use the search field to filter.
+
+### Quick Navigation with Commands
+
+Select a command with the mouse or arrow keys, then press Enter to run it. The palette closes after you run a command.
+
+## Keyboard Shortcuts
+
+Harmony uses `react-hotkeys-hook` for shortcuts. Modifier keys: `Cmd` on Mac, `Ctrl` on Windows/Linux.
+
+### Global Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+K` / `Ctrl+K` | Open command palette |
+| `Cmd+S` / `Ctrl+S` | Toggle sidebar |
+| `Cmd+H` / `Ctrl+H` | Toggle Intercom (Help) |
+| `Cmd+M` / `Ctrl+M` | Toggle theme (light/dark) |
+
+### Navigation Shortcuts (g then key)
+
+Type `g`, then a letter:
+
+| Sequence | Destination |
+|----------|-------------|
+| `g` then `d` | Dashboard |
+| `g` then `t` | Tickets |
+| `g` then `i` | Agents |
+| `g` then `w` | Workflows |
+| `g` then `a` | Assets |
+| `g` then `s` | Software |
+| `g` then `p` | People |
+| `g` then `c` | Settings |
+| `g` then `g` then `a` | Admin (Harmony admins only) |
+
+### Settings Tab Shortcuts (t then key)
+
+When you're in Settings, type `t`, then a letter:
+
+| Sequence | Tab |
+|----------|-----|
+| `t` then `g` | General |
+| `t` then `i` | Integrations |
+| `t` then `k` | Knowledge Base |
+| `t` then `a` | Asset Management |
+| `t` then `d` | Desks |
+| `t` then `b` | Branding |
+| `t` then `p` | Preferences |
+
+### Table Navigation Shortcuts
+
+In data tables (e.g. tickets, assets, people), these shortcuts work when the table has focus:
+
+| Shortcut | Action |
+|----------|--------|
+| `/` | Focus search |
+| `Escape` | Clear search |
+| `↑` / `↓` | Move between rows |
+| `←` / `→` | Previous / next page (when available) |
+| `Shift+R` | Refresh table |
+| `Shift+X` | Reset filters |
+
+### Theme Toggle (Cmd+M / Ctrl+M)
+
+Press `Cmd+M` or `Ctrl+M` anywhere to switch between light and dark theme.
+
+## Using Breadcrumbs for Navigation
+
+Breadcrumbs appear on pages with nested structure, such as:
+
+- **Settings → Desks → [Desk name]** — When viewing a desk
+- **Settings → Desks → [Desk] → Teams → [Team]** — When viewing a team
+- **Settings → User Management → [User]** — When viewing a user
+- **Settings → User Management → [Group]** — When viewing a group
+
+Breadcrumb segments are links; click them to go back to that level.
+
+{/* IMAGE: Breadcrumbs on Settings desk page → /guides/navigating-the-interface/screenshots/breadcrumbs.png | UI: frontend-app/src/features/settings/components/desks/desk-settings-layout.tsx | Route: /settings/desks/$deskId */}
+
+### Navigating Back Through Breadcrumbs
+
+Click any breadcrumb segment to return to that page. For example, from **Settings → Desks → IT** → Teams → Support, click **Desks** to go back to the desks list, or **Settings** to go to settings home. On some detail pages (e.g., tickets, software), a back arrow uses browser history or falls back to the parent route.
+
+## Working with Employee Selectors
+
+Employee selectors appear in forms when you need to assign someone, add a participant, or select a user (e.g., ticket assignee, approval workflows).
+
+### Using Employee Selector Fields
+
+Employee selector fields use a combobox: click to open a dropdown, or type to search. The field shows the selected employee's avatar and name. Use **Clear** or the X to remove the selection.
+
+### Searching for Employees
+
+Type in the employee selector to search by display name, first/last name, email, job title, department, or location. Results appear as you type. By default, only active employees are shown (depending on the field configuration).
+
+### Selecting Multiple Employees
+
+When a field supports multiple employees (e.g., approval approvers), use the multi-select variant. Selected employees appear as stacked avatars with a "+N" for overflow. Use the dropdown to add or remove people. Some selectors support partial selection (e.g., for approval fallback).
+
+### Understanding Employee Avatars
+
+Avatars show the employee's photo or initials. Size varies by context (sm, md, lg). VIP employees may have a badge. The Harmony AI agent has a special avatar treatment.
+
+### Viewing Employee Hover Cards
+
+Hover over an employee avatar (in selectors, tables, or profiles) to see a hover card. The card shows: name, job title, department, messaging options (Slack, Teams, email), local time, location, office, and phone numbers. VIP badge appears when applicable. Click the profile link to open the employee in People.
+
+### Understanding Employee Status
+
+Employee selectors typically filter to **active** employees only. Inactive or terminated employees may be excluded from search results. The `activeOnly` behavior depends on the field (e.g., ticket assignee vs. approval approvers).
+
+## Using the User Menu
+
+The user menu is in the sidebar footer. It shows your avatar, name, and email.
+
+### Menu Options
+
+- **Admin** — Go to admin (only for Harmony admins)
+- **Self-service portal** — Open the portal in a new tab
+- **Documentation** — Open docs.harmony.io
+- **Theme** — Switch between light and dark
+- **Log out** — Sign out
+
+{/* IMAGE: User menu dropdown in sidebar footer → /guides/navigating-the-interface/screenshots/user-menu.png | UI: frontend-app/src/components/layout/app-sidebar/user-sidebar-menu.tsx | Route: /dashboard */}
+
+<Tip>
+Use the command palette (`Cmd+K`) to reach most areas without using the sidebar.
+</Tip>
+
+<Info>
+Shortcuts like `g>d` mean: press `g`, then press `d`. No need to hold both at the same time.
+</Info>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Getting Started" icon="rocket" href="/guides/getting-started-with-harmony-dashboard" />
+  <Card title="Managing Your Profile" icon="user" href="/guides/managing-your-profile-and-preferences" />
+  <Card title="Managing People" icon="users" href="/guides/managing-people">
+    Employee directory and profiles.
+  </Card>
+</CardGroup>

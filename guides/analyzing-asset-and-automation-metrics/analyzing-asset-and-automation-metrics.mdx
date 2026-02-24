@@ -1,0 +1,150 @@
+---
+title: "Asset & Automation Metrics"
+description: "Understand asset compliance, software status, AI resolution, agent runs, and workflow metrics in the Harmony Dashboard."
+---
+
+<Note>
+**Path:** `/dashboard`
+</Note>
+
+## Asset Metrics
+
+### Understanding Asset Compliance Status
+
+**Asset Breakdown by Compliance** shows how many assets are compliant vs non-compliant (e.g. with MDM or security policies). Use it to monitor compliance across hardware. Click a segment to filter the Assets page by that compliance status.
+
+![Dashboard widget with compliance segments](/guides/analyzing-asset-and-automation-metrics/screenshots/asset-compliance-widget.png)
+
+### Viewing Asset Distribution
+
+These widgets show asset distribution on the default dashboard:
+
+| Widget | What it shows |
+|--------|---------------|
+| **By Vendor** | Assets grouped by manufacturer. Top 9 vendors shown; the rest are grouped as "Others". |
+| **By Model Family** | Assets grouped by device model family (e.g. MacBook Pro, iPhone 14). |
+
+Clicking a segment opens the Assets page filtered by that dimension.
+
+![Asset distribution widgets (By Vendor, By Model Family)](/guides/analyzing-asset-and-automation-metrics/screenshots/asset-distribution-widgets.png)
+
+### Tracking Asset Lifecycle Status
+
+**Asset Breakdown by Status** shows assets by lifecycle status:
+
+- **In stock** — Available, not assigned
+- **Active** — In use
+- **In repair**
+- **EOL planned** — End-of-life planned
+- **EOL grace period** — Past planned EOL, in grace
+- **EOL reached** — Expired
+- **Retired**
+
+![Asset Breakdown by Status widget (lifecycle)](/guides/analyzing-asset-and-automation-metrics/screenshots/asset-status-widget.png)
+
+### Understanding Asset Age Breakdown
+
+**Asset Breakdown by Age** groups assets by purchase date into buckets:
+
+- 0-1 year
+- 2-3 years
+- 4-5 years
+- 6+ years
+- N/A (no purchase date)
+
+Color coding highlights older assets (e.g. orange for 4-5 years, red for 6+). Use it for refresh planning and lifecycle management.
+
+![Asset age breakdown chart](/guides/analyzing-asset-and-automation-metrics/screenshots/asset-age-chart.png)
+
+---
+
+## Software Metrics
+
+### Monitoring Software Status
+
+**Software Breakdown by Status** shows the distribution of applications by status:
+
+- **Approved** — Authorized for use
+- **Discovered** — Detected but not yet approved
+- **Ignored** — Explicitly excluded
+
+Click a segment to filter the Software page by that status.
+
+![Software status donut chart](/guides/analyzing-asset-and-automation-metrics/screenshots/software-status-chart.png)
+
+---
+
+## AI and Automation Metrics
+
+### Tracking AI-Resolved Tickets
+
+**Tickets Resolved by AI** shows how many tickets Harmony AI resolved each day. Counts tickets where the resolver was `harmony_ai` and excludes imported tickets.
+
+### Tracking AI-Created Tickets
+
+**Tickets Created by AI** shows tickets created by AI agents (e.g. auto-created from triage or enrichment). Filters on `created_by_agent: true` and excludes imported tickets.
+
+### Understanding AI Resolution vs Escalation Rates
+
+**AI vs Human Resolution** compares three metrics over time:
+
+- **Resolved by AI** — Tickets resolved by Harmony AI
+- **Escalated to Human** — Tickets escalated to human agents
+- **Deflected by AI** — Conversations resolved without a ticket
+
+Use it to measure deflection and escalation rates.
+
+![AI vs Human Resolution chart (deflection/escalation)](/guides/analyzing-asset-and-automation-metrics/screenshots/ai-vs-human-resolution.png)
+
+### Monitoring Agent Run Status
+
+**Agent Runs by Status** shows outcomes of Harmony AI agent runs over time:
+
+- **Completed** — Successful runs
+- **Failed** — Runs that failed
+- **Cancelled** — Runs that were cancelled
+
+Built-in agents only; custom workflows are excluded.
+
+![Agent Runs by Status widget (Completed/Failed/Cancelled)](/guides/analyzing-asset-and-automation-metrics/screenshots/agent-runs-status.png)
+
+### Analyzing Agent Runs by Name
+
+**Agent Runs by Name** shows run counts by agent name. Displays top 5 agents; others are grouped. Built-in agents only.
+
+### Analyzing Agent Runs by Category
+
+**Agent Runs by Category** shows run counts by agent category over time. Built-in agents only.
+
+### Monitoring Workflow Run Status
+
+**Workflow Runs by Status** shows outcomes of *custom* workflow runs:
+
+- **Completed**
+- **Failed**
+- **Cancelled**
+
+Custom workflows only; built-in agents are excluded.
+
+![Workflow Runs by Status widget](/guides/analyzing-asset-and-automation-metrics/screenshots/workflow-runs-status.png)
+
+### Analyzing Workflow Runs by Name
+
+**Workflow Runs by Name** shows run counts by custom workflow name. Add from the Widget Library.
+
+<Info>
+**Agents vs Workflows:** Agent widgets cover built-in Harmony AI agents. Workflow widgets cover custom workflows you create. Both use the same underlying run events but filter by category.
+</Info>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Asset Management Settings" icon="laptop" href="/guides/configuring-asset-management" />
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details" />
+  <Card title="AI Agents" icon="robot" href="/guides/working-with-ai-agents" />
+  <Card title="Managing Software" icon="grid" href="/guides/managing-software-applications" />
+  <Card title="Service Desk Metrics" icon="bar-chart" href="/guides/analyzing-service-desk-metrics" />
+  <Card title="Working with Widgets" icon="grid-2" href="/guides/working-with-dashboard-widgets" />
+</CardGroup>

@@ -1,2 +1,4 @@
 .playwright-dashboard-profile
+.recordings
+transcriptions
 node_modules

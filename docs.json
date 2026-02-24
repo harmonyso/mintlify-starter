@@ -20,85 +20,85 @@
             "icon": "rocket",
             "pages": [
               "index",
-              "guides/getting-started-with-harmony-dashboard",
-              "guides/navigating-the-interface",
-              "guides/managing-your-profile-and-preferences",
-              "guides/understanding-user-roles-and-permissions"
+              "guides/getting-started-with-harmony-dashboard/getting-started-with-harmony-dashboard",
+              "guides/navigating-the-interface/navigating-the-interface",
+              "guides/managing-your-profile-and-preferences/managing-your-profile-and-preferences",
+              "guides/understanding-user-roles-and-permissions/understanding-user-roles-and-permissions"
             ]
           },
           {
             "group": "Dashboard & Analytics",
             "icon": "chart-bar",
             "pages": [
-              "guides/creating-and-managing-custom-dashboards",
-              "guides/working-with-dashboard-widgets",
-              "guides/analyzing-service-desk-metrics",
-              "guides/analyzing-asset-and-automation-metrics"
+              "guides/creating-and-managing-custom-dashboards/creating-and-managing-custom-dashboards",
+              "guides/working-with-dashboard-widgets/working-with-dashboard-widgets",
+              "guides/analyzing-service-desk-metrics/analyzing-service-desk-metrics",
+              "guides/analyzing-asset-and-automation-metrics/analyzing-asset-and-automation-metrics"
             ]
           },
           {
             "group": "Service Desk & Tickets",
             "icon": "ticket",
             "pages": [
-              "guides/understanding-service-desk-and-managing-tickets",
-              "guides/organizing-tickets-and-table-views"
+              "guides/understanding-service-desk-and-managing-tickets/understanding-service-desk-and-managing-tickets",
+              "guides/organizing-tickets-and-table-views/organizing-tickets-and-table-views"
             ]
           },
           {
             "group": "People Management",
             "icon": "users",
             "pages": [
-              "guides/managing-people"
+              "guides/managing-people/managing-people"
             ]
           },
           {
             "group": "Asset Management",
             "icon": "laptop",
             "pages": [
-              "guides/managing-asset-views-and-details",
-              "guides/managing-asset-organization-and-importing"
+              "guides/managing-asset-views-and-details/managing-asset-views-and-details",
+              "guides/managing-asset-organization-and-importing/managing-asset-organization-and-importing"
             ]
           },
           {
             "group": "Software Management",
             "icon": "box",
             "pages": [
-              "guides/managing-software-applications"
+              "guides/managing-software-applications/managing-software-applications"
             ]
           },
           {
             "group": "Workflows & Automation",
             "icon": "diagram-project",
             "pages": [
-              "guides/building-and-managing-workflows"
+              "guides/building-and-managing-workflows/building-and-managing-workflows"
             ]
           },
           {
             "group": "Portal (End-User View)",
             "icon": "user-circle",
             "pages": [
-              "guides/using-the-harmony-portal"
+              "guides/using-the-harmony-portal/using-the-harmony-portal"
             ]
           },
           {
             "group": "Settings",
             "icon": "cog",
             "pages": [
-              "guides/managing-service-desks-and-teams",
-              "guides/configuring-automation-and-sla",
-              "guides/managing-ticket-settings",
-              "guides/managing-user-management",
-              "guides/configuring-asset-management",
-              "guides/managing-knowledge-base"
+              "guides/managing-service-desks-and-teams/managing-service-desks-and-teams",
+              "guides/configuring-automation-and-sla/configuring-automation-and-sla",
+              "guides/managing-ticket-settings/managing-ticket-settings",
+              "guides/managing-user-management/managing-user-management",
+              "guides/configuring-asset-management/configuring-asset-management",
+              "guides/managing-knowledge-base/managing-knowledge-base"
             ]
           },
           {
             "group": "Integrations",
             "icon": "plug",
             "pages": [
-              "guides/understanding-integrations",
-              "guides/connecting-and-managing-integrations",
-              "guides/configuring-integration-sync-and-credentials"
+              "guides/understanding-integrations/understanding-integrations",
+              "guides/connecting-and-managing-integrations/connecting-and-managing-integrations",
+              "guides/configuring-integration-sync-and-credentials/configuring-integration-sync-and-credentials"
             ]
           }
         ]
@@ -111,8 +111,8 @@
             "group": "Getting started",
             "icon": "rocket",
             "pages": [
-              "guides/working-with-ai-agents",
-              "guides/configuring-ai-agents"
+              "guides/working-with-ai-agents/working-with-ai-agents",
+              "guides/configuring-ai-agents/configuring-ai-agents"
             ]
           },
           {

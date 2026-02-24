@@ -1,0 +1,163 @@
+---
+title: "Managing People"
+description: "Learn how to use the People directory to search, filter, view employee profiles, manage accounts, and export data."
+---
+
+<Note>
+**Path:** `/people`
+</Note>
+
+## Understanding the People Directory
+
+The People directory lists all employees in your organization. It requires admin access. Open **People** from the sidebar to view the list at `/people`. Each row shows the employee name, avatar, status, department, location, source, type, employment dates, last login, and related assets and software.
+
+### Navigating the People List
+
+The People page displays a data table with sortable columns. Click a row to open that employee's profile. Use the toolbar for search, filters, refresh, and export. The table supports pagination with configurable page size (10–200 rows).
+
+{/* IMAGE: People data table with toolbar and filters → /guides/managing-people/screenshots/people-list.png | UI: frontend-app/src/routes/people/index.tsx | Route: /people */}
+
+### Searching for Employees
+
+Use the **Search** input in the toolbar. Search matches display name, work email, department, location, and job title. Results update as you type (debounced). Search is combined with active filters.
+
+### Filtering Employees
+
+Use the filter popover to apply one or more filters. Filters use AND logic. Available filters:
+
+| Filter | Description |
+|--------|-------------|
+| **Status** | Employment status: Active, Terminated, On leave, Pending, Other |
+| **Type** | Employee type: Person, Bot, Service account |
+| **Department** | Department name (values from data) |
+| **Location** | Location (values from data) |
+| **Source** | Integration source (Okta, Microsoft Entra, etc.) |
+| **IdP Status** | Identity provider status (values from data) |
+| **VIP Reporter** | Quick filter for VIP reporters (hidden column) |
+
+Clear individual filters or use **Reset filters** to remove all. By default, the view shows active employees of type Person.
+
+### Sorting the People List
+
+Click column headers to sort. Supported sort fields include display name, status, IdP status, department, location, source, type, start date, last login, related assets, related devices, and software count. Toggle between ascending and descending.
+
+### Understanding Employee Avatars
+
+In the People list, each employee appears with an avatar (photo or initials), display name, and secondary text (job title or email). VIP employees show a VIP badge on the avatar. Service accounts display a settings icon instead of a photo.
+
+### Using Employee Selector Fields
+
+Elsewhere in Harmony (e.g., ticket assignee, reporter, asset assignment), employee selector fields let you search and pick employees. When you hover over a selected employee in these fields, a hover card shows name, email, department, location, and links to message via Slack or Teams when available.
+
+---
+
+## Viewing Employee Details
+
+Click an employee row to open their profile at `/people/$employeeId`. The profile shows the header ( avatar, name, status, type, source, action buttons) and an Overview section with work details, contact details, assigned assets, software, and related tickets.
+
+{/* IMAGE: Employee profile with Overview tab → /guides/managing-people/screenshots/employee-profile.png | UI: frontend-app/src/routes/people/$employeeId.tsx | Route: /people/$employeeId */}
+
+### Understanding Employee Profiles
+
+The employee header includes:
+
+- Avatar with VIP badge (if applicable)
+- Display name and employment status badge
+- Type (Person, Bot, Service account) — editable via dropdown
+- Source(s) — links to HRIS/IdP profile when available
+- **Reset Password** — only for Okta test tenants
+- **Manage Groups** — only for Okta test tenants with Okta-sourced users
+- **VIP** toggle — mark or remove VIP status (not for service accounts)
+
+### Viewing Employee Profile Information
+
+The **Overview** tab includes:
+
+**Work Details**
+
+- Job title, Department
+- Direct manager (with avatar and hover card), Employment contract
+- Start date, End date (when terminated), Tenure
+
+**Contact Details**
+
+- Email address, Phone numbers
+- Location (with office name when available)
+- IdP Status
+- Last login (timestamp of last SSO login)
+
+### Viewing Employee Assets
+
+The **Assigned assets** section lists devices and non-device assets assigned to the employee. Asset cells support hover previews showing name, type, status, and compliance. Use pagination when there are many assets.
+
+### Viewing Employee Software
+
+The **Assigned software** section lists software applications assigned to the employee. Use the source and status filters to narrow results. Pagination is available.
+
+### Viewing Employee Tickets
+
+The **Related tickets** section lists tickets associated with the employee (as reporter, assignee, or otherwise). You can filter and search within the tickets list.
+
+### Understanding Employee VIP Status
+
+VIP employees appear with a VIP badge in the People list and on their profile. Use the gem icon button in the employee header to mark or remove VIP status. VIP status is used to prioritize reporters in the service desk. Service accounts cannot be marked as VIP.
+
+---
+
+## Managing Employee Accounts
+
+### Resetting Employee Passwords
+
+**Reset Password** is shown only for Okta test tenants. Click the button to send an "Email Password Reset" workflow to the employee. The employee receives an email with instructions to reset their password.
+
+### Managing Employee Groups
+
+**Manage Groups** is shown only when the tenant is a test tenant and the employee has an Okta source. Click the button to open the Manage Groups dialog.
+
+{/* IMAGE: Manage Groups dialog with group selector → /guides/managing-people/screenshots/manage-groups-dialog.png | UI: frontend-app/src/features/people/components/employee-details/manage-groups-dialog.tsx | Route: /people/$employeeId */}
+
+### Assigning Users to Groups
+
+In the Manage Groups dialog, use the group selector to add the user to Okta groups. Search and select groups, then add them. The user will be a member of the selected groups in Okta.
+
+### Understanding Group Assignments
+
+- Only Okta groups can be managed from Harmony.
+- System groups such as **Okta Administrators** and **Everyone** cannot be removed; they are shown for reference only.
+- Group membership is synchronized with Okta.
+
+### Removing Users from Groups
+
+In the Manage Groups dialog, remove the user from a group by clicking the remove action next to that group. System groups (Okta Administrators, Everyone) cannot be removed.
+
+---
+
+## Exporting People Data
+
+### Exporting Employee Data to CSV
+
+Click **Export** in the People toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-people-export-YYYY-MM-DD.csv`. Export includes all employees that match the filters; large exports may take a moment.
+
+{/* IMAGE: People toolbar with Export button → /guides/managing-people/screenshots/people-toolbar-export.png | UI: frontend-app/src/routes/people/index.tsx | Route: /people */}
+
+### Understanding People Export Fields
+
+The CSV includes columns such as Display Name, Employee ID, First Name, Last Name, Work Email, Job Title, Manager, Department, Location, Employment Status, Employee Type, IdP Status, Sources, Start Date, Last Login, Related Devices, Related Assets, and Related Apps. Column visibility and order from the table are respected when possible.
+
+### Filtering People for Export
+
+Apply filters before exporting to limit which employees are included. Supported export filters: search (display name, email, department, location, job title), department, location, employment status, type, sources, IdP status. Sort order is also applied to the export.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Asset Views & Details" icon="laptop" href="/guides/managing-asset-views-and-details">
+    Assign assets to employees and view asset details.
+  </Card>
+  <Card title="Managing Software" icon="grid" href="/guides/managing-software-applications">
+    View software assigned to employees and manage applications.
+  </Card>
+  <Card title="Service Desk & Tickets" icon="ticket" href="/guides/understanding-service-desk-and-managing-tickets">
+    Create and manage tickets linked to employees.
+  </Card>
+</CardGroup>

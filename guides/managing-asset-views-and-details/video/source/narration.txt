@@ -1,0 +1,9 @@
+Switch to Warehouse view to see assets aggregated by model, vendor, and type.
+
+Use quick filters for Unassigned assets, end of life items, MacOS, Windows, or Phones and Tablets.
+
+Click an asset row to open its detail page with Overview, Specifications, and related software.
+
+Change status to Retired to record asset retirement.
+
+Open the Activity log to see asset history.
