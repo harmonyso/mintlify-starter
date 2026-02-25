@@ -55,3 +55,11 @@ export const targets = [
     },
   },
 ];
+
+export const videoConfig = {
+  path: "settings/asset-management",
+  preload: async (page) => {
+    await page.waitForLoadState("networkidle");
+    await new Promise((r) => setTimeout(r, 2000));
+  },
+};

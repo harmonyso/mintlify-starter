@@ -1,0 +1,1 @@
+{"recordedDurationMs":19772,"steps":[{"index":0,"startMs":7,"selector":"table:has(th:has-text(\"Department\")), div:has(table:has(th:has-text(\"Status\")))"},{"index":1,"startMs":5679}]}

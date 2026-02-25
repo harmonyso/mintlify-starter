@@ -1,53 +1,64 @@
 /**
- * Aggregates all guide screenshot targets.
- * Guide files now live at: guides/{guide}/guide.mjs
+ * Dynamically discovers all guide.mjs files and aggregates their targets.
+ * No manual registration needed — drop a guide.mjs into any guide folder and
+ * it is automatically picked up on the next run.
  */
 
-import { targets as analyzingAssetAndAutomationMetricsTargets } from "../../analyzing-asset-and-automation-metrics/guide.mjs";
-import { targets as analyzingServiceDeskMetricsTargets } from "../../analyzing-service-desk-metrics/guide.mjs";
-import { targets as configuringAiAgentsTargets } from "../../configuring-ai-agents/guide.mjs";
-import { targets as configuringAssetManagementTargets } from "../../configuring-asset-management/guide.mjs";
-import { targets as configuringAutomationAndSlaTargets } from "../../configuring-automation-and-sla/guide.mjs";
-import { targets as configuringIntegrationSyncAndCredentialsTargets } from "../../configuring-integration-sync-and-credentials/guide.mjs";
-import { targets as connectingAndManagingIntegrationsTargets } from "../../connecting-and-managing-integrations/guide.mjs";
-import { targets as creatingAndManagingCustomDashboardsTargets } from "../../creating-and-managing-custom-dashboards/guide.mjs";
-import { targets as gettingStartedWithHarmonyDashboardTargets } from "../../getting-started-with-harmony-dashboard/guide.mjs";
-import { targets as managingAssetOrganizationAndImportingTargets } from "../../managing-asset-organization-and-importing/guide.mjs";
-import { targets as managingAssetViewsAndDetailsTargets } from "../../managing-asset-views-and-details/guide.mjs";
-import { targets as managingKnowledgeBaseTargets } from "../../managing-knowledge-base/guide.mjs";
+import { readdir } from "fs/promises";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
-export const ALL_GUIDE_NAMES = [
-  "analyzing-asset-and-automation-metrics",
-  "analyzing-service-desk-metrics",
-  "configuring-ai-agents",
-  "configuring-asset-management",
-  "configuring-automation-and-sla",
-  "configuring-integration-sync-and-credentials",
-  "connecting-and-managing-integrations",
-  "creating-and-managing-custom-dashboards",
-  "getting-started-with-harmony-dashboard",
-  "managing-asset-organization-and-importing",
-  "managing-asset-views-and-details",
-  "managing-knowledge-base",
-];
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const GUIDES_ROOT = join(__dirname, "../../");
+const SKIP_DIRS = new Set(["_utilities", "_shared", "agents"]);
 
-export function getAllTargets(selectedGuides = null) {
-  const all = [
-    ...analyzingAssetAndAutomationMetricsTargets,
-    ...analyzingServiceDeskMetricsTargets,
-    ...configuringAiAgentsTargets,
-    ...configuringAssetManagementTargets,
-    ...configuringAutomationAndSlaTargets,
-    ...configuringIntegrationSyncAndCredentialsTargets,
-    ...connectingAndManagingIntegrationsTargets,
-    ...creatingAndManagingCustomDashboardsTargets,
-    ...gettingStartedWithHarmonyDashboardTargets,
-    ...managingAssetOrganizationAndImportingTargets,
-    ...managingAssetViewsAndDetailsTargets,
-    ...managingKnowledgeBaseTargets,
-  ];
-  if (selectedGuides?.length) {
-    return all.filter((t) => selectedGuides.includes(t.dir));
+async function discoverGuideNames() {
+  const entries = await readdir(GUIDES_ROOT, { withFileTypes: true });
+  return entries
+    .filter((e) => e.isDirectory() && !SKIP_DIRS.has(e.name) && !e.name.startsWith("."))
+    .map((e) => e.name)
+    .sort();
+}
+
+let _cache = null;
+
+async function load() {
+  if (_cache) return _cache;
+
+  const names = await discoverGuideNames();
+  const allTargets = [];
+  const validNames = [];
+
+  for (const name of names) {
+    try {
+      const mod = await import(`${GUIDES_ROOT}${name}/guide.mjs`);
+      if (Array.isArray(mod.targets) && mod.targets.length > 0) {
+        allTargets.push(...mod.targets);
+        validNames.push(name);
+      }
+    } catch {
+      // No guide.mjs or no targets — skip silently
+    }
   }
-  return all;
+
+  _cache = { allTargets, validNames };
+  return _cache;
+}
+
+export async function getAllTargets(selectedGuides = null) {
+  const { allTargets, validNames } = await load();
+  if (selectedGuides?.length) {
+    const invalid = selectedGuides.filter((g) => !validNames.includes(g));
+    if (invalid.length) {
+      console.log(`\n⚠ No targets for guides: ${invalid.join(", ")}`);
+      console.log(`  Valid: ${validNames.join(", ")}\n`);
+    }
+    return allTargets.filter((t) => selectedGuides.includes(t.dir));
+  }
+  return allTargets;
+}
+
+export async function getAllGuideNames() {
+  const { validNames } = await load();
+  return validNames;
 }

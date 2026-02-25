@@ -47,9 +47,9 @@ Change status to Retired to
 record asset retirement
 
 13
-00:00:23,30 --> 00:00:24,53
+00:00:25,65 --> 00:00:26,87
 Open the Activity log to
 
 14
-00:00:24,68 --> 00:00:25,54
+00:00:27,02 --> 00:00:27,88
 see asset history

@@ -1,0 +1,17 @@
+Asset Breakdown by Compliance shows how many assets meet your M D M and security policies. Click a segment to filter the Assets page by that compliance status.
+
+Asset Breakdown by Vendor groups assets by manufacturer. The top nine vendors are shown individually; all others are grouped together.
+
+Asset Breakdown by Model Family groups devices by model family, such as MacBook Pro or iPhone. Click any segment to filter assets by that model.
+
+Asset Breakdown by Status shows assets across their full lifecycle: In Stock, Active, In Repair, end of life planned, end of life grace period, end of life reached, and Retired.
+
+Asset Breakdown by Age groups assets by purchase date into buckets. Color coding highlights aging hardware to help with refresh planning.
+
+Software Breakdown by Status shows your application inventory split into Approved, Discovered, and Ignored. Click a segment to filter the Software page.
+
+AI versus Human Resolution compares tickets resolved by Harmony AI, escalated to a human, and deflected before a ticket was created — helping you measure automation effectiveness.
+
+Agent Runs by Status tracks outcomes of built-in Harmony AI agent runs: Completed, Failed, and Cancelled.
+
+Workflow Runs by Status shows outcomes for your custom workflows. Use it alongside agent metrics to get a complete picture of automation health.

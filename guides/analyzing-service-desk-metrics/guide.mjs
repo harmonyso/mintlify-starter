@@ -11,3 +11,11 @@ export const targets = [
   { title: "Ticket Breakdown by Priority", filename: "breakdown-priority.png", dir },
   { title: "User satisfaction score", filename: "user-satisfaction.png", dir },
 ];
+
+export const videoConfig = {
+  path: "tickets/desk/all",
+  preload: async (page) => {
+    await page.waitForLoadState("networkidle");
+    await new Promise((r) => setTimeout(r, 2000));
+  },
+};

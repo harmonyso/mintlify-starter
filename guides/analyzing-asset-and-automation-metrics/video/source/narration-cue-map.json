@@ -1,0 +1,268 @@
+{
+  "cues": [
+    {
+      "index": 0,
+      "startMs": 137,
+      "endMs": 1887,
+      "text": "Asset Breakdown by Compliance shows",
+      "stepIndex": 0
+    },
+    {
+      "index": 1,
+      "startMs": 2037,
+      "endMs": 3225,
+      "text": "how many assets meet your",
+      "stepIndex": 0
+    },
+    {
+      "index": 2,
+      "startMs": 3375,
+      "endMs": 4662,
+      "text": "M D M and security",
+      "stepIndex": 0
+    },
+    {
+      "index": 3,
+      "startMs": 4812,
+      "endMs": 6780,
+      "text": "policies Click a segment to",
+      "stepIndex": 0
+    },
+    {
+      "index": 4,
+      "startMs": 6930,
+      "endMs": 8305,
+      "text": "filter the Assets page by",
+      "stepIndex": 0
+    },
+    {
+      "index": 5,
+      "startMs": 8455,
+      "endMs": 9430,
+      "text": "that compliance status",
+      "stepIndex": 0
+    },
+    {
+      "index": 6,
+      "startMs": 9913,
+      "endMs": 11501,
+      "text": "Asset Breakdown by Age groups",
+      "stepIndex": 1
+    },
+    {
+      "index": 7,
+      "startMs": 11651,
+      "endMs": 13001,
+      "text": "assets by purchase date into",
+      "stepIndex": 1
+    },
+    {
+      "index": 8,
+      "startMs": 13151,
+      "endMs": 15793,
+      "text": "buckets Color coding highlights aging",
+      "stepIndex": 1
+    },
+    {
+      "index": 9,
+      "startMs": 15943,
+      "endMs": 17168,
+      "text": "hardware to help with refresh",
+      "stepIndex": 2
+    },
+    {
+      "index": 10,
+      "startMs": 17318,
+      "endMs": 17918,
+      "text": "planning",
+      "stepIndex": 2
+    },
+    {
+      "index": 11,
+      "startMs": 18225,
+      "endMs": 19900,
+      "text": "Software Breakdown by Status shows",
+      "stepIndex": 2
+    },
+    {
+      "index": 12,
+      "startMs": 20050,
+      "endMs": 21938,
+      "text": "your application inventory split into",
+      "stepIndex": 3
+    },
+    {
+      "index": 13,
+      "startMs": 22088,
+      "endMs": 24730,
+      "text": "Approved Discovered and Ignored Click",
+      "stepIndex": 3
+    },
+    {
+      "index": 14,
+      "startMs": 24880,
+      "endMs": 25818,
+      "text": "a segment to filter the",
+      "stepIndex": 4
+    },
+    {
+      "index": 15,
+      "startMs": 25968,
+      "endMs": 26718,
+      "text": "Software page",
+      "stepIndex": 4
+    },
+    {
+      "index": 16,
+      "startMs": 27907,
+      "endMs": 29882,
+      "text": "AI versus Human Resolution compares",
+      "stepIndex": 4
+    },
+    {
+      "index": 17,
+      "startMs": 30032,
+      "endMs": 32007,
+      "text": "tickets resolved by Harmony AI",
+      "stepIndex": 5
+    },
+    {
+      "index": 18,
+      "startMs": 32157,
+      "endMs": 33632,
+      "text": "escalated to a human and",
+      "stepIndex": 5
+    },
+    {
+      "index": 19,
+      "startMs": 33782,
+      "endMs": 35007,
+      "text": "deflected before a ticket was",
+      "stepIndex": 6
+    },
+    {
+      "index": 20,
+      "startMs": 35157,
+      "endMs": 37245,
+      "text": "created helping you measure automation",
+      "stepIndex": 6
+    },
+    {
+      "index": 21,
+      "startMs": 37395,
+      "endMs": 37995,
+      "text": "effectiveness",
+      "stepIndex": 6
+    },
+    {
+      "index": 22,
+      "startMs": 39387,
+      "endMs": 40812,
+      "text": "Agent Runs by Status tracks",
+      "stepIndex": 7
+    },
+    {
+      "index": 23,
+      "startMs": 40962,
+      "endMs": 42800,
+      "text": "outcomes of built-in Harmony AI",
+      "stepIndex": 7
+    },
+    {
+      "index": 24,
+      "startMs": 42950,
+      "endMs": 45300,
+      "text": "agent runs Completed Failed and",
+      "stepIndex": 7
+    },
+    {
+      "index": 25,
+      "startMs": 45450,
+      "endMs": 46050,
+      "text": "Cancelled",
+      "stepIndex": 8
+    },
+    {
+      "index": 26,
+      "startMs": 46917,
+      "endMs": 48517,
+      "text": "Workflow Runs by Status shows",
+      "stepIndex": 8
+    },
+    {
+      "index": 27,
+      "startMs": 48667,
+      "endMs": 50959,
+      "text": "outcomes for your custom workflows",
+      "stepIndex": 8
+    },
+    {
+      "index": 28,
+      "startMs": 51109,
+      "endMs": 52759,
+      "text": "Use it alongside agent metrics",
+      "stepIndex": 8
+    },
+    {
+      "index": 29,
+      "startMs": 52909,
+      "endMs": 53884,
+      "text": "to get a complete picture",
+      "stepIndex": -1
+    },
+    {
+      "index": 30,
+      "startMs": 54034,
+      "endMs": 55047,
+      "text": "of automation health",
+      "stepIndex": -1
+    }
+  ],
+  "stepRanges": [
+    {
+      "stepIndex": 0,
+      "startMs": 8,
+      "endMs": 8868
+    },
+    {
+      "stepIndex": 1,
+      "startMs": 8868,
+      "endMs": 13794
+    },
+    {
+      "stepIndex": 2,
+      "startMs": 13794,
+      "endMs": 18727
+    },
+    {
+      "stepIndex": 3,
+      "startMs": 18727,
+      "endMs": 23660
+    },
+    {
+      "stepIndex": 4,
+      "startMs": 23660,
+      "endMs": 28595
+    },
+    {
+      "stepIndex": 5,
+      "startMs": 28595,
+      "endMs": 33528
+    },
+    {
+      "stepIndex": 6,
+      "startMs": 33528,
+      "endMs": 38471
+    },
+    {
+      "stepIndex": 7,
+      "startMs": 38471,
+      "endMs": 43395
+    },
+    {
+      "stepIndex": 8,
+      "startMs": 43395,
+      "endMs": 51603
+    }
+  ]
+}

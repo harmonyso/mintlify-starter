@@ -25,10 +25,10 @@ import { mkdir } from "fs/promises";
 import { join } from "path";
 
 import { exists, hideImpersonationBanner, injectHideImpersonationBanner, guideScreenshotsDir, PROFILE_DIR, BASE_URL, DASHBOARD_PATH, SYSTEM_DASHBOARD_PATH } from "../screenshot-shared.mjs";
-import { getAllTargets, ALL_GUIDE_NAMES } from "./guides-index.mjs";
+import { getAllTargets, getAllGuideNames } from "./guides-index.mjs";
 
 const forceOverwrite = process.argv.includes("--force");
-const useHeaded = process.argv.includes("--headed");
+const useHeadless = process.argv.includes("--headless");
 const needsLogin = process.argv.includes("--login");
 const guidesArg = process.argv.find((a) => a.startsWith("--guides="));
 const selectedGuides = guidesArg ? guidesArg.replace("--guides=", "").split(",").map((s) => s.trim()) : null;
@@ -51,6 +51,14 @@ async function captureTarget(target, page, captured, skipped) {
   if (target.type === "region") {
     await page.screenshot({ path: filepath, clip: target.clip });
     console.log(`✓ ${dir}/${filename}`);
+    captured.add(key);
+  } else if (target.type === "fullpage") {
+    if (typeof target.prepare === "function") {
+      await target.prepare(page);
+      await hideImpersonationBanner(page);
+    }
+    await page.screenshot({ path: filepath, fullPage: true });
+    console.log(`✓ ${dir}/${filename} (full page)`);
     captured.add(key);
   } else if (target.type === "element") {
     if (typeof target.prepare === "function") {
@@ -112,7 +120,7 @@ async function main() {
     console.log("🔐 Login mode: Browser will open. Log in to Harmony, then close the browser.\n");
   }
 
-  const headless = !needsLogin && !useHeaded;
+  const headless = !needsLogin && useHeadless;
   let context;
   try {
     context = await chromium.launchPersistentContext(PROFILE_DIR, {
@@ -159,7 +167,7 @@ async function main() {
     } else if (needsLogin) {
       console.log("✓ Already logged in. Profile saved. You can close the browser.");
       await hideImpersonationBanner(page);
-      await new Promise((r) => setTimeout(r, 5000));
+      await new Promise((r) => setTimeout(r, 60000));
     }
 
     if (needsLogin) {
@@ -168,12 +176,7 @@ async function main() {
 
     const captured = new Set();
     const skipped = [];
-    const targets = getAllTargets(selectedGuides);
-
-    if (selectedGuides?.length && targets.length === 0) {
-      console.log(`\n⚠ No targets for guides: ${selectedGuides.join(", ")}`);
-      console.log(`  Valid: ${ALL_GUIDE_NAMES.join(", ")}\n`);
-    }
+    const targets = await getAllTargets(selectedGuides);
 
     const byPath = {};
     for (const t of targets) {
@@ -182,7 +185,12 @@ async function main() {
       byPath[p].push(t);
     }
 
-    const pathOrder = [SYSTEM_DASHBOARD_PATH, "agents", "assets", "settings/asset-management", "settings/desks", "settings/integrations", "settings/knowledge-base"];
+    // Paths with special pre-navigation logic run first; all others follow generically.
+    const SPECIAL_PATHS = new Set([SYSTEM_DASHBOARD_PATH, "agents", "assets", "settings/asset-management", "settings/desks", "settings/integrations", "settings/knowledge-base"]);
+    const pathOrder = [
+      ...Object.keys(byPath).filter((p) => SPECIAL_PATHS.has(p)),
+      ...Object.keys(byPath).filter((p) => !SPECIAL_PATHS.has(p)),
+    ];
 
     for (const path of pathOrder) {
       const pathTargets = byPath[path];
@@ -191,14 +199,13 @@ async function main() {
       if (path === "settings/integrations") {
         console.log(`\nNavigating to /settings/integrations...`);
         await page.goto(`${BASE_URL}/settings/integrations`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
         await new Promise((r) => setTimeout(r, 4000));
         await hideImpersonationBanner(page);
       } else if (path === "settings/desks") {
         console.log(`\nNavigating to /settings/desks...`);
         await page.goto(`${BASE_URL}/settings/desks`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
-        await new Promise((r) => setTimeout(r, 3000));
+        await page.waitForSelector("table tbody tr, button:has-text('Create desk')", { timeout: 15000 }).catch(() => {});
+        await new Promise((r) => setTimeout(r, 2000));
         const firstDesk = page.locator("table tbody tr.cursor-pointer").first();
         if (await firstDesk.isVisible().catch(() => false)) {
           await firstDesk.click();
@@ -209,25 +216,21 @@ async function main() {
       } else if (path === "assets") {
         console.log(`\nNavigating to /assets...`);
         await page.goto(`${BASE_URL}/assets`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
         await new Promise((r) => setTimeout(r, 4000));
         await hideImpersonationBanner(page);
       } else if (path === "settings/asset-management") {
         console.log(`\nNavigating to /settings/asset-management...`);
         await page.goto(`${BASE_URL}/settings/asset-management`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
         await new Promise((r) => setTimeout(r, 4000));
         await hideImpersonationBanner(page);
       } else if (path === "settings/knowledge-base") {
         console.log(`\nNavigating to /settings/knowledge-base...`);
         await page.goto(`${BASE_URL}/settings/knowledge-base`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
         await new Promise((r) => setTimeout(r, 4000));
         await hideImpersonationBanner(page);
       } else if (path === "agents") {
         console.log(`\nNavigating to /agents...`);
         await page.goto(`${BASE_URL}/agents`, { waitUntil: "domcontentloaded", timeout: 30000 });
-        await page.waitForLoadState("networkidle");
         await new Promise((r) => setTimeout(r, 3000));
         await hideImpersonationBanner(page);
         let firstAgent = page.locator('a[href*="/agents/"]').first();
@@ -250,11 +253,10 @@ async function main() {
         await hideImpersonationBanner(page);
       } else {
         console.log(`\nNavigating to ${path}...`);
-        await page.goto(`${BASE_URL}${path}`, { waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.goto(`${BASE_URL}/${path}`, { waitUntil: "domcontentloaded", timeout: 30000 });
         await new Promise((r) => setTimeout(r, 5000));
         if (path === SYSTEM_DASHBOARD_PATH) {
           await page.waitForSelector(".dashboard-widget", { timeout: 10000 });
-          await page.waitForLoadState("networkidle");
           await new Promise((r) => setTimeout(r, 5000));
           await hideImpersonationBanner(page);
         }

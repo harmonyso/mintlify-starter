@@ -40,3 +40,11 @@ export const targets = [
     },
   },
 ];
+
+export const videoConfig = {
+  path: "agents",
+  preload: async (page) => {
+    await page.waitForLoadState("networkidle");
+    await new Promise((r) => setTimeout(r, 2000));
+  },
+};

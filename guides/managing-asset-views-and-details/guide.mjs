@@ -101,7 +101,7 @@ export const targets = [
       await p.waitForSelector('[id="overview"]', { state: "visible", timeout: 5000 });
       await p.locator('[id="overview"]').first().scrollIntoViewIfNeeded();
       // Wait for card content to populate (cards start empty while data loads)
-      await p.waitForSelector('[id="overview"] [class*="card"] *:not(:empty), [id="overview"] dl dt, [id="overview"] [data-field]', { state: "visible", timeout: 8000 }).catch(() => {});
+      await p.waitForSelector('[id="overview"] [class*="card"] *:not(:empty), [id="overview"] dl dt, [id="overview"] [data-field]', { state: "visible", timeout: 8000 }).catch(() => { });
       await new Promise((r) => setTimeout(r, 1500));
     },
   },
@@ -184,7 +184,7 @@ export const videoConfig = {
   path: "assets",
   /** Runs before recording starts to ensure page is in list view, not warehouse view. */
   preload: async (page) => {
-    await page.waitForSelector('table tbody tr[data-row-index], button:has-text("Import assets")', { state: "visible", timeout: 10000 });
+    await page.waitForSelector('table tbody tr[data-row-index], button:has-text("Import assets")', { state: "visible", timeout: 20000 });
     const listBtn = page.locator('[data-slot="toggle-group"] button').first();
     if (await listBtn.isVisible().catch(() => false)) {
       const isWarehouseActive = await page.locator('[aria-label="Warehouse view"][data-state="on"], [aria-label="Warehouse view"][aria-pressed="true"]').isVisible().catch(() => false);

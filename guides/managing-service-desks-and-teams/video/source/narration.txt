@@ -1,0 +1,13 @@
+The Desks list shows all your service desks. Click Create Desk to set up a new one from scratch or from a template.
+
+Each desk can have multiple teams. Create teams with their own timezone and description for intelligent ticket routing.
+
+The Members tab shows all desk members. Add members here before assigning them to teams.
+
+Team routing determines how tickets are distributed — by timezone match or by AI-based description matching.
+
+Working hours define S L A business hours for each desk and team. Choose 24 by 7 or configure custom schedules.
+
+Desk automation settings control assignment method, status transitions, auto-close, and survey triggers.
+
+Delete a desk by confirming the desk name in the deletion dialog. This permanently removes the desk and all its tickets.

@@ -1,0 +1,264 @@
+{
+  "cues": [
+    {
+      "index": 0,
+      "startMs": 62,
+      "endMs": 1287,
+      "text": "The Desks list shows all",
+      "stepIndex": 0,
+      "selector": "main:has(h4:has-text(\"Desks\")):has(button:has-text(\"Create desk\"))"
+    },
+    {
+      "index": 1,
+      "startMs": 1437,
+      "endMs": 3542,
+      "text": "your service desks Click Create",
+      "stepIndex": 0,
+      "selector": "main:has(h4:has-text(\"Desks\")):has(button:has-text(\"Create desk\"))"
+    },
+    {
+      "index": 2,
+      "startMs": 3692,
+      "endMs": 4480,
+      "text": "Desk to set up a",
+      "stepIndex": 0,
+      "selector": "main:has(h4:has-text(\"Desks\")):has(button:has-text(\"Create desk\"))"
+    },
+    {
+      "index": 3,
+      "startMs": 4630,
+      "endMs": 5742,
+      "text": "new one from scratch or",
+      "stepIndex": 0,
+      "selector": "main:has(h4:has-text(\"Desks\")):has(button:has-text(\"Create desk\"))"
+    },
+    {
+      "index": 4,
+      "startMs": 5892,
+      "endMs": 6492,
+      "text": "from a template",
+      "stepIndex": 1,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "index": 5,
+      "startMs": 7129,
+      "endMs": 8404,
+      "text": "Each desk can have multiple",
+      "stepIndex": 1,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "index": 6,
+      "startMs": 8554,
+      "endMs": 10384,
+      "text": "teams Create teams with their",
+      "stepIndex": 1,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "index": 7,
+      "startMs": 10534,
+      "endMs": 12109,
+      "text": "own timezone and description for",
+      "stepIndex": 1,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "index": 8,
+      "startMs": 12259,
+      "endMs": 13447,
+      "text": "intelligent ticket routing",
+      "stepIndex": 1,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "index": 9,
+      "startMs": 13926,
+      "endMs": 15176,
+      "text": "The Members tab shows all",
+      "stepIndex": 2
+    },
+    {
+      "index": 10,
+      "startMs": 15326,
+      "endMs": 17444,
+      "text": "desk members Add members here",
+      "stepIndex": 2
+    },
+    {
+      "index": 11,
+      "startMs": 17594,
+      "endMs": 18844,
+      "text": "before assigning them to teams",
+      "stepIndex": 2
+    },
+    {
+      "index": 12,
+      "startMs": 20584,
+      "endMs": 22084,
+      "text": "Team routing determines how tickets",
+      "stepIndex": 3,
+      "selector": "[role=\"alertdialog\"]"
+    },
+    {
+      "index": 13,
+      "startMs": 22234,
+      "endMs": 24196,
+      "text": "are distributed by timezone match",
+      "stepIndex": 3,
+      "selector": "[role=\"alertdialog\"]"
+    },
+    {
+      "index": 14,
+      "startMs": 24346,
+      "endMs": 25871,
+      "text": "or by AI based description",
+      "stepIndex": 3,
+      "selector": "[role=\"alertdialog\"]"
+    },
+    {
+      "index": 15,
+      "startMs": 26021,
+      "endMs": 26621,
+      "text": "matching",
+      "stepIndex": 3,
+      "selector": "[role=\"alertdialog\"]"
+    },
+    {
+      "index": 16,
+      "startMs": 27828,
+      "endMs": 29178,
+      "text": "Working hours define S L",
+      "stepIndex": 4
+    },
+    {
+      "index": 17,
+      "startMs": 29328,
+      "endMs": 30553,
+      "text": "A business hours for each",
+      "stepIndex": 4
+    },
+    {
+      "index": 18,
+      "startMs": 30703,
+      "endMs": 32845,
+      "text": "desk and team Choose 24",
+      "stepIndex": 4
+    },
+    {
+      "index": 19,
+      "startMs": 32995,
+      "endMs": 34408,
+      "text": "by 7 or configure custom",
+      "stepIndex": 4
+    },
+    {
+      "index": 20,
+      "startMs": 34558,
+      "endMs": 35158,
+      "text": "schedules",
+      "stepIndex": 4
+    },
+    {
+      "index": 21,
+      "startMs": 37873,
+      "endMs": 39985,
+      "text": "Desk automation settings control assignment",
+      "stepIndex": 5,
+      "selector": "[role=\"dialog\"]"
+    },
+    {
+      "index": 22,
+      "startMs": 40135,
+      "endMs": 42910,
+      "text": "method status transitions auto-close and",
+      "stepIndex": 5,
+      "selector": "[role=\"dialog\"]"
+    },
+    {
+      "index": 23,
+      "startMs": 43060,
+      "endMs": 43660,
+      "text": "survey triggers",
+      "stepIndex": 5,
+      "selector": "[role=\"dialog\"]"
+    },
+    {
+      "index": 24,
+      "startMs": 48787,
+      "endMs": 50087,
+      "text": "Delete a desk by confirming",
+      "stepIndex": 6
+    },
+    {
+      "index": 25,
+      "startMs": 50237,
+      "endMs": 50962,
+      "text": "the desk name in the",
+      "stepIndex": 6
+    },
+    {
+      "index": 26,
+      "startMs": 51112,
+      "endMs": 53792,
+      "text": "deletion dialog This permanently removes",
+      "stepIndex": 6
+    },
+    {
+      "index": 27,
+      "startMs": 53942,
+      "endMs": 54867,
+      "text": "the desk and all its",
+      "stepIndex": 6
+    },
+    {
+      "index": 28,
+      "startMs": 55017,
+      "endMs": 55617,
+      "text": "tickets",
+      "stepIndex": -1
+    }
+  ],
+  "stepRanges": [
+    {
+      "stepIndex": 0,
+      "startMs": 1,
+      "endMs": 5455,
+      "selector": "main:has(h4:has-text(\"Desks\")):has(button:has-text(\"Create desk\"))"
+    },
+    {
+      "stepIndex": 1,
+      "startMs": 5455,
+      "endMs": 12545,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Create New Desk\"))"
+    },
+    {
+      "stepIndex": 2,
+      "startMs": 12545,
+      "endMs": 19140
+    },
+    {
+      "stepIndex": 3,
+      "startMs": 19140,
+      "endMs": 26384,
+      "selector": "[role=\"alertdialog\"]"
+    },
+    {
+      "stepIndex": 4,
+      "startMs": 26384,
+      "endMs": 36429
+    },
+    {
+      "stepIndex": 5,
+      "startMs": 36429,
+      "endMs": 47406,
+      "selector": "[role=\"dialog\"]"
+    },
+    {
+      "stepIndex": 6,
+      "startMs": 47406,
+      "endMs": 54366
+    }
+  ]
+}

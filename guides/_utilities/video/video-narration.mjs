@@ -12,6 +12,7 @@
  * - ffmpeg
  */
 
+import { FALLBACK_NARRATION } from "./narration-scripts.mjs";
 import { fromSSO } from "@aws-sdk/credential-providers";
 import { BedrockRuntimeClient, ConverseCommand } from "@aws-sdk/client-bedrock-runtime";
 import { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
@@ -41,6 +42,7 @@ const selectedGuide = guidesArg ? guidesArg.replace("--guides=", "").trim() : "m
 const GUIDE_TITLES = {
   "managing-knowledge-base": "Knowledge Base",
   "managing-asset-views-and-details": "Asset Views & Details",
+  "analyzing-asset-and-automation-metrics": "Asset & Automation Metrics",
 };
 
 const INTRO_DURATION_MS = 2500;
@@ -48,24 +50,6 @@ const INTRO_DURATION_SEC = INTRO_DURATION_MS / 1000;
 const INTRO_BG_PATH = join(GUIDE_ASSETS, "_shared", "background-light.png");
 const BG_MUSIC_PATH = join(GUIDE_ASSETS, "_shared", "background-music-alex_kizenkov-upbeat-happy-corporate-144497.mp3");
 const BG_MUSIC_VOLUME = 0.10; // 10% volume
-
-/** Narration segments per guide target (fallback if Bedrock fails). Keyed by filename stem. */
-const FALLBACK_NARRATION = {
-  "managing-knowledge-base": [
-    "The Knowledge Base stores articles that AI agents use. Click Add source to upload PDFs or connect Confluence, Notion, Freshservice, or SharePoint.",
-    "For third-party sources, a selection dialog opens with a tree view. Browse spaces and pages, select items, and click Save and sync.",
-    "The table shows sync status per article: Completed, Pending, or Failed. Use the status filter. Hover over Failed to see the reason.",
-    "Permissions come from the source system. Authorized groups and users appear as badges. Fix permissions in the source.",
-    "To delete articles, select them with checkboxes and click Delete. Confirm in the dialog.",
-  ],
-  "managing-asset-views-and-details": [
-    "Switch to Warehouse view to see assets aggregated by model, vendor, and type.",
-    "Use quick filters for Unassigned assets, EOL items, MacOS, Windows, or Phones and Tablets.",
-    "Click an asset row to open its detail page with Overview, Specifications, and related software.",
-    "Change status to Retired to record asset retirement.",
-    "Open the Activity log to see asset history.",
-  ],
-};
 
 function runFfmpeg(args, cwd = DOCS_ROOT) {
   return new Promise((resolve, reject) => {
@@ -422,7 +406,7 @@ async function main() {
   let segments = fallback;
 
   // Try Bedrock to generate from MDX
-  const mdxPath = join(DOCS_ROOT, "guides", `${selectedGuide}.mdx`);
+  const mdxPath = join(DOCS_ROOT, "guides", selectedGuide, `${selectedGuide}.mdx`);
   try {
     const mdxContent = await readFile(mdxPath, "utf-8");
     const targetLabels = fallback.map((_, i) => `Step ${i + 1}`);

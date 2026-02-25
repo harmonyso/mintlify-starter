@@ -28,3 +28,11 @@ export const targets = [
     prepare: navigateToDeskSla,
   },
 ];
+
+export const videoConfig = {
+  path: "settings/desks",
+  preload: async (page) => {
+    await page.waitForLoadState("networkidle");
+    await new Promise((r) => setTimeout(r, 2000));
+  },
+};

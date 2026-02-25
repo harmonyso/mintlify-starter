@@ -5,13 +5,6 @@ const dir = "managing-asset-organization-and-importing";
 export const targets = [
   {
     type: "element",
-    selector: 'div:has([data-table-search="true"]):has(button:has-text("Import assets"))',
-    filename: "assets-toolbar-export.png",
-    dir,
-    path: "assets",
-  },
-  {
-    type: "element",
     selector: 'div:has(span:has-text("selected")):has(button:has-text("Change location"))',
     filename: "asset-bulk-actions.png",
     dir,
@@ -68,3 +61,11 @@ export const targets = [
     },
   },
 ];
+
+export const videoConfig = {
+  path: "assets",
+  preload: async (page) => {
+    await page.waitForLoadState("networkidle");
+    await new Promise((r) => setTimeout(r, 2000));
+  },
+};

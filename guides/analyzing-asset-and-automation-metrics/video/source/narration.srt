@@ -1,0 +1,123 @@
+1
+00:00:00,13 --> 00:00:01,88
+Asset Breakdown by Compliance shows
+
+2
+00:00:02,03 --> 00:00:03,22
+how many assets meet your
+
+3
+00:00:03,37 --> 00:00:04,66
+M D M and security
+
+4
+00:00:04,81 --> 00:00:06,78
+policies Click a segment to
+
+5
+00:00:06,93 --> 00:00:08,30
+filter the Assets page by
+
+6
+00:00:08,45 --> 00:00:09,43
+that compliance status
+
+7
+00:00:09,91 --> 00:00:11,50
+Asset Breakdown by Age groups
+
+8
+00:00:11,65 --> 00:00:13,00
+assets by purchase date into
+
+9
+00:00:13,15 --> 00:00:15,79
+buckets Color coding highlights aging
+
+10
+00:00:15,94 --> 00:00:17,16
+hardware to help with refresh
+
+11
+00:00:17,31 --> 00:00:17,91
+planning
+
+12
+00:00:18,22 --> 00:00:19,90
+Software Breakdown by Status shows
+
+13
+00:00:20,05 --> 00:00:21,93
+your application inventory split into
+
+14
+00:00:22,08 --> 00:00:24,73
+Approved Discovered and Ignored Click
+
+15
+00:00:24,88 --> 00:00:25,81
+a segment to filter the
+
+16
+00:00:25,96 --> 00:00:26,71
+Software page
+
+17
+00:00:27,90 --> 00:00:29,88
+AI versus Human Resolution compares
+
+18
+00:00:30,03 --> 00:00:32,00
+tickets resolved by Harmony AI
+
+19
+00:00:32,15 --> 00:00:33,63
+escalated to a human and
+
+20
+00:00:33,78 --> 00:00:35,00
+deflected before a ticket was
+
+21
+00:00:35,15 --> 00:00:37,24
+created helping you measure automation
+
+22
+00:00:37,39 --> 00:00:37,99
+effectiveness
+
+23
+00:00:39,38 --> 00:00:40,81
+Agent Runs by Status tracks
+
+24
+00:00:40,96 --> 00:00:42,80
+outcomes of built-in Harmony AI
+
+25
+00:00:42,95 --> 00:00:45,30
+agent runs Completed Failed and
+
+26
+00:00:45,45 --> 00:00:46,05
+Cancelled
+
+27
+00:00:46,91 --> 00:00:48,51
+Workflow Runs by Status shows
+
+28
+00:00:48,66 --> 00:00:50,95
+outcomes for your custom workflows
+
+29
+00:00:51,10 --> 00:00:52,75
+Use it alongside agent metrics
+
+30
+00:00:52,90 --> 00:00:53,88
+to get a complete picture
+
+31
+00:00:54,03 --> 00:00:55,04
+of automation health

@@ -61,16 +61,16 @@
       "startMs": 13206,
       "endMs": 14194,
       "text": "Click an asset row to",
-      "stepIndex": 2,
-      "selector": "[id=\"overview\"]"
+      "stepIndex": 1,
+      "selector": "div.grid:has(div:has-text(\"Unassigned assets\")):has(div:has-text(\"Assets reached EOL\"))"
     },
     {
       "index": 8,
       "startMs": 14344,
       "endMs": 15631,
       "text": "open its detail page with",
-      "stepIndex": 2,
-      "selector": "[id=\"overview\"]"
+      "stepIndex": 1,
+      "selector": "div.grid:has(div:has-text(\"Unassigned assets\")):has(div:has-text(\"Assets reached EOL\"))"
     },
     {
       "index": 9,
@@ -85,62 +85,63 @@
       "startMs": 19661,
       "endMs": 20948,
       "text": "Change status to Retired to",
-      "stepIndex": 3,
-      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Mark asset as retired\"))"
+      "stepIndex": 2,
+      "selector": "[id=\"overview\"]"
     },
     {
       "index": 11,
       "startMs": 21098,
       "endMs": 22223,
       "text": "record asset retirement",
-      "stepIndex": 4,
-      "selector": "[data-slot=\"sheet-content\"]:has(h2:has-text(\"Activity\"))"
+      "stepIndex": 3,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Mark asset as retired\"))"
     },
     {
       "index": 12,
-      "startMs": 23305,
-      "endMs": 24530,
+      "startMs": 25651,
+      "endMs": 26876,
       "text": "Open the Activity log to",
-      "stepIndex": 4,
-      "selector": "[data-slot=\"sheet-content\"]:has(h2:has-text(\"Activity\"))"
+      "stepIndex": 3,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Mark asset as retired\"))"
     },
     {
       "index": 13,
-      "startMs": 24680,
-      "endMs": 25543,
+      "startMs": 27026,
+      "endMs": 27889,
       "text": "see asset history",
-      "stepIndex": -1
+      "stepIndex": 3,
+      "selector": "[role=\"dialog\"]:has(h2:has-text(\"Mark asset as retired\"))"
     }
   ],
   "stepRanges": [
     {
       "stepIndex": 0,
-      "startMs": 4,
-      "endMs": 5818,
+      "startMs": 5,
+      "endMs": 7241,
       "selector": "div.overflow-auto.border-t:has(table:has(th:has-text(\"Availability\")))"
     },
     {
       "stepIndex": 1,
-      "startMs": 5818,
-      "endMs": 11701,
+      "startMs": 7241,
+      "endMs": 14772,
       "selector": "div.grid:has(div:has-text(\"Unassigned assets\")):has(div:has-text(\"Assets reached EOL\"))"
     },
     {
       "stepIndex": 2,
-      "startMs": 11701,
-      "endMs": 16439,
+      "startMs": 14772,
+      "endMs": 21097,
       "selector": "[id=\"overview\"]"
     },
     {
       "stepIndex": 3,
-      "startMs": 16439,
-      "endMs": 20894,
+      "startMs": 21097,
+      "endMs": 27138,
       "selector": "[role=\"dialog\"]:has(h2:has-text(\"Mark asset as retired\"))"
     },
     {
       "stepIndex": 4,
-      "startMs": 20894,
-      "endMs": 23630,
+      "startMs": 27138,
+      "endMs": 29874,
       "selector": "[data-slot=\"sheet-content\"]:has(h2:has-text(\"Activity\"))"
     }
   ]

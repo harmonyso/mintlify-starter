@@ -15,7 +15,7 @@ The Software area shows applications discovered from your integrations (e.g., Ok
 
 The Software page displays a data table with sortable columns. Click a row to open that application's detail page. Use the toolbar for search, filters, refresh, export, and bulk actions. The table supports pagination with configurable page size.
 
-{/* IMAGE: Software list with toolbar and filters → /guides/managing-software-applications/screenshots/software-list.png | UI: frontend-app/src/routes/software/index.tsx | Route: /software */}
+![Software list with toolbar and filters](/guides/managing-software-applications/screenshots/software-list.png)
 
 ### Adding New Software
 
@@ -25,7 +25,7 @@ Software applications are discovered automatically from your integrations (Okta,
 
 Click an application row to open its detail page at `/software/$appId` (or `/software/v2/$appId`). The page shows the header (name, icon, status, monthly cost, detected logins, end of contract), overview (description, category, vendor, source, stakeholders), licenses table, and users table.
 
-{/* IMAGE: Application detail page with Licenses and users → /guides/managing-software-applications/screenshots/software-detail.png | UI: frontend-app/src/routes/software/$appId.tsx | Route: /software/$appId */}
+![Application detail page with Licenses and users](/guides/managing-software-applications/screenshots/software-detail.png)
 
 ### Understanding Application Types
 
@@ -72,7 +72,7 @@ Licenses track seat counts, cost, billing cycle, and renewal dates for an applic
 2. In the **Licenses** section, click **Add license**.
 3. Fill in: License type, Status, Seats (or Unlimited), Cost, Currency, Billing cycle, PO number (optional), Start date, Renewal date.
 
-{/* IMAGE: Add license form with seats, cost, billing cycle → /guides/managing-software-applications/screenshots/add-license-form.png | UI: frontend-app/src/features/software-management/components/add-edit-license-modal.tsx | Route: /software/$appId */}
+![Add license form with seats, cost, billing cycle](/guides/managing-software-applications/screenshots/add-license-form.png)
 
 4. Click **Add license** or **Save**.
 
@@ -103,8 +103,6 @@ App permissions control who has access to an application. User access is managed
 ### Assigning App Permissions to Users
 
 For Okta test tenants: On the application detail page, in the **Users** section, click **Add** to open the Assign App Permissions dialog. Select an employee and confirm. The "Provision Application Access" workflow provisions access for that user across Okta instances. Refresh the page to see the updated user list.
-
-{/* IMAGE: Assign App Permissions dialog → /guides/managing-software-applications/screenshots/assign-app-permissions.png | UI: frontend-app/src/features/software-management/components/assign-app-permissions-modal.tsx | Route: /software/$appId */}
 
 ### Managing User Access to Applications
 
@@ -142,7 +140,7 @@ The bulk actions toolbar appears when you have selected applications. Available 
 - **Set budget approver** — Assign budget approver(s) to selected apps.
 - **Set IT approver** — Assign IT approver(s) to selected apps.
 
-{/* IMAGE: Software bulk actions toolbar with Change status → /guides/managing-software-applications/screenshots/software-bulk-actions.png | UI: frontend-app/src/features/software-management/components/bulk-actions.tsx | Route: /software */}
+![Software bulk actions toolbar with Change status](/guides/managing-software-applications/screenshots/software-bulk-actions.png)
 
 ---
 
@@ -151,8 +149,6 @@ The bulk actions toolbar appears when you have selected applications. Available 
 ### Exporting Software to CSV
 
 Click **Export** in the Software toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-software-export-YYYY-MM-DD.csv`. Export includes all applications that match the filters.
-
-{/* IMAGE: Software toolbar with Export button → /guides/managing-software-applications/screenshots/software-toolbar-export.png | UI: frontend-app/src/routes/software/index.tsx | Route: /software */}
 
 ### Exporting Application Users
 

@@ -1,0 +1,115 @@
+1
+00:00:00,06 --> 00:00:01,28
+The Desks list shows all
+
+2
+00:00:01,43 --> 00:00:03,54
+your service desks Click Create
+
+3
+00:00:03,69 --> 00:00:04,48
+Desk to set up a
+
+4
+00:00:04,63 --> 00:00:05,74
+new one from scratch or
+
+5
+00:00:05,89 --> 00:00:06,49
+from a template
+
+6
+00:00:07,12 --> 00:00:08,40
+Each desk can have multiple
+
+7
+00:00:08,55 --> 00:00:10,38
+teams Create teams with their
+
+8
+00:00:10,53 --> 00:00:12,10
+own timezone and description for
+
+9
+00:00:12,25 --> 00:00:13,44
+intelligent ticket routing
+
+10
+00:00:13,92 --> 00:00:15,17
+The Members tab shows all
+
+11
+00:00:15,32 --> 00:00:17,44
+desk members Add members here
+
+12
+00:00:17,59 --> 00:00:18,84
+before assigning them to teams
+
+13
+00:00:20,58 --> 00:00:22,08
+Team routing determines how tickets
+
+14
+00:00:22,23 --> 00:00:24,19
+are distributed by timezone match
+
+15
+00:00:24,34 --> 00:00:25,87
+or by AI based description
+
+16
+00:00:26,02 --> 00:00:26,62
+matching
+
+17
+00:00:27,82 --> 00:00:29,17
+Working hours define S L
+
+18
+00:00:29,32 --> 00:00:30,55
+A business hours for each
+
+19
+00:00:30,70 --> 00:00:32,84
+desk and team Choose 24
+
+20
+00:00:32,99 --> 00:00:34,40
+by 7 or configure custom
+
+21
+00:00:34,55 --> 00:00:35,15
+schedules
+
+22
+00:00:37,87 --> 00:00:39,98
+Desk automation settings control assignment
+
+23
+00:00:40,13 --> 00:00:42,91
+method status transitions auto-close and
+
+24
+00:00:43,06 --> 00:00:43,66
+survey triggers
+
+25
+00:00:48,78 --> 00:00:50,08
+Delete a desk by confirming
+
+26
+00:00:50,23 --> 00:00:50,96
+the desk name in the
+
+27
+00:00:51,11 --> 00:00:53,79
+deletion dialog This permanently removes
+
+28
+00:00:53,94 --> 00:00:54,86
+the desk and all its
+
+29
+00:00:55,01 --> 00:00:55,61
+tickets

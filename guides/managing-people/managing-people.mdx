@@ -15,7 +15,7 @@ The People directory lists all employees in your organization. It requires admin
 
 The People page displays a data table with sortable columns. Click a row to open that employee's profile. Use the toolbar for search, filters, refresh, and export. The table supports pagination with configurable page size (10–200 rows).
 
-{/* IMAGE: People data table with toolbar and filters → /guides/managing-people/screenshots/people-list.png | UI: frontend-app/src/routes/people/index.tsx | Route: /people */}
+![People data table with toolbar and filters](/guides/managing-people/screenshots/people-list.png)
 
 ### Searching for Employees
 
@@ -55,7 +55,7 @@ Elsewhere in Harmony (e.g., ticket assignee, reporter, asset assignment), employ
 
 Click an employee row to open their profile at `/people/$employeeId`. The profile shows the header ( avatar, name, status, type, source, action buttons) and an Overview section with work details, contact details, assigned assets, software, and related tickets.
 
-{/* IMAGE: Employee profile with Overview tab → /guides/managing-people/screenshots/employee-profile.png | UI: frontend-app/src/routes/people/$employeeId.tsx | Route: /people/$employeeId */}
+![Employee profile with Overview tab](/guides/managing-people/screenshots/employee-profile.png)
 
 ### Understanding Employee Profiles
 
@@ -114,8 +114,6 @@ VIP employees appear with a VIP badge in the People list and on their profile. U
 
 **Manage Groups** is shown only when the tenant is a test tenant and the employee has an Okta source. Click the button to open the Manage Groups dialog.
 
-{/* IMAGE: Manage Groups dialog with group selector → /guides/managing-people/screenshots/manage-groups-dialog.png | UI: frontend-app/src/features/people/components/employee-details/manage-groups-dialog.tsx | Route: /people/$employeeId */}
-
 ### Assigning Users to Groups
 
 In the Manage Groups dialog, use the group selector to add the user to Okta groups. Search and select groups, then add them. The user will be a member of the selected groups in Okta.
@@ -137,8 +135,6 @@ In the Manage Groups dialog, remove the user from a group by clicking the remove
 ### Exporting Employee Data to CSV
 
 Click **Export** in the People toolbar. The export uses the current filters, search, and sort settings. A CSV file downloads with a name like `harmony-people-export-YYYY-MM-DD.csv`. Export includes all employees that match the filters; large exports may take a moment.
-
-{/* IMAGE: People toolbar with Export button → /guides/managing-people/screenshots/people-toolbar-export.png | UI: frontend-app/src/routes/people/index.tsx | Route: /people */}
 
 ### Understanding People Export Fields
 

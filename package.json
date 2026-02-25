@@ -9,11 +9,13 @@
     "type": "module",
     "scripts": {
         "screenshots:dashboard": "node guides/_utilities/screenshots/capture-dashboard-screenshots.mjs",
+        "screenshots:apply": "node guides/_utilities/screenshots/apply-screenshots.mjs",
         "screenshots:dashboard:login": "pnpm exec playwright install chromium && node guides/_utilities/screenshots/capture-dashboard-screenshots.mjs --login",
         "screenshots:dashboard:run": "pnpm exec playwright install chromium && pnpm run screenshots:dashboard",
         "video:article": "node guides/_utilities/video/capture-article-video.mjs",
         "video:narration": "AWS_PROFILE=harmony-mgmt AWS_REGION=us-east-1 node guides/_utilities/video/video-narration.mjs",
-        "video:full": "node guides/_utilities/video/video-full.mjs"
+        "video:full": "node guides/_utilities/video/video-full.mjs",
+        "studio": "node guides/_utilities/studio.mjs"
     },
     "devDependencies": {
         "playwright": "^1.52.0"

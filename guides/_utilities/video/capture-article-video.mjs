@@ -34,7 +34,6 @@ import {
   PROFILE_DIR,
   BASE_URL,
 } from "../screenshot-shared.mjs";
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DOCS_ROOT = join(__dirname, "../../..");
 const GUIDE_ASSETS = join(DOCS_ROOT, "guides");
@@ -209,7 +208,7 @@ async function main() {
 
   try {
     await page.goto(`${BASE_URL}/${config.path}`, { waitUntil: "domcontentloaded", timeout: 30000 });
-    await page.waitForLoadState("load");
+    await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => { });
     await new Promise((r) => setTimeout(r, 1500));
     const isLoginPage =
       (await page.locator("form[action*='login'], [data-testid=login], input[type='password']").count()) > 0;
@@ -250,6 +249,7 @@ async function main() {
       } catch {
         /* selector may not match; use action-complete time */
       }
+
       stepStartMs.push(stepStart);
       await new Promise((r) => setTimeout(r, SCREEN_PAUSE_MS));
     }
