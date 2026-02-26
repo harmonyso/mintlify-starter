@@ -24,6 +24,10 @@ export const exists = async (p) => access(p).then(() => true).catch(() => false)
 
 /** Injects CSS and observes DOM to hide the impersonation banner. Use with context.addInitScript(). */
 export function injectHideImpersonationBanner() {
+  // Matches the ImpersonationBanner component: absolute div with bg-red-600 containing
+  // "IMPERSONATION MODE ACTIVE" text. No data attribute exists on the element.
+  const BANNER_SELECTOR = 'div.bg-red-600.text-white.absolute';
+
   const hide = (el) => {
     if (el && !el.dataset.__playwrightHidden) {
       el.style.setProperty("display", "none", "important");
@@ -36,16 +40,14 @@ export function injectHideImpersonationBanner() {
     style.id = "__playwright_hide_impersonation__";
     if (document.getElementById(style.id)) return;
     style.textContent = `
-      [data-impersonation-banner] { display: none !important; }
+      div.bg-red-600.text-white { display: none !important; }
     `;
     (document.head || document.documentElement).appendChild(style);
 
-    // Hide any already in DOM
-    document.querySelectorAll("[data-impersonation-banner]").forEach(hide);
+    document.querySelectorAll(BANNER_SELECTOR).forEach(hide);
 
-    // Catch dynamically added banner (React renders client-side)
     const obs = new MutationObserver(() => {
-      document.querySelectorAll("[data-impersonation-banner]").forEach(hide);
+      document.querySelectorAll(BANNER_SELECTOR).forEach(hide);
     });
     obs.observe(document.documentElement, { childList: true, subtree: true });
   };
@@ -60,14 +62,11 @@ export function injectHideImpersonationBanner() {
 export async function hideImpersonationBanner(page) {
   await new Promise((r) => setTimeout(r, 200));
   await page.evaluate(() => {
-    const sel = "[data-impersonation-banner]";
-    let banner = document.querySelector(sel);
-    if (!banner) {
-      const el = Array.from(document.querySelectorAll("*")).find((e) =>
-        e.textContent?.includes("IMPERSONATION MODE ACTIVE")
+    // The ImpersonationBanner renders as an absolute div.bg-red-600.text-white with no data attribute.
+    const banner = document.querySelector("div.bg-red-600.text-white.absolute") ??
+      Array.from(document.querySelectorAll("div.bg-red-600")).find((el) =>
+        el.textContent?.includes("IMPERSONATION MODE ACTIVE")
       );
-      banner = el?.closest("[class*='bg-red'], [class*='bg-red-600']");
-    }
-    if (banner) banner.style.setProperty("display", "none");
+    if (banner) banner.style.setProperty("display", "none", "important");
   });
 }

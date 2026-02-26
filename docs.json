@@ -88,6 +88,7 @@
               "guides/configuring-automation-and-sla/configuring-automation-and-sla",
               "guides/managing-ticket-settings/managing-ticket-settings",
               "guides/managing-user-management/managing-user-management",
+              "guides/managing-notification-channels/managing-notification-channels",
               "guides/configuring-asset-management/configuring-asset-management",
               "guides/managing-knowledge-base/managing-knowledge-base"
             ]

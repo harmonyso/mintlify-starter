@@ -11,33 +11,31 @@ export const targets = [
     prepare: async (p) => {
       await p.keyboard.press("Escape");
       await p.goto(`${BASE_URL}/dashboard`, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await p.waitForLoadState("networkidle");
+      await p.waitForSelector('[data-sidebar="sidebar"]', { timeout: 15000 });
       await new Promise((r) => setTimeout(r, 2000));
     },
   },
   {
-    type: "element",
-    selector: '[data-radix-popper-content-wrapper]:has(p), [role="tooltip"]:has(span), div:has([data-state="open"]):has([data-sidebar="group"])',
+    type: "region",
+    clip: { x: 0, y: 0, width: 330, height: 600 },
     filename: "desk-hover-preview.png",
     dir,
     path: "dashboard",
     prepare: async (p) => {
-      await p.keyboard.press("Escape");
+      // Force sidebar to load collapsed via its persistence cookie
+      await p.evaluate(() => {
+        document.cookie = "sidebar_state=false; path=/; max-age=604800";
+      });
       await p.goto(`${BASE_URL}/dashboard`, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await p.waitForLoadState("networkidle");
-      await new Promise((r) => setTimeout(r, 2000));
-      // Collapse sidebar first
-      const toggleBtn = p.locator('[data-sidebar="rail"], button[aria-label*="sidebar"], button[aria-label*="Sidebar"]').first();
-      if (await toggleBtn.isVisible().catch(() => false)) {
-        await toggleBtn.click();
-        await new Promise((r) => setTimeout(r, 800));
-      }
-      // Hover a desk item
-      const deskItem = p.locator('[data-sidebar="group"] a[href*="/tickets/desk/"]').first();
-      if (await deskItem.isVisible().catch(() => false)) {
-        await deskItem.hover();
-        await new Promise((r) => setTimeout(r, 1000));
-      }
+      await p.waitForSelector('[data-sidebar="sidebar"][data-state="collapsed"]', { timeout: 10000 });
+      await new Promise((r) => setTimeout(r, 1500));
+      // Hover the Tickets menu button to open the desk hover card
+      await p.locator('button[title="Tickets"]').first().hover();
+      await new Promise((r) => setTimeout(r, 800));
+      // Restore expanded state for subsequent screenshots
+      await p.evaluate(() => {
+        document.cookie = "sidebar_state=true; path=/; max-age=604800";
+      });
     },
   },
   {
@@ -49,7 +47,7 @@ export const targets = [
     prepare: async (p) => {
       await p.keyboard.press("Escape");
       await p.goto(`${BASE_URL}/dashboard`, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await p.waitForLoadState("networkidle");
+      await p.waitForSelector('[data-sidebar="sidebar"]', { timeout: 15000 });
       await new Promise((r) => setTimeout(r, 2000));
       await p.keyboard.press("Meta+k");
       await new Promise((r) => setTimeout(r, 800));
@@ -64,14 +62,14 @@ export const targets = [
     prepare: async (p) => {
       await p.keyboard.press("Escape");
       await p.goto(`${BASE_URL}/settings/desks`, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await p.waitForLoadState("networkidle");
-      await new Promise((r) => setTimeout(r, 2000));
+      await p.waitForSelector('table tbody tr, li:has(a[href*="/settings/desks/"])', { timeout: 15000 });
+      await new Promise((r) => setTimeout(r, 1000));
       const firstDesk = p.locator('table tbody tr, li:has(a[href*="/settings/desks/"])').first();
       if (await firstDesk.isVisible().catch(() => false)) {
         await firstDesk.click();
         await p.waitForURL((u) => u.pathname.match(/\/settings\/desks\/.+/), { timeout: 8000 }).catch(() => {});
-        await p.waitForLoadState("networkidle");
-        await new Promise((r) => setTimeout(r, 1500));
+        await p.waitForSelector('nav[aria-label="breadcrumb"], ol[aria-label="breadcrumb"]', { timeout: 8000 }).catch(() => {});
+        await new Promise((r) => setTimeout(r, 1000));
       }
     },
   },
@@ -84,7 +82,7 @@ export const targets = [
     prepare: async (p) => {
       await p.keyboard.press("Escape");
       await p.goto(`${BASE_URL}/dashboard`, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await p.waitForLoadState("networkidle");
+      await p.waitForSelector('[data-sidebar="sidebar"]', { timeout: 15000 });
       await new Promise((r) => setTimeout(r, 2000));
       const userMenuBtn = p.locator('nav footer button, [data-sidebar="footer"] button').first();
       if (await userMenuBtn.isVisible().catch(() => false)) {
@@ -98,7 +96,7 @@ export const targets = [
 export const videoConfig = {
   path: "dashboard",
   preload: async (page) => {
-    await page.waitForLoadState("networkidle");
+    await page.waitForSelector('[data-sidebar="sidebar"]', { timeout: 15000 });
     await new Promise((r) => setTimeout(r, 2000));
   },
 };

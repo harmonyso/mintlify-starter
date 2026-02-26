@@ -1,0 +1,114 @@
+---
+title: "Notification Channels"
+description: "Configure where notifications are sent (Slack, Teams, Email) for desk tickets, AI agent events, and asset alerts."
+---
+
+<Note>
+**Paths:** `/settings/desks/$deskId/notifications` (per desk) · `/settings/asset-management` (org-level assets)
+</Note>
+
+## Managing Notification Channels
+
+Configure where notifications are sent (Slack, Teams, Email). Destinations are configured per desk for tickets and AI agent events, and org-level for asset events.
+
+### Understanding Notification Channels
+
+Notifications can be delivered to **Slack** or **Microsoft Teams** channels. Both require a configured integration and are added per desk via **Add destination**.
+
+- **Slack** — Requires Slack integration.
+- **Microsoft Teams** — Requires Teams integration.
+
+Each destination card lets you pick the target channel and choose which event types (ticket, SLA, or AI agent events) it receives.
+
+### Setting Up Slack Notifications
+
+1. Ensure Slack is connected under **Settings** → **Integrations**.
+2. Open **Settings** → **Desks** → select a desk → **Notifications**.
+3. Click **Add destination** and choose **Slack**.
+4. Select the Slack channel from the dropdown on the destination card.
+5. Check the event types you want delivered to that channel.
+
+### Setting Up Microsoft Teams Notifications
+
+1. Ensure Microsoft Teams is connected under **Settings** → **Integrations**.
+2. Open **Settings** → **Desks** → select a desk → **Notifications**.
+3. Click **Add destination** and choose **Microsoft Teams**.
+4. Select the organization and channel on the destination card.
+5. Check the event types you want delivered to that channel.
+
+![Ticket notifications section showing Slack and Microsoft Teams destination cards](/guides/managing-notification-channels/screenshots/ticket-notifications.png)
+
+### Emailing Reporters About Ticket Updates
+
+This is a separate feature from the Slack/Teams channels above. It automatically emails the **person who submitted a ticket** when their ticket is updated — useful so reporters stay informed without needing access to Harmony.
+
+1. Open **Settings** → **Desks** → select a desk → **Notifications**.
+2. Find the **Email reporters about ticket updates** toggle.
+3. Enable it.
+
+![Email reporters about ticket updates toggle](/guides/managing-notification-channels/screenshots/email-reporters.png)
+
+<Note>
+This toggle notifies ticket **reporters** (submitters) only. It is not a notification channel for agents or admins.
+</Note>
+
+### Configuring Notification Destinations
+
+Each destination (Slack channel, Teams channel, or Email) can have different event types. Use the checkboxes on each destination card to choose which events go to that channel. You can add multiple destinations and configure each independently.
+
+### Managing Notification Channels
+
+- **Add** — Use **Add destination** and pick Slack or Teams. Email appears automatically for ticket notifications once any integration is configured.
+- **Edit** — Change the channel or event types on a destination card.
+- **Delete** — Remove the destination from the card menu.
+
+### Configuring Notification Types
+
+**Ticket notifications** (per desk, `/settings/desks/$deskId/notifications`)
+
+Default types: ticket created, ticket status changed, SLA breach. Additional ticket-related events may be available (e.g., mentioned in ticket).
+
+**SLA notifications** (per desk)
+
+Included in Service Desk destinations: `sla_breach` and related SLA events.
+
+**AI Agent notifications** (per desk)
+
+Separate section for Harmony AI Agent events (e.g., agent failures, run outcomes). Add destinations and select event types.
+
+**Asset Management notifications** (org-level)
+
+Configure at org asset settings. Default types: EOL planned, EOL reached, EOL grace period expired, low stock threshold reached.
+
+**Low stock notifications** (org-level)
+
+Part of Asset Management: `low_stock_threshold_reached` and related stock alerts.
+
+### Understanding Notification Categories
+
+| Category | Scope | Events |
+|----------|-------|--------|
+| **Ticket notifications** | Per desk | ticket_created, ticket_status_changed, sla_breach, etc. |
+| **AI Agent notifications** | Per desk | AI agent failures, run events |
+| **Asset notifications** | Org | EOL lifecycle, low stock |
+
+### Selecting Notification Types Per Channel
+
+On each destination card, use the checkboxes to choose which event types are sent to that channel. Different destinations can receive different events.
+
+***
+
+<CardGroup cols={2}>
+  <Card title="Service Desks & Teams" icon="building" href="/guides/managing-service-desks-and-teams">
+    Desk structure and team configuration.
+  </Card>
+  <Card title="Understanding Integrations" icon="plug" href="/guides/understanding-integrations">
+    Connect Slack, Teams, and notification channels.
+  </Card>
+  <Card title="User Management" icon="users" href="/guides/managing-user-management">
+    Users, groups, and role assignments.
+  </Card>
+  <Card title="Ticket Settings" icon="cog" href="/guides/managing-ticket-settings">
+    Custom fields, tags, and canned responses.
+  </Card>
+</CardGroup>

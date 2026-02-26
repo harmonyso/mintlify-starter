@@ -144,12 +144,11 @@ async function main() {
   const page = context.pages()[0] || (await context.newPage());
 
   try {
-    console.log(`Navigating to ${BASE_URL}${DASHBOARD_PATH}...`);
-    await page.goto(`${BASE_URL}${DASHBOARD_PATH}`, {
-      waitUntil: "domcontentloaded",
-      timeout: 60000,
-    });
-    await new Promise((r) => setTimeout(r, 5000));
+    // Navigate to root to check session — avoids a full dashboard load just for the auth check.
+    const startUrl = needsLogin ? `${BASE_URL}${DASHBOARD_PATH}` : `${BASE_URL}/settings`;
+    console.log(`Checking session at ${startUrl}...`);
+    await page.goto(startUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
+    await new Promise((r) => setTimeout(r, 2000));
 
     const isLoginPage =
       (await page.locator("form[action*='login'], [data-testid=login], input[type='password']").count()) > 0;
