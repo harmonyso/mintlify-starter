@@ -46,9 +46,11 @@ Before connecting Slack to Harmony, ensure you have:
 <Steps>
   <Step title="Navigate to Integrations">
     1. Log into your Harmony dashboard
-    2. Navigate to **Settings → Integrations**
-    3. Find **Slack** under the **Collaboration** section
-    4. Click **Connect** to begin the OAuth flow
+    2. Click **Settings** in the sidebar
+    3. Click **Integrations** in the settings menu
+    4. Click **Slack** under the **Collaboration** section to begin the OAuth flow
+
+    <img src="/images/screenshots/slack-integrations-page.png" alt="Navigate to Slack integration in Harmony dashboard" />
   </Step>
 
   <Step title="Authorize in Slack">
@@ -60,6 +62,8 @@ Before connecting Slack to Harmony, ensure you have:
     2. Select a channel to connect to Harmony initially
     3. Click **Allow** to authorize the connection
 
+    <img src="/images/screenshots/slack-authorization-page.png" alt="Click Allow to authorize Harmony in Slack" />
+
     At this point, Slack should be successfully connected to Harmony.
   </Step>
 </Steps>
@@ -68,7 +72,7 @@ Before connecting Slack to Harmony, ensure you have:
 
 ## Configure Slack as Your IT Help Desk
 
-After connecting Slack, you'll land on the Slack configuration page in Harmony. The channel you selected during setup will be visible but in a **disabled state** by default—Harmony won't take any actions in the channel until you configure it.
+After connecting Slack, you'll land on the Slack configuration page in Harmony where you can configure how Harmony operates in your channels.
 
 ### Configure Your Connected Channel
 
@@ -76,16 +80,19 @@ Once you've connected Slack, configure how Harmony should operate in the channel
 
 <Steps>
   <Step title="Enable the Channel">
-    1. Navigate to **Settings → Integrations → Slack**
-    2. Find your connected channel in the list
-    3. Select a channel mode (see [Channel Modes](#channel-configuration-modes) below)
-    4. Click **Save** to activate Harmony in the channel
+    1. Click **Settings** in the sidebar
+    2. Navigate to **Desks** in the settings menu
+    3. Select your desk and click **Notifications**
+    4. Click **Add destination** and select **Slack**
+    5. Configure the notification events and select your Slack channel
+
+    <img src="/images/screenshots/slack-enable-channel.png" alt="Enable and configure Slack channel in Harmony" />
   </Step>
 
   <Step title="Test the Integration">
     1. Go to your Slack channel
     2. Type a test message like "Help with password reset"
-    3. Harmony should respond according to your selected channel mode
+    3. Harmony should respond to your request
   </Step>
 </Steps>
 
@@ -93,146 +100,17 @@ Once you've connected Slack, configure how Harmony should operate in the channel
 
 You can connect more channels in two ways:
 
-**Method 1: Through OAuth flow**
-1. Click **Add Channel** in the Slack integration settings
-2. Select a different channel from the dropdown
-3. Complete the authorization to add the new channel
-4. Configure the mode for the new channel
+**Method 1: Through notification settings**
+1. Navigate to **Settings → Desks → Notifications**
+2. Click **Add destination** and select **Slack**
+3. Choose a different channel from the dropdown
+4. Configure the notification events for the new channel
 
 **Method 2: Using @mention in Slack**
 1. Go to any Slack channel where you want to add Harmony
 2. Type `@Harmony` to mention the app
 3. Click the **Add them** button when prompted
-4. Configure the channel mode in Harmony settings
-
-### Enable Direct Messaging (Optional)
-
-<Steps>
-  <Step title="Configure DM Support">
-    1. Navigate to **Settings → Integrations → Slack**
-    2. Toggle on **Enable Direct Messages**
-    3. Click **Save**
-
-    Users can now DM Harmony directly for private IT support conversations.
-  </Step>
-</Steps>
-
-<Tip>
-  **Recommended**: Start with **Silent Mode** to test the integration without notifying users. Once comfortable, switch to **Help Desk Mode** for full autonomous operation.
-</Tip>
-
-***
-
-## Channel Configuration Modes
-
-When you connect a Slack channel to Harmony, configure it to operate in different modes:
-
-### Disabled Mode (Default)
-
-*Harmony will do nothing*
-
-- Harmony will not create tickets from messages
-- Harmony will not respond to any messages in the channel
-- Ideal for safely adding Harmony to a channel before activating features
-
-### Silent Mode
-
-*Harmony monitors the channel but operates quietly*
-
-- Creates tickets based on messages in the channel
-- Does not post responses or acknowledgments in the channel
-- Tickets are created silently in the Harmony dashboard
-- If you @mention Harmony, it will toggle on and attempt to help resolve the ticket
-- Ideal for testing or when you want ticket creation without channel noise
-
-### Help Desk Mode
-
-*Full autonomous IT helpdesk functionality*
-
-- Creates tickets from channel messages automatically
-- Responds with intelligent AI-powered answers
-- Attempts autonomous resolution using Harmony's AI and workflows
-- Provides the complete autonomous support experience
-- Recommended for primary IT support channels
-
-### Team Only Mode
-
-*Designed for internal IT team channels*
-
-- IT team members can create tickets and request automation workflows
-- Access to all available workflows, including secure team-only workflows
-- Provides maximum functionality for internal IT operations
-- Should only be used in channels restricted to IT team members
-
-<Warning>
-  Team Only Mode grants access to privileged workflows and sensitive IT operations. Only use in private channels with verified IT team members.
-</Warning>
-
-### Team Inbox Mode
-
-*A dedicated channel for IT agents to triage all escalated tickets*
-
-- Aggregates all escalated tickets into one channel for support agents
-- Support agents can view, respond to, and collaborate on tickets
-- Responses in threads sync automatically back to the end user's original location
-- Egress-only: does not create new tickets from channel messages
-- Should be a private channel with only IT support agents
-
-<Info>
-  Team Inbox is especially valuable when tickets come from DMs or other sources that support agents can't see directly.
-</Info>
-
-***
-
-## Configure Team Inbox Channels
-
-### What is a Team Inbox?
-
-A private channel where IT support agents triage all escalated tickets within Slack. Every escalated ticket—from DMs, help desk channels, or the web—appears as a thread in this channel.
-
-**Key benefits:**
-
-- Triage all tickets in one centralized location
-- Collaborate with other agents on ticket resolution
-- Respond to end users directly from the inbox thread
-- Never miss a ticket from DMs or private conversations
-
-### Setting Up a Team Inbox
-
-<Steps>
-  <Step title="Create a private Slack channel">
-    Create a private channel in Slack for your IT support team's inbox (e.g., `#it-support-inbox`, `#helpdesk-triage`).
-
-    <Tip>
-      Use a clear naming convention like `#[team-name]-inbox`. Only add IT support staff—not end users—to this channel.
-    </Tip>
-  </Step>
-
-  <Step title="Add Harmony to the channel">
-    In the channel, type `@Harmony` to mention the app and click **Add them** when prompted.
-  </Step>
-
-  <Step title="Configure as Team Inbox mode">
-    1. In Harmony, navigate to **Settings → Integrations → Slack**
-    2. Find the channel you just created
-    3. Set the channel mode to **Team Inbox**
-    4. Click **Save**
-
-    All tickets for your team will now sync to this channel automatically.
-  </Step>
-</Steps>
-
-### Working in Team Inbox Channels
-
-Once configured, tickets automatically populate as threads:
-
-1. **View**: Each ticket appears as a thread with details and history
-2. **Respond**: Reply in the thread—your message sends to the end user automatically
-3. **Manage**: Use commands like `@Harmony assign to me` to triage tickets
-
-<Warning>
-  Messages posted directly to the Team Inbox channel (not in ticket threads) will not create new tickets. Team Inbox mode is egress-only.
-</Warning>
+4. Configure the notification settings in Harmony
 
 ***
 
@@ -268,10 +146,6 @@ Tag `@Harmony` in channels to activate assistance:
 
 Continue natural conversations with context preservation—just reply in the thread where Harmony responded.
 
-### Direct Messages
-
-When enabled, users can DM Harmony for private support conversations.
-
 ***
 
 ## Permissions Explained
@@ -297,36 +171,22 @@ Harmony requests the following Slack permissions:
 ### Harmony doesn't respond to messages
 
 **Possible causes:**
-- The channel is in Disabled or Silent mode
 - You need to @mention Harmony in the channel
 - Harmony lacks permissions in the channel
 
 **Solutions:**
-1. Check the channel mode in **Settings → Integrations → Slack**
-2. Ensure you're @mentioning Harmony or the channel is in Help Desk mode
-3. Re-invite Harmony to the channel: Type `@Harmony` and click **Add them**
+1. Ensure you're @mentioning Harmony in the channel
+2. Re-invite Harmony to the channel: Type `@Harmony` and click **Add them**
 
 ### Tickets aren't being created
 
 **Possible causes:**
-- The channel is in Disabled mode
 - Messages don't meet ticket creation criteria
 - Integration connection expired
 
 **Solutions:**
-1. Verify the channel is in Silent, Help Desk, or Team Only mode
-2. Try explicitly creating a ticket with `/harmony [your request]`
-3. Reconnect the integration: **Settings → Integrations → Slack → Reconnect**
-
-### Can't see Harmony in DMs
-
-**Possible causes:**
-- Direct messaging is not enabled
-- User hasn't initiated a conversation with Harmony
-
-**Solutions:**
-1. Enable DMs in **Settings → Integrations → Slack**
-2. Have users search for **Harmony** in Slack and start a conversation
+1. Try explicitly creating a ticket with `/harmony [your request]`
+2. Reconnect the integration: **Settings → Integrations → Slack → Reconnect**
 
 ***
 
