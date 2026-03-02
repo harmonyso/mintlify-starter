@@ -113,104 +113,23 @@ The Harmony app must be uploaded to your Microsoft Teams environment by a Teams 
 
 ***
 
-## Step 4: Deploy to Users (Optional)
+## Add Harmony to Channels
 
-By default, users must manually add the Harmony app to their Teams. To automatically install it for all users:
-
-<Steps>
-  <Step title="Navigate to Setup Policies">
-    1. In the Microsoft Teams admin center, go to **Teams apps → Setup policies**
-    2. Click on **Global (Org-wide default)** or create a custom policy
-  </Step>
-
-  <Step title="Add Harmony to Installed Apps">
-    1. Under **Installed apps**, click **+ Add apps**
-    2. Search for **Harmony** and add it to the list
-    3. Click **Save**
-
-    ![Setup Policies](/images/teams/setup-policies.png)
-
-    <Note>
-      It may take a few minutes to several hours for the app to propagate to all users in your organization.
-    </Note>
-  </Step>
-</Steps>
-
-***
-
-## Configure Teams Channels
-
-After uploading the Harmony app, configure how it operates in your Teams channels:
-
-### Add Harmony to a Channel
+After uploading the Harmony app, you can add Harmony to your Teams channels:
 
 <Steps>
   <Step title="Add Harmony Bot to Channel">
-    1. Open the Teams channel where you want Harmony
-    2. Click the **+** button to add a tab
-    3. Search for **Harmony** and select it
-    4. Click **Add** to add Harmony to the channel
-  </Step>
+    1. In Harmony dashboard, click **Settings** in the sidebar
+    2. Navigate to **Desks** and select your desk
+    3. Click on **Notifications**
+    4. Click **+ Add destination** under **Ticket notifications**
+    5. Select **Microsoft Teams** from the dropdown
+    6. Choose your Teams channel and configure the ticket events you want to receive notifications for
+    7. Click **Save**
 
-  <Step title="Configure Channel Mode">
-    1. In Harmony dashboard, navigate to **Settings → Integrations → Microsoft Teams**
-    2. Find your channel in the list
-    3. Select a channel mode (see [Channel Modes](#channel-configuration-modes) below)
-    4. Click **Save**
+    <img src="/images/screenshots/teams-add-channel.png" alt="Configure Teams channel notifications in Harmony dashboard" />
   </Step>
 </Steps>
-
-***
-
-## Channel Configuration Modes
-
-Configure how Harmony operates in each Teams channel:
-
-### Disabled Mode (Default)
-
-*Harmony will do nothing*
-
-- Does not create tickets from messages
-- Does not respond to messages in the channel
-- Safe for testing without activating features
-
-### Silent Mode
-
-*Harmony monitors but operates quietly*
-
-- Creates tickets from channel messages
-- Does not post responses in the channel
-- @mention Harmony to activate assistance on specific threads
-- Ideal for testing without channel noise
-
-### Help Desk Mode
-
-*Full autonomous IT helpdesk*
-
-- Creates tickets from messages automatically
-- Responds with intelligent AI-powered answers
-- Attempts autonomous resolution
-- Complete autonomous support experience
-- **Recommended for primary IT support channels**
-
-### Team Only Mode
-
-*Internal IT team channels*
-
-- IT team members can create tickets and workflows
-- Access to privileged workflows and operations
-- Maximum functionality for IT operations
-- **Only use in private channels with IT team members**
-
-### Team Inbox Mode
-
-*Centralized ticket triage for agents*
-
-- Aggregates all escalated tickets into one channel
-- Agents view, respond, and collaborate on tickets
-- Responses sync automatically to end users
-- Egress-only (doesn't create new tickets from messages)
-- **Use a private channel with only IT support agents**
 
 ***
 
@@ -235,49 +154,6 @@ Interact with the Harmony bot in channels by mentioning @Harmony to get instant 
 | Troubleshooting | "@Harmony User can't connect to WiFi, what should I check?" |
 | Policy Questions | "@Harmony What's our password policy for new accounts?" |
 | Knowledge Base | "@Harmony Show me the steps to install Office 365" |
-
-***
-
-## Interacting with Harmony in Teams
-
-### In Channels
-
-**@mention Harmony** to get AI-powered responses:
-
-```
-@Harmony How do I reset a user's MFA?
-```
-
-### In Thread Replies
-
-Continue the conversation by @mentioning Harmony in thread replies:
-
-```
-@Harmony Can you walk me through the steps?
-```
-
-### Direct Messages
-
-Use the `/harmony` command or **Create Ticket** message action:
-
-1. Open a chat with Harmony bot
-2. Type `/harmony [your request]` OR
-3. Right-click any message → **More actions** → **Create Harmony Ticket**
-
-### Message Actions
-
-Convert any existing message into a ticket:
-
-1. Hover over any message
-2. Click the **⋯** (more actions) menu
-3. Select **Create Harmony Ticket**
-
-<Warning>
-  **Important:**
-  - **In channels**: @mention Harmony to get AI responses
-  - **In thread replies**: Continue with @mentions for context
-  - **In DMs**: Use `/harmony` command or message actions to create tickets
-</Warning>
 
 ***
 
@@ -317,12 +193,10 @@ Harmony requests the following Microsoft Teams permissions:
 **Possible causes:**
 - Teams integration not connected in Harmony
 - Not @mentioning the bot in channels
-- Channel is in Disabled or Silent mode
 
 **Solutions:**
 1. Verify **Settings → Integrations → Microsoft Teams** shows **Connected**
 2. Ensure you're @mentioning **@Harmony** in channel messages
-3. Check channel mode in Harmony settings
 
 ### Cannot create tickets in DMs
 
@@ -354,19 +228,8 @@ Harmony requests the following Microsoft Teams permissions:
   <Accordion title="Start with a Pilot Channel">
     Before rolling out organization-wide:
     - Choose one IT support channel for testing
-    - Start in Silent Mode to observe ticket creation
-    - Gradually move to Help Desk Mode
     - Gather feedback from early users
     - Roll out to additional channels based on success
-  </Accordion>
-
-  <Accordion title="Configure Team Inbox for Agents">
-    Create a dedicated private channel for IT support agents:
-    - Name it clearly (e.g., `IT Support Inbox`)
-    - Only invite support agents and managers
-    - Configure as Team Inbox Mode
-    - Train agents on responding within threads
-    - Use as central triage location
   </Accordion>
 
   <Accordion title="Educate End Users">
@@ -383,7 +246,6 @@ Harmony requests the following Microsoft Teams permissions:
     - Check ticket creation patterns
     - Monitor resolution rates
     - Identify common user questions
-    - Adjust channel modes based on usage
     - Collect user feedback on AI responses
   </Accordion>
 </AccordionGroup>
