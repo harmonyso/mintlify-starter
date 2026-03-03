@@ -19,8 +19,6 @@ Microsoft Entra ID (formerly Azure Active Directory) is Microsoft's cloud-based 
 | Conditional Access       | Enforce intelligent access policies based on context                                       |
 | Automation Workflows     | Build custom workflows using Microsoft Graph API                                           |
 
-Anything defined in the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/api/overview) can be accessed through Harmony workflows.
-
 ***
 
 ## Prerequisites
@@ -28,148 +26,38 @@ Anything defined in the [Microsoft Graph API](https://learn.microsoft.com/en-us/
 Before connecting Microsoft Entra ID to Harmony, ensure you have:
 
 1. **Microsoft 365 Global Administrator access**
-2. **Azure AD Premium licenses** (for advanced features like conditional access)
-3. **Permissions to register applications** in Azure AD
-4. **A Harmony account** with admin privileges
+2. **A Harmony account** with admin privileges
 
 <Note>
-  Global Administrator or Privileged Role Administrator role is required to grant admin consent for application permissions.
+  Global Administrator or Privileged Role Administrator role is required to authorize the Harmony integration.
 </Note>
 
 ***
 
-## Azure AD Configuration
-
-### Step 1: Register Harmony Application
-
-<Steps>
-  <Step title="Navigate to App Registrations">
-    1. Sign in to the [Azure Portal](https://portal.azure.com)
-    2. Navigate to **Azure Active Directory → App registrations**
-    3. Click **+ New registration**
-  </Step>
-
-  <Step title="Configure Registration">
-    Fill in the application details:
-
-    | Field                  | Value                                    |
-    | ---------------------- | ---------------------------------------- |
-    | **Name**               | `Harmony Integration`                    |
-    | **Supported account types** | Accounts in this organizational directory only |
-    | **Redirect URI**       | Leave blank for now                      |
-
-    Click **Register**
-  </Step>
-
-  <Step title="Note Application ID">
-    After registration, copy the following values:
-    - **Application (client) ID**
-    - **Directory (tenant) ID**
-
-    <Tip>
-      You'll need these values when configuring Harmony.
-    </Tip>
-  </Step>
-</Steps>
-
-### Step 2: Create Client Secret
-
-<Steps>
-  <Step title="Generate Secret">
-    1. In your app registration, navigate to **Certificates & secrets**
-    2. Click **+ New client secret**
-    3. Add description: `Harmony Integration Secret`
-    4. Select expiration: **24 months** (recommended)
-    5. Click **Add**
-  </Step>
-
-  <Step title="Copy Secret Value">
-    **Important**: Copy the secret **Value** immediately—it won't be shown again.
-
-    <Warning>
-      Save the client secret securely. If lost, you'll need to generate a new secret and update Harmony.
-    </Warning>
-  </Step>
-</Steps>
-
-### Step 3: Configure API Permissions
-
-<Steps>
-  <Step title="Add Permissions">
-    1. Navigate to **API permissions** in your app registration
-    2. Click **+ Add a permission**
-    3. Select **Microsoft Graph**
-    4. Choose **Application permissions** (not Delegated)
-  </Step>
-
-  <Step title="Select Required Permissions">
-    Add the following Microsoft Graph permissions:
-
-    **User Management:**
-    - `User.Read.All` - Read all users' profiles
-    - `User.ReadWrite.All` - Manage user accounts (for provisioning)
-
-    **Group Management:**
-    - `Group.Read.All` - Read all groups
-    - `GroupMember.Read.All` - Read group memberships
-
-    **Directory Management:**
-    - `Directory.Read.All` - Read directory data
-    - `Organization.Read.All` - Read organization information
-
-    **Application Management:**
-    - `Application.Read.All` - Read applications and service principals
-
-    **License Management (Optional):**
-    - `Organization.Read.All` - Read license assignments
-
-    <Tip>
-      Start with read-only permissions (`*.Read.All`) for testing, then add write permissions when enabling provisioning workflows.
-    </Tip>
-  </Step>
-
-  <Step title="Grant Admin Consent">
-    1. Click **Grant admin consent for [Your Organization]**
-    2. Click **Yes** to confirm
-    3. Verify all permissions show **Granted for [Your Organization]** status
-
-    <Warning>
-      Admin consent is required for application permissions. Without it, Harmony cannot access your directory.
-    </Warning>
-  </Step>
-</Steps>
-
-***
-
-## Harmony Configuration
+## Connect Microsoft Entra ID
 
 <Steps>
   <Step title="Navigate to Integrations">
     1. Log into your Harmony dashboard
     2. Navigate to **Settings → Integrations**
-    3. Find **Microsoft Entra ID** under **Identity & Access Management**
+    3. Find **Microsoft Entra ID** under **Identity Provider**
     4. Click **Connect**
+
+    <img src="/images/screenshots/teams-entra-id-integrations.png" alt="Navigate to Microsoft Entra ID integration in Harmony dashboard" />
   </Step>
 
-  <Step title="Enter Configuration">
-    Fill in the following fields:
+  <Step title="Authorize Entra ID">
+    1. You'll be redirected to Microsoft to authorize the connection
+    2. Sign in with your **Microsoft 365 admin account**
+    3. Review the requested permissions
+    4. Click **Accept** to authorize
+    5. You'll be redirected back to Harmony
 
-    | Field           | Description                          | Example                      |
-    | --------------- | ------------------------------------ | ---------------------------- |
-    | **Tenant ID**   | Your Azure AD tenant (directory) ID  | `12345678-1234-1234-1234-123456789012` |
-    | **Client ID**   | Application (client) ID              | `87654321-4321-4321-4321-210987654321` |
-    | **Client Secret** | The client secret value you generated | `your~secret~value...`     |
-
-    <Note>
-      Use the **Value** of the client secret, not the **Secret ID**.
-    </Note>
+    <img src="/images/screenshots/teams-entra-id-authorization.png" alt="Microsoft Entra ID authorization dialog" />
   </Step>
 
-  <Step title="Test Connection">
-    1. Click **Connect**
-    2. Harmony will authenticate and fetch directory information
-    3. If successful, you'll see a confirmation message
-    4. User and group sync will begin automatically
+  <Step title="Verify Connection">
+    Confirm that Microsoft Entra ID shows **Connected** status in your Harmony integrations page.
   </Step>
 </Steps>
 
@@ -196,26 +84,16 @@ Once connected, Harmony automatically syncs:
 - Microsoft 365 groups
 - Distribution lists
 - Group memberships
-- Group owners
-- Dynamic group rules
 
 ### Applications
 
 - Enterprise applications
 - App registrations
-- Service principals
 - User and group assignments
 - OAuth permissions
 
-### Licenses
-
-- Available license SKUs
-- License assignments per user
-- Subscription status
-- Service plan details
-
 <Tip>
-  Harmony syncs data every 24 hours by default. Critical changes (user creation, deletion) trigger immediate incremental sync.
+  Harmony syncs data every 24 hours by default.
 </Tip>
 
 ***
@@ -248,15 +126,6 @@ Identify cost-saving opportunities:
 
 **Typical savings**: 10-25% reduction in Microsoft 365 costs
 
-### Conditional Access Automation
-
-Implement intelligent access policies:
-- Require MFA for admin accounts
-- Block legacy authentication
-- Enforce compliant devices for access
-- Geo-location based restrictions
-- Risk-based conditional access
-
 ### Group-Based Access Management
 
 - **Auto-assignment**: Add users to groups based on department, location, or role
@@ -268,66 +137,41 @@ Implement intelligent access policies:
 
 ## Troubleshooting
 
-### Connection fails with insufficient permissions
+### Connection fails during authorization
 
 **Solutions:**
-1. Verify all required API permissions are added
-2. Ensure admin consent was granted (check green checkmarks)
-3. Wait 5 minutes after granting consent for changes to propagate
-4. Try regenerating the client secret
+1. Ensure you're signing in with a Global Administrator or Privileged Role Administrator account
+2. Verify your organization allows third-party app integrations
+3. Try clearing browser cache and cookies, then retry the authorization
+4. Check if your organization has conditional access policies that might block the connection
 
 ### User sync incomplete
 
 **Solutions:**
-1. Check if `User.Read.All` permission is granted
-2. Verify users are not hidden in directory
-3. For large directories (10,000+ users), allow extra sync time
-4. Review sync logs for specific errors
+1. Verify users are not hidden in directory
+2. For large directories (10,000+ users), allow extra sync time
+3. Review sync logs in Harmony for specific errors
+4. Contact Harmony support if specific users are consistently missing
 
 ### Cannot provision new users
 
 **Solutions:**
-1. Ensure `User.ReadWrite.All` permission is granted
-2. Verify you have available licenses to assign
-3. Check that domain is verified in Azure AD
-4. Confirm user email format matches verified domains
-
-### License assignments failing
-
-**Solutions:**
-1. Verify user's usage location is set
-2. Ensure licenses are available (not all consumed)
-3. Check license dependencies (some require others)
-4. Confirm service plans are available in user's region
+1. Verify you have available licenses to assign
+2. Check that domain is verified in Azure AD
+3. Confirm user email format matches verified domains
+4. Ensure your organization's user provisioning policies allow external integrations
 
 ***
 
 ## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Use Service Principal Authentication">
-    Application permissions (service principal) are more secure than delegated permissions:
-    - No user context required
-    - Credentials don't expire with user password changes
-    - Better audit trails
-    - Least privilege model
-  </Accordion>
-
-  <Accordion title="Rotate Secrets Regularly">
-    Implement a secret rotation schedule:
-    - Set secret expiration to 12-24 months
-    - Set reminders 30 days before expiration
-    - Generate new secret before old one expires
-    - Update Harmony with new secret
-    - Delete old secret only after confirming new one works
-  </Accordion>
-
-  <Accordion title="Monitor API Throttling">
-    Microsoft Graph has rate limits:
-    - 2,000 requests per second per tenant
-    - Monitor for 429 (Too Many Requests) responses
-    - Implement exponential backoff for retries
-    - For large operations, spread them over time
+  <Accordion title="Monitor Integration Health">
+    Regularly check your integration status:
+    - Review sync logs in Harmony dashboard
+    - Monitor for any authorization issues
+    - Check sync completion times for large directories
+    - Set up alerts for sync failures
   </Accordion>
 
   <Accordion title="Leverage Dynamic Groups">
@@ -339,11 +183,19 @@ Implement intelligent access policies:
   </Accordion>
 
   <Accordion title="Enable Security Defaults">
-    Enforce baseline security:
+    Enforce baseline security in Microsoft Entra ID:
     - Require MFA for all users
     - Protect privileged accounts
     - Block legacy authentication
     - Security defaults provide immediate protection
+  </Accordion>
+
+  <Accordion title="Regular Access Reviews">
+    Periodically review access and permissions:
+    - Audit user group memberships quarterly
+    - Review license assignments for optimization
+    - Remove inactive or unnecessary user accounts
+    - Validate conditional access policies
   </Accordion>
 </AccordionGroup>
 
@@ -352,17 +204,14 @@ Implement intelligent access policies:
 ## Security Considerations
 
 <Warning>
-  **Least Privilege**: Only grant permissions needed for your use case. Start with read-only and add write permissions as needed.
+  **Review Permissions**: During authorization, carefully review the permissions Harmony requests before accepting. Only proceed if you understand and approve the requested access.
 </Warning>
 
 **Security best practices:**
 
-- Use separate app registrations for different environments (dev, prod)
-- Enable certificate-based authentication for production
-- Monitor sign-in logs for the service principal
-- Set up alerts for unusual API activity
-- Store client secrets in Azure Key Vault (for production)
-- Regularly review and audit permissions
+- Only Global Administrators should authorize the integration
+- Monitor sign-in logs in Azure AD for the Harmony service principal
+- Use conditional access policies to further secure your directory
 
 ***
 
