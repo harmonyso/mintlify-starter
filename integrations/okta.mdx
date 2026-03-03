@@ -36,166 +36,51 @@ Before connecting Okta to Harmony, ensure you have:
 
 ***
 
-## Okta Configuration
-
-### Step 1: Create an API Token
+## Step 1: Add the Harmony Integration
 
 <Steps>
-  <Step title="Navigate to API Tokens">
+  <Step title="Navigate to Okta App Catalog">
     1. Sign in to your Okta Admin Console
-    2. Navigate to **Security → API**
-    3. Click on the **Tokens** tab
-    4. Click **Create token**
-  </Step>
+    2. Navigate to **Applications → Browse App Catalog**
+    3. Search for **Harmony (API)** in the catalog
+    4. Click **Add Integration**
+    5. Follow the on-screen prompts to complete the integration setup
 
-  <Step title="Generate Token">
-    1. Enter a descriptive name: `Harmony Integration`
-    2. Click **Create token**
-    3. **Important**: Copy the token value immediately—you will not be able to view it again
-
-    <Warning>
-      Save this API token securely. If you lose it, you'll need to generate a new token and update your Harmony configuration.
-    </Warning>
-  </Step>
-</Steps>
-
-### Step 2: Create an OAuth Application (Recommended for Production)
-
-For enhanced security and more granular permissions, create an OAuth application:
-
-<Steps>
-  <Step title="Navigate to Applications">
-    1. In the Okta Admin Console, navigate to **Applications → Applications**
-    2. Click **Create App Integration**
-  </Step>
-
-  <Step title="Configure Application">
-    1. Select **API Services** as the application type
-    2. Click **Next**
-    3. Enter application details:
-       - **App integration name**: `Harmony`
-       - **Grant type**: Select **Client Credentials**
-    4. Click **Save**
-  </Step>
-
-  <Step title="Note Credentials">
-    After creation, you'll see:
-    - **Client ID**: Copy this value
-    - **Client Secret**: Click **Show** to reveal, then copy securely
-
-    <Tip>
-      The Client ID and Client Secret are used for OAuth 2.0 authentication, which is more secure than API tokens for production environments.
-    </Tip>
-  </Step>
-</Steps>
-
-### Step 3: Assign Required Scopes
-
-<Steps>
-  <Step title="Configure API Scopes">
-    1. Open the Harmony application you just created
-    2. Navigate to the **Okta API Scopes** tab
-    3. Click **Grant** for the following scopes:
-
-    | Scope                   | Purpose                                    |
-    | ----------------------- | ------------------------------------------ |
-    | `okta.apps.read`        | Read application configurations            |
-    | `okta.apps.manage`      | Manage application assignments             |
-    | `okta.users.read`       | Read user profiles and details             |
-    | `okta.users.manage`     | Manage user lifecycle and provisioning     |
-    | `okta.groups.read`      | Read group memberships                     |
-    | `okta.groups.manage`    | Manage group assignments                   |
-    | `okta.logs.read`        | Read system logs for audit and compliance  |
+    ![Okta Admin Console - Add Harmony Integration](/images/integrations/okta-add-integration.png)
   </Step>
 </Steps>
 
 ***
 
-## Harmony Configuration
-
-### Connect Using API Token
+## Step 2: Harmony Configuration
 
 <Steps>
   <Step title="Navigate to Integrations">
     1. Log into your Harmony dashboard
     2. Navigate to **Settings → Integrations**
     3. Find **Okta** under **Identity & Access Management**
-    4. Click **Connect**
+
+    ![Harmony Dashboard - Connect Okta Integration](/images/integrations/okta-harmony-connect.png)
   </Step>
 
   <Step title="Enter Configuration">
     Fill in the following fields:
 
-    | Field         | Description                                          | Example                     |
-    | ------------- | ---------------------------------------------------- | --------------------------- |
-    | **Okta Domain** | Your Okta organization domain (without https://)     | `company.okta.com`          |
-    | **API Token** | The API token you generated in Okta                  | `00ABc1dEfGHiJKlmNOPQRstu...` |
+    | Field              | Description                                                        | Example                      |
+    | ------------------ | ------------------------------------------------------------------ | ---------------------------- |
+    | **Instance name**  | A descriptive name for this Okta instance                          | `Company Okta`               |
+    | **Client ID**      | The Client ID from the Okta OIN app integration                    | `0oa1a2b3c4d5e6f7g8h9`       |
+    | **Client secret**  | The Client Secret from the Okta OIN app integration                | `AbCdEfGhIjKlMnOpQrStUvWxYz...` |
+    | **Okta domain**    | Your Okta organization domain (e.g., https://company.okta.com or company.okta.eu) | `https://company.okta.com`   |
+
+    Once all fields are filled in, click **Connect** to complete the integration setup.
+
+    ![Harmony - Okta Configuration Fields](/images/integrations/okta-configuration.png)
 
     <Note>
-      Enter only your Okta domain without the protocol. For example, use `company.okta.com`, not `https://company.okta.com`.
+      You can find the Client ID and Client Secret in the Okta Admin Console after adding the Harmony integration from the App Catalog.
     </Note>
-  </Step>
 
-  <Step title="Test Connection">
-    1. Click **Connect**
-    2. Harmony will test the connection by fetching basic organization information
-    3. If successful, you'll see a confirmation message
-    4. Application discovery will begin automatically
-  </Step>
-</Steps>
-
-### Connect Using OAuth (Recommended)
-
-<Steps>
-  <Step title="Navigate to Integrations">
-    1. Log into your Harmony dashboard
-    2. Navigate to **Settings → Integrations**
-    3. Find **Okta** under **Identity & Access Management**
-    4. Click **Connect with OAuth**
-  </Step>
-
-  <Step title="Enter OAuth Configuration">
-    Fill in the following fields:
-
-    | Field           | Description                                  | Example                      |
-    | --------------- | -------------------------------------------- | ---------------------------- |
-    | **Okta Domain** | Your Okta organization domain (without https://) | `company.okta.com`            |
-    | **Client ID**   | The Client ID from your OAuth application    | `0oa1a2b3c4d5e6f7g8h9`       |
-    | **Client Secret** | The Client Secret from your OAuth application | `AbCdEfGhIjKlMnOpQrStUvWxYz...` |
-  </Step>
-
-  <Step title="Authorize and Test">
-    1. Click **Connect**
-    2. You'll be redirected to Okta to authorize the connection
-    3. Review the requested scopes and click **Allow**
-    4. You'll be redirected back to Harmony
-    5. Application discovery will begin automatically
-  </Step>
-</Steps>
-
-***
-
-## Verify the Integration
-
-After connecting, verify that Harmony can access your Okta data:
-
-<Steps>
-  <Step title="Check Application Discovery">
-    1. Navigate to **Applications** in the Harmony dashboard
-    2. You should see applications synced from Okta
-    3. Verify that application details like users and assignments are populated
-  </Step>
-
-  <Step title="Review User Sync">
-    1. Navigate to **Users** in the Harmony dashboard
-    2. Verify that users from Okta are synced with their profiles
-    3. Check that group memberships are accurately reflected
-  </Step>
-
-  <Step title="Test Workflows">
-    1. Create a test workflow using Okta actions (e.g., "Assign user to application")
-    2. Execute the workflow to ensure Harmony can make changes in Okta
-    3. Verify the changes in your Okta Admin Console
   </Step>
 </Steps>
 
@@ -228,17 +113,6 @@ Once connected, Harmony automatically syncs the following data:
 - Application assignments per group
 - Group rules and policies
 
-### Logs (Optional)
-
-- Authentication events
-- Application access logs
-- User lifecycle events
-- Administrative actions
-
-<Tip>
-  Harmony syncs data every 24 hours by default. You can trigger a manual sync at any time from **Settings → Integrations → Okta → Sync Now**.
-</Tip>
-
 ***
 
 ## Troubleshooting
@@ -248,85 +122,20 @@ Once connected, Harmony automatically syncs the following data:
 **Possible causes:**
 - The API token was entered incorrectly
 - The API token has expired or been revoked
-- The API token doesn't have sufficient permissions
 
 **Solutions:**
 1. Verify you copied the entire API token without extra spaces
 2. Generate a new API token in Okta and update Harmony
-3. Ensure the token was created by an administrator with sufficient privileges
 
 ### Application discovery is incomplete
 
 **Possible causes:**
 - Some applications are not assigned to any users
-- API token lacks permissions to read certain applications
-- Applications are managed by a different Okta org
+- Applications are managed by a different IDP
 
 **Solutions:**
 1. Verify applications have at least one user assigned in Okta
-2. Regenerate the API token with full administrator privileges
-3. Check that you're using the correct Okta domain
-
-### Cannot assign users to applications
-
-**Possible causes:**
-- Using API token instead of OAuth with Client Credentials
-- Missing `okta.apps.manage` or `okta.users.manage` scopes
-- Application has custom provisioning requirements
-
-**Solutions:**
-1. Switch to OAuth authentication for more granular permissions
-2. Ensure all required scopes are granted to the OAuth application
-3. Verify the application supports API-based user assignment in Okta
-
-### Sync is slow or timing out
-
-**Possible causes:**
-- Large number of applications or users (10,000+)
-- Okta API rate limits being hit
-- Network connectivity issues
-
-**Solutions:**
-1. Contact Harmony support to enable incremental sync mode
-2. Request Okta to increase your organization's API rate limits
-3. Verify network connectivity and firewall rules allow Harmony to reach Okta
-
-***
-
-## Best Practices
-
-<AccordionGroup>
-  <Accordion title="Use OAuth for Production">
-    While API tokens are simpler to set up, OAuth with Client Credentials provides:
-    - More granular permission control
-    - Better audit trails
-    - Easier credential rotation
-    - Enhanced security compliance
-  </Accordion>
-
-  <Accordion title="Regularly Review Permissions">
-    Periodically review the scopes granted to Harmony:
-    - Remove scopes that are no longer needed
-    - Monitor Okta system logs for API usage
-    - Rotate credentials every 90 days
-  </Accordion>
-
-  <Accordion title="Enable Automation Gradually">
-    When setting up automated workflows:
-    - Start with read-only workflows to understand the data
-    - Test provisioning workflows in a sandbox Okta environment first
-    - Enable automated user provisioning only after thorough testing
-    - Use approval workflows for high-risk actions
-  </Accordion>
-
-  <Accordion title="Monitor License Usage">
-    Leverage Harmony's license optimization features:
-    - Review unused licenses weekly
-    - Set up alerts for license usage thresholds
-    - Automatically deprovision applications for offboarded users
-    - Track cost savings from license optimization
-  </Accordion>
-</AccordionGroup>
+2. Check that you're using the correct Okta domain
 
 ***
 
